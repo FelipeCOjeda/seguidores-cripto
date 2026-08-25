@@ -17,7 +17,7 @@ WORKER_BASE_URL = "https://seguidores-cripto-worker.SEU-USUARIO.workers.dev"
 SMM_API_URL     = "https://smmhub.com.br/api/v2"
 
 # Segredos — configure via CLI (nunca coloque aqui):
-# wrangler secret put NOWPAYMENTS_API_KEY
-# wrangler secret put NOWPAYMENTS_IPN_SECRET
-# wrangler secret put MP_ACCESS_TOKEN
-# wrangler secret put SMM_API_KEY
+# wrangler secret put DEPIX_API_KEY          ← token JWT DePix (prod)
+# wrangler secret put NOWPAYMENTS_API_KEY    ← BTC / Lightning / USDT
+# wrangler secret put NOWPAYMENTS_IPN_SECRET ← assinatura webhook NOWPayments
+# wrangler secret put SMM_API_KEY            ← painel SMM (ex: SMMHub)

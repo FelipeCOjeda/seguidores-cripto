@@ -75,8 +75,8 @@ export default {
       if (path === '/webhooks/nowpayments' && request.method === 'POST')
         return handleNowPaymentsWebhook(request, env);
 
-      if (path === '/webhooks/mercadopago' && request.method === 'POST')
-        return handleMercadoPagoWebhook(request, env);
+      if (path === '/webhooks/depix' && request.method === 'POST')
+        return handleDePIXWebhook(request, env);
 
       return addCors(json({ error: 'Not found' }, 404));
     } catch (e) {
@@ -91,10 +91,16 @@ async function handleCreateOrder(request, env) {
   const body = await request.json().catch(() => null);
   if (!body) return json({ error: 'Invalid JSON' }, 400);
 
-  const { serviceId, link, paymentMethod } = body;
+  const { serviceId, link, paymentMethod, taxNumber } = body;
 
   if (!serviceId || !link || !paymentMethod)
     return json({ error: 'Missing: serviceId, link, paymentMethod' }, 400);
+
+  // CPF/CNPJ obrigatório para PIX (regra DePix)
+  if (paymentMethod === 'pix') {
+    if (!taxNumber || taxNumber.trim().length < 11)
+      return json({ error: 'CPF ou CNPJ obrigatorio para pagamento PIX.' }, 400);
+  }
 
   const service = CATALOG[serviceId];
   if (!service) return json({ error: 'Service not found' }, 404);
@@ -114,6 +120,7 @@ async function handleCreateOrder(request, env) {
     link,
     priceBRL: service.priceBRL,
     paymentMethod,
+    taxNumber:     paymentMethod === 'pix' ? taxNumber.replace(/\D/g, '') : null,
     paymentStatus: 'pending',
     smmOrderId: null,
     smmStatus: 'pending',
@@ -129,10 +136,10 @@ async function handleCreateOrder(request, env) {
 
   try {
     if (paymentMethod === 'pix') {
-      const inv = await createMercadoPagoPixInvoice(service.priceBRL, orderId, service.name, env);
-      order.invoiceId = String(inv.id);
-      order.qrCode    = inv.point_of_interaction?.transaction_data?.qr_code;
-      order.qrBase64  = inv.point_of_interaction?.transaction_data?.qr_code_base64;
+      const chk = await createDePIXCheckout(service.priceBRL, order.taxNumber, orderId, service.name, env);
+      order.invoiceId   = chk.id;                  // chk_01j...
+      order.qrCode      = chk.pix?.qr_code || null;
+      order.paymentUrl  = chk.payment_url || null;
     } else {
       const payCurrency = paymentMethod === 'btc'       ? 'btc'
                         : paymentMethod === 'lightning'  ? 'btcln'
@@ -163,6 +170,7 @@ async function handleCreateOrder(request, env) {
     payCurrency:   order.payCurrency,
     qrCode:        order.qrCode,
     qrBase64:      order.qrBase64,
+    paymentUrl:    order.paymentUrl || null,
     status:        order.paymentStatus,
   }, 201);
 }
@@ -219,34 +227,34 @@ async function handleNowPaymentsWebhook(request, env) {
   return new Response('OK');
 }
 
-// ─── POST /webhooks/mercadopago ───────────────────────────────────────
-async function handleMercadoPagoWebhook(request, env) {
-  const body = await request.json().catch(() => null);
-  if (!body) return new Response('Bad Request', { status: 400 });
+// ─── POST /webhooks/depix ─────────────────────────────────────────────
+// DePix envia o objeto checkout completo (ou embrulhado em { checkout: {...} })
+async function handleDePIXWebhook(request, env) {
+  const raw = await request.json().catch(() => null);
+  if (!raw) return new Response('Bad Request', { status: 400 });
 
-  if (body.type !== 'payment') return new Response('OK');
+  const checkout = raw.checkout || raw;           // suporta ambos os formatos
+  const { id: checkoutId, status, metadata } = checkout;
+  const orderId = metadata?.order_id;
+  if (!orderId) return new Response('OK');        // webhook sem order_id → ignorar
 
-  const paymentId = body.data?.id;
-  if (!paymentId) return new Response('OK');
+  const stored = await env.ORDERS.get(orderId);
+  if (!stored) return new Response('OK');
+  const order = JSON.parse(stored);
 
-  const mpResp = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-    headers: { Authorization: `Bearer ${env.MP_ACCESS_TOKEN}` },
-  });
-  if (!mpResp.ok) return new Response('MP fetch error', { status: 502 });
-  const payment = await mpResp.json();
+  const PAID = ['approved', 'completed'];
+  const FAILED = ['cancelled', 'expired'];
 
-  const orderId = payment.external_reference;
-  if (!orderId) return new Response('No external_reference', { status: 400 });
-
-  const raw = await env.ORDERS.get(orderId);
-  if (!raw) return new Response('Order not found', { status: 404 });
-  const order = JSON.parse(raw);
-
-  if (payment.status === 'approved' && order.paymentStatus !== 'confirmed') {
-    order.paymentStatus = 'confirmed';
-    order.updatedAt = new Date().toISOString();
+  if (PAID.includes(status) && order.paymentStatus !== 'confirmed') {
+    order.paymentStatus   = 'confirmed';
+    order.depixCheckoutId = checkoutId;
+    order.updatedAt       = new Date().toISOString();
     await dispatchSmmOrder(order, env);
-    await env.ORDERS.put(order.id, JSON.stringify(order), { expirationTtl: 604800 });
+    await env.ORDERS.put(orderId, JSON.stringify(order), { expirationTtl: 604800 });
+  } else if (FAILED.includes(status) && order.paymentStatus === 'pending') {
+    order.paymentStatus = 'failed';
+    order.updatedAt     = new Date().toISOString();
+    await env.ORDERS.put(orderId, JSON.stringify(order), { expirationTtl: 604800 });
   }
 
   return new Response('OK');
@@ -311,24 +319,40 @@ async function createNowPaymentsInvoice(amountBRL, payCurrency, orderId, descrip
 }
 
 // ─── Mercado Pago PIX: criar invoice ──────────────────────────────────
-async function createMercadoPagoPixInvoice(amountBRL, orderId, description, env) {
-  const resp = await fetch('https://api.mercadopago.com/v1/payments', {
+// ─── DePix: criar checkout PIX ───────────────────────────────────────
+// Docs: POST https://api.depixapp.com/api/checkouts
+// amount em centavos, payer_tax_number obrigatório no trilho pix
+async function createDePIXCheckout(amountBRL, taxNumber, orderId, description, env) {
+  const amountCents = Math.round(amountBRL * 100);
+  const baseUrl     = env.WORKER_BASE_URL || '';
+
+  const body = {
+    amount:           amountCents,
+    payer_tax_number: taxNumber,                  // CPF/CNPJ (somente dígitos)
+    description:      description.slice(0, 500),
+    expires_in:       1200,                       // 20min — máximo para trilho pix
+    callback_url:     `${baseUrl}/webhooks/depix`,
+    metadata:         { order_id: orderId },
+  };
+
+  const resp = await fetch('https://api.depixapp.com/api/checkouts', {
     method: 'POST',
     headers: {
-      Authorization:        `Bearer ${env.MP_ACCESS_TOKEN}`,
-      'Content-Type':       'application/json',
-      'X-Idempotency-Key':  orderId,
+      'Authorization':    `Bearer ${env.DEPIX_API_KEY}`,
+      'Content-Type':     'application/json',
+      'Idempotency-Key':  `pix-${orderId}`,       // evita QR duplicado em retry
     },
-    body: JSON.stringify({
-      transaction_amount:  amountBRL,
-      payment_method_id:   'pix',
-      external_reference:  orderId,
-      description,
-      payer: { email: 'cliente@seguidorescripto.com' },
-    }),
+    body: JSON.stringify(body),
   });
-  if (!resp.ok) throw new Error(`MercadoPago ${resp.status}: ${await resp.text()}`);
+
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    const msg = err?.response?.errorMessage || err?.error?.message || `DePix HTTP ${resp.status}`;
+    throw new Error(msg);
+  }
+
   return resp.json();
+  // Resposta: { id, status: "pending", pix: { qr_code }, payment_url, ... }
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────

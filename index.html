@@ -541,6 +541,14 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
           <label for="linkInput">Link do seu perfil / publicacao</label>
           <input type="url" id="linkInput" placeholder="https://instagram.com/seuperfil" autocomplete="off" inputmode="url">
         </div>
+        <div class="field" id="taxNumberField" style="display:none">
+          <label for="taxInput">CPF ou CNPJ do pagador <span style="color:var(--accent)">*</span></label>
+          <input type="text" id="taxInput" placeholder="000.000.000-00 ou 00.000.000/0001-00" autocomplete="off" maxlength="18" inputmode="numeric">
+          <div style="display:flex;gap:8px;align-items:flex-start;background:rgba(255,160,0,.1);border:1px solid rgba(255,160,0,.3);border-radius:var(--radius-sm);padding:10px 12px;margin-top:4px">
+            <span style="font-size:1rem;flex-shrink:0">&#9888;&#65039;</span>
+            <p style="font-size:.75rem;color:#8A6000;line-height:1.55;margin:0"><strong>O PIX deve ser pago pela mesma conta do CPF/CNPJ informado.</strong> Pagamentos de titulares diferentes serao estornados automaticamente em ate 24h por medida de segurança.</p>
+          </div>
+        </div>
         <div class="field">
           <label>Forma de pagamento</label>
           <div class="pay-grid">
@@ -622,6 +630,17 @@ var WORKER_URL = 'https://SEU-WORKER.SEU-USUARIO.workers.dev';
 
 var currentOrderId = null;
 var pollInterval   = null;
+
+// ── CPF/CNPJ field visibility ─────────────────────────────────────────
+function toggleTaxField() {
+  var pm = document.querySelector('input[name="payMethod"]:checked');
+  var field = document.getElementById('taxNumberField');
+  if (field) field.style.display = (pm && pm.value === 'pix') ? '' : 'none';
+}
+document.querySelectorAll('input[name="payMethod"]').forEach(function(r){
+  r.addEventListener('change', toggleTaxField);
+});
+toggleTaxField();
 
 // ── Filtro de rede ────────────────────────────────────────────────────
 (function(){
@@ -720,18 +739,27 @@ document.getElementById('btnPay').addEventListener('click', async function(){
   var link = document.getElementById('linkInput').value.trim();
   var sid  = btn.dataset.sid;
   var pm   = document.querySelector('input[name="payMethod"]:checked');
+  var taxNumber = document.getElementById('taxInput') ? document.getElementById('taxInput').value.trim() : '';
+
   if (!link){
     document.getElementById('linkInput').style.borderColor = 'var(--accent)';
     document.getElementById('linkInput').focus();
     return;
   }
+  if (pm.value === 'pix' && taxNumber.replace(/\D/g,'').length < 11) {
+    document.getElementById('taxInput').style.borderColor = 'var(--accent)';
+    document.getElementById('taxInput').focus();
+    return;
+  }
   btn.disabled = true;
   btn.innerHTML = '<div class="spinner"></div> Gerando pagamento...';
   try {
+    var orderBody = { serviceId: sid, link: link, paymentMethod: pm.value };
+    if (pm.value === 'pix') orderBody.taxNumber = taxNumber.replace(/\D/g,'');
     var resp = await fetch(WORKER_URL + '/api/order', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ serviceId: sid, link: link, paymentMethod: pm.value }),
+      body: JSON.stringify(orderBody),
     });
     var data = await resp.json();
     if (!resp.ok) throw new Error(data.error || 'Erro ao criar pedido');
