@@ -8,12 +8,12 @@ compatibility_flags = ["nodejs_compat"]
 # Cole o id retornado abaixo
 [[kv_namespaces]]
 binding = "ORDERS"
-id = "COLE_O_ID_AQUI"
-preview_id = "COLE_O_PREVIEW_ID_AQUI"
+id = "85ed42c644454bf88d3518dd53837d7a"
+preview_id = "3160da09f99d417cb9eab82b65b8de76"
 
 # Variáveis não-secretas
 [vars]
-WORKER_BASE_URL = "https://seguidores-cripto-worker.SEU-USUARIO.workers.dev"
+WORKER_BASE_URL = "https://seguidores-cripto-worker.felipecojeda.workers.dev"
 SMM_API_URL     = "https://smmhub.com.br/api/v2"
 
 # Segredos — configure via CLI (nunca coloque aqui):
@@ -21,3 +21,4 @@ SMM_API_URL     = "https://smmhub.com.br/api/v2"
 # wrangler secret put NOWPAYMENTS_API_KEY    ← BTC / Lightning / USDT
 # wrangler secret put NOWPAYMENTS_IPN_SECRET ← assinatura webhook NOWPayments
 # wrangler secret put SMM_API_KEY            ← painel SMM (ex: SMMHub)
+
