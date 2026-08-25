@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeguidoresCripto — Compre com Bitcoin, PIX e USDT</title>
+<meta name="description" content="Compre seguidores reais para Instagram, TikTok, YouTube e mais. Aceita Bitcoin, Lightning, USDT e PIX. Sem identificação, sem cadastro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────────────── */
+:root{
+  --bg:#F5F6FF;--bg-raised:#FFFFFF;--bg-card:#FFFFFF;--border:#E4E6F2;
+  --text:#0D1030;--text-2:#4A4F72;--text-3:#8E93B4;
+  --accent:#FF2D6B;--accent-dim:rgba(255,45,107,.12);--accent-2:#00C9A7;
+  --btc:#F7931A;--btc-dim:rgba(247,147,26,.12);
+  --badge-bg:#FFF0F5;--badge-text:#C0174C;
+  --topbar:#FFFFFF;--topbar-border:#E4E6F2;
+  --shadow:0 2px 12px rgba(13,16,48,.07);--shadow-lg:0 8px 32px rgba(13,16,48,.10);
+  --radius:12px;--radius-sm:8px;--radius-pill:999px;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A0F1E;--bg-raised:#111828;--bg-card:#141A2E;--border:#1F2A42;
+  --text:#EEF0FF;--text-2:#8E97C4;--text-3:#4A5480;
+  --accent:#FF2D6B;--accent-dim:rgba(255,45,107,.15);--accent-2:#00C9A7;
+  --btc:#F7931A;--btc-dim:rgba(247,147,26,.15);
+  --badge-bg:rgba(255,45,107,.15);--badge-text:#FF6B9D;
+  --topbar:#111828;--topbar-border:#1F2A42;
+  --shadow:0 2px 12px rgba(0,0,0,.30);--shadow-lg:0 8px 32px rgba(0,0,0,.40);
+}}
+:root[data-theme="dark"]{
+  --bg:#0A0F1E;--bg-raised:#111828;--bg-card:#141A2E;--border:#1F2A42;
+  --text:#EEF0FF;--text-2:#8E97C4;--text-3:#4A5480;
+  --accent:#FF2D6B;--accent-dim:rgba(255,45,107,.15);--accent-2:#00C9A7;
+  --btc:#F7931A;--btc-dim:rgba(247,147,26,.15);
+  --badge-bg:rgba(255,45,107,.15);--badge-text:#FF6B9D;
+  --topbar:#111828;--topbar-border:#1F2A42;
+  --shadow:0 2px 12px rgba(0,0,0,.30);--shadow-lg:0 8px 32px rgba(0,0,0,.40);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:var(--topbar);border-bottom:1px solid var(--topbar-border);box-shadow:var(--shadow)}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:32px}
+.logo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.03em;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.logo-icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:18px;height:18px;fill:white}
+.logo span{color:var(--accent)}
+.logo-btc{font-size:.7rem;font-weight:600;background:var(--btc-dim);color:var(--btc);padding:2px 7px;border-radius:var(--radius-pill);letter-spacing:.03em;margin-left:2px}
+.nav-cats{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-cats::-webkit-scrollbar{display:none}
+.nav-cat{font-family:'DM Sans',sans-serif;font-size:.875rem;font-weight:500;color:var(--text-2);padding:6px 14px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s}
+.nav-cat:hover,.nav-cat.active{background:var(--accent-dim);color:var(--accent)}
+.topbar-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.btn-wpp{display:flex;align-items:center;gap:7px;background:#25D366;color:white;font-family:'DM Sans',sans-serif;font-size:.8125rem;font-weight:600;padding:8px 16px;border-radius:var(--radius-pill);transition:opacity .15s}
+.btn-wpp:hover{opacity:.9}
+.btn-wpp svg{width:16px;height:16px;fill:white;flex-shrink:0}
+
+/* TICKER */
+.ticker-strip{background:var(--accent);overflow:hidden;height:36px;display:flex;align-items:center}
+.ticker-track{display:flex;gap:56px;white-space:nowrap;animation:ticker 32s linear infinite;padding-right:56px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+.ticker-item{color:white;font-family:'DM Sans',sans-serif;font-size:.8125rem;font-weight:500;display:flex;align-items:center;gap:8px}
+.ticker-num{font-family:'Sora',sans-serif;font-weight:700;font-variant-numeric:tabular-nums}
+.ticker-dot{width:5px;height:5px;background:rgba(255,255,255,.5);border-radius:50%;flex-shrink:0}
+
+/* HERO */
+.hero{max-width:1200px;margin:0 auto;padding:52px 24px 32px;display:flex;flex-direction:column;gap:16px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--badge-bg);color:var(--badge-text);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:var(--radius-pill);width:fit-content}
+.pulse-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse-anim 1.6s ease-in-out infinite}
+@keyframes pulse-anim{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
+@media(prefers-reduced-motion:reduce){.pulse-dot{animation:none}}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(1.75rem,4vw,2.75rem);font-weight:800;line-height:1.15;letter-spacing:-.03em;text-wrap:balance;max-width:660px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:1rem;color:var(--text-2);max-width:520px;text-wrap:balance}
+.hero-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.chip{display:flex;align-items:center;gap:6px;background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius-pill);padding:6px 14px;font-size:.8125rem;color:var(--text-2);font-weight:500}
+.chip svg{width:14px;height:14px;stroke:var(--accent-2);fill:none}
+.chip.btc-chip{border-color:rgba(247,147,26,.3);background:var(--btc-dim);color:var(--btc)}
+.chip.btc-chip svg{stroke:var(--btc)}
+
+/* TRUST BAR */
+.trust-bar{background:var(--bg-raised);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:48px}
+.trust-inner{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
+.trust-item{display:flex;align-items:flex-start;gap:12px}
+.trust-icon{width:38px;height:38px;border-radius:10px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-icon svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:2}
+.trust-icon.btc-icon{background:var(--btc-dim)}
+.trust-icon.btc-icon svg{stroke:var(--btc)}
+.trust-text strong{display:block;font-family:'Sora',sans-serif;font-size:.875rem;font-weight:700;letter-spacing:-.01em;margin-bottom:2px}
+.trust-text span{font-size:.8rem;color:var(--text-2)}
+
+/* CATALOG */
+.catalog-wrap{max-width:1200px;margin:0 auto;padding:0 24px 80px}
+.filter-row{display:flex;align-items:center;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.filter-label{font-size:.75rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);margin-right:4px}
+.filter-pill{font-family:'DM Sans',sans-serif;font-size:.8125rem;font-weight:500;padding:7px 16px;border-radius:var(--radius-pill);border:1.5px solid var(--border);background:var(--bg-raised);color:var(--text-2);transition:background .15s,border-color .15s,color .15s}
+.filter-pill:hover{border-color:var(--accent);color:var(--accent)}
+.filter-pill.active{background:var(--accent);border-color:var(--accent);color:white}
+.section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+.section-head h2{font-family:'Sora',sans-serif;font-size:1.125rem;font-weight:700;letter-spacing:-.02em}
+.section-head .count{font-size:.8125rem;color:var(--text-3);font-weight:400}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:48px}
+
+/* CARD */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card-header{padding:20px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.card-badge{font-size:.6875rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:var(--radius-pill);background:var(--badge-bg);color:var(--badge-text);white-space:nowrap}
+.card-badge.teal{background:rgba(0,201,167,.12);color:#00A387}
+.card-body{padding:14px 20px 20px;flex:1;display:flex;flex-direction:column;gap:8px}
+.card-title{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+.card-desc{font-size:.8125rem;color:var(--text-2);line-height:1.5;flex:1}
+.card-qty{display:flex;align-items:center;gap:6px;font-size:.8125rem;color:var(--text-3)}
+.card-qty svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+.card-footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-price{display:flex;flex-direction:column;gap:1px}
+.price-from{font-size:.7rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em}
+.price-val{font-family:'Sora',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--text)}
+.btn-buy{background:var(--accent);color:white;font-family:'Sora',sans-serif;font-size:.8125rem;font-weight:700;padding:9px 18px;border-radius:var(--radius-pill);letter-spacing:-.01em;transition:opacity .15s,transform .1s;white-space:nowrap}
+.btn-buy:hover{opacity:.9;transform:scale(1.02)}
+.btn-buy:active{transform:scale(.98)}
+
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;z-index:400;background:rgba(10,15,30,.65);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-backdrop.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;box-shadow:var(--shadow-lg);transform:translateY(16px);transition:transform .25s;overflow:hidden}
+.modal-backdrop.open .modal{transform:translateY(0)}
+.modal-header{padding:20px 24px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.modal-service{display:flex;align-items:center;gap:12px}
+.modal-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.modal-service-info strong{display:block;font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:-.02em}
+.modal-service-info span{font-size:.8125rem;color:var(--text-2)}
+.modal-close{background:var(--bg);border:1px solid var(--border);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0;transition:background .15s}
+.modal-close:hover{background:var(--border)}
+.modal-close svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5}
+.modal-body{padding:20px 24px;display:flex;flex-direction:column;gap:16px}
+.step{display:none;flex-direction:column;gap:16px}
+.step.active{display:flex}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.8125rem;font-weight:600;color:var(--text-2)}
+.field input{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:.9375rem;color:var(--text);outline:none;transition:border-color .15s}
+.field input:focus{border-color:var(--accent)}
+.field input::placeholder{color:var(--text-3)}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pay-option{position:relative}
+.pay-option input[type="radio"]{position:absolute;opacity:0;pointer-events:none}
+.pay-label{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
+.pay-label:hover{border-color:var(--accent);background:var(--accent-dim)}
+.pay-option input:checked + .pay-label{border-color:var(--accent);background:var(--accent-dim)}
+.pay-option input:checked + .pay-label.btc-lbl{border-color:var(--btc);background:var(--btc-dim)}
+.pay-label-ico{font-size:1.1rem;flex-shrink:0}
+.pay-label-txt{display:flex;flex-direction:column}
+.pay-label-txt strong{font-family:'Sora',sans-serif;font-size:.8125rem;font-weight:700;letter-spacing:-.01em}
+.pay-label-txt em{font-style:normal;font-size:.7rem;color:var(--text-3)}
+.price-row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.price-row span{font-size:.8125rem;color:var(--text-2)}
+.price-row strong{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:-.03em;color:var(--text)}
+.btn-pay{width:100%;background:var(--accent);color:white;font-family:'Sora',sans-serif;font-size:.9375rem;font-weight:700;padding:13px;border-radius:var(--radius-pill);letter-spacing:-.01em;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-pay:hover{opacity:.9}
+.btn-pay:disabled{opacity:.5;cursor:not-allowed}
+.spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.35);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.invoice-badge{display:flex;align-items:center;gap:8px;background:var(--btc-dim);color:var(--btc);padding:8px 14px;border-radius:var(--radius-sm);font-size:.8125rem;font-weight:600;width:fit-content}
+.invoice-badge.pix-badge{background:rgba(0,201,167,.12);color:#00A387}
+.qr-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius)}
+.qr-wrap img{width:160px;height:160px;image-rendering:pixelated}
+.qr-fallback{font-size:.7rem;color:var(--text-3);text-align:center;max-width:220px;word-break:break-all;line-height:1.5}
+.copy-row{display:flex;gap:8px}
+.copy-input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-family:monospace;font-size:.78rem;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:default;min-width:0}
+.btn-copy{background:var(--accent-dim);color:var(--accent);font-family:'Sora',sans-serif;font-size:.8125rem;font-weight:700;padding:9px 14px;border-radius:var(--radius-sm);white-space:nowrap;transition:background .15s,color .15s}
+.btn-copy:hover{background:var(--accent);color:white}
+.order-id-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--accent-dim);border-radius:var(--radius-sm)}
+.order-id-row span{font-size:.8125rem;color:var(--text-2)}
+.order-id-row strong{font-family:monospace;font-size:.875rem;color:var(--accent)}
+.status-polling{display:flex;align-items:center;gap:8px;font-size:.8125rem;color:var(--text-3)}
+.status-dot{width:8px;height:8px;background:var(--btc);border-radius:50%;animation:pulse-anim 1.6s ease-in-out infinite;flex-shrink:0}
+.status-dot.green{background:#19A350;animation:none}
+.success-icon{width:64px;height:64px;background:rgba(25,163,80,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.success-icon svg{width:32px;height:32px;stroke:#19A350;fill:none;stroke-width:2.5}
+.success-title{font-family:'Sora',sans-serif;font-size:1.25rem;font-weight:800;letter-spacing:-.02em;text-align:center}
+.success-sub{font-size:.875rem;color:var(--text-2);text-align:center;line-height:1.6}
+.btn-wpp-success{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;font-family:'Sora',sans-serif;font-size:.875rem;font-weight:700;padding:12px 20px;border-radius:var(--radius-pill)}
+.btn-wpp-success svg{width:18px;height:18px;fill:white}
+
+/* FOOTER */
+footer{background:var(--bg-raised);border-top:1px solid var(--border)}
+.footer-inner{max-width:1200px;margin:0 auto;padding:48px 24px 32px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand .logo{margin-bottom:12px}
+.footer-brand p{font-size:.875rem;color:var(--text-2);line-height:1.6;max-width:260px}
+.footer-brand .wpp-link{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:rgba(37,211,102,.15);color:#19A350;font-size:.8125rem;font-weight:600;padding:8px 16px;border-radius:var(--radius-pill);transition:background .15s}
+.footer-brand .wpp-link:hover{background:rgba(37,211,102,.25)}
+.footer-brand .wpp-link svg{width:15px;height:15px;fill:#19A350}
+.footer-col h4{font-family:'Sora',sans-serif;font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul li a{font-size:.875rem;color:var(--text-2);transition:color .15s}
+.footer-col ul li a:hover{color:var(--accent)}
+.footer-divider{border:none;border-top:1px solid var(--border);margin-bottom:24px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-bottom p{font-size:.8rem;color:var(--text-3)}
+.payment-methods{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pm-badge{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:.7rem;font-weight:600;color:var(--text-2);letter-spacing:.02em}
+.pm-badge.crypto{background:var(--btc-dim);border-color:rgba(247,147,26,.3);color:var(--btc)}
+.wpp-float{position:fixed;bottom:24px;right:24px;z-index:200;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s}
+.wpp-float:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(37,211,102,.55)}
+.wpp-float svg{width:28px;height:28px;fill:white}
+
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){
+  .topbar-inner{gap:16px}
+  .btn-wpp .btn-label{display:none}
+  .hero{padding:32px 16px 24px}
+  .catalog-wrap{padding:0 16px 64px}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .trust-inner{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+      Seguidores<span>Cripto</span>
+      <span class="logo-btc">&#8383;</span>
+    </a>
+    <nav class="nav-cats">
+      <a href="#seguidores" class="nav-cat active">&#128101; Seguidores</a>
+      <a href="#visualizacoes" class="nav-cat">&#9654;&#65039; Visualizacoes</a>
+      <a href="#curtidas" class="nav-cat">&#10084;&#65039; Curtidas</a>
+      <a href="#comentarios" class="nav-cat">&#128172; Comentarios</a>
+    </nav>
+    <div class="topbar-actions">
+      <a href="https://wa.link/moshe" target="_blank" rel="noopener" class="btn-wpp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span class="btn-label">WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="ticker-strip" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item">&#8383; Bitcoin aceito <span class="ticker-dot"></span></div>
+    <div class="ticker-item">&#9889; Lightning Network <span class="ticker-dot"></span></div>
+    <div class="ticker-item">&#128178; USDT aceito <span class="ticker-dot"></span></div>
+    <div class="ticker-item">PIX disponivel <span class="ticker-dot"></span></div>
+    <div class="ticker-item">Sem cadastro obrigatorio <span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-num">+2.4M</span> pedidos entregues <span class="ticker-dot"></span></div>
+    <div class="ticker-item">Entrega em ate <span class="ticker-num">24h</span> <span class="ticker-dot"></span></div>
+    <div class="ticker-item">&#8383; Bitcoin aceito <span class="ticker-dot"></span></div>
+    <div class="ticker-item">&#9889; Lightning Network <span class="ticker-dot"></span></div>
+    <div class="ticker-item">&#128178; USDT aceito <span class="ticker-dot"></span></div>
+    <div class="ticker-item">PIX disponivel <span class="ticker-dot"></span></div>
+    <div class="ticker-item">Sem cadastro obrigatorio <span class="ticker-dot"></span></div>
+    <div class="ticker-item"><span class="ticker-num">+2.4M</span> pedidos entregues <span class="ticker-dot"></span></div>
+    <div class="ticker-item">Entrega em ate <span class="ticker-num">24h</span> <span class="ticker-dot"></span></div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-eyebrow"><span class="pulse-dot"></span>Bitcoin &middot; Lightning &middot; USDT &middot; PIX</div>
+  <h1>Seguidores reais, <em>sem rastreio</em> &mdash; pague em cripto</h1>
+  <p class="hero-sub">A unica loja brasileira de SMM que aceita Bitcoin e USDT. Sem CPF, sem cadastro, sem cartao. Entrega automatica.</p>
+  <div class="hero-chips">
+    <span class="chip btc-chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Bitcoin</span>
+    <span class="chip btc-chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Lightning &#9889;</span>
+    <span class="chip btc-chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>USDT</span>
+    <span class="chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>PIX</span>
+    <span class="chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Instagram</span>
+    <span class="chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>TikTok</span>
+    <span class="chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>YouTube</span>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-icon btc-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
+      <div class="trust-text"><strong>Zero Chargeback</strong><span>Cripto e irreversivel &mdash; seguro pra voce</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon btc-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg></div>
+      <div class="trust-text"><strong>Sem Identificacao</strong><span>Sem CPF, sem cadastro, sem banco</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
+      <div class="trust-text"><strong>Entrega em ate 24h</strong><span>Inicio imediato apos pagamento confirmado</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg></div>
+      <div class="trust-text"><strong>Suporte WhatsApp</strong><span>Atendimento 7 dias por semana</span></div>
+    </div>
+  </div>
+</div>
+
+<main class="catalog-wrap">
+  <div class="filter-row">
+    <span class="filter-label">Filtrar:</span>
+    <button class="filter-pill active" data-filter="all">Todos</button>
+    <button class="filter-pill" data-filter="instagram">Instagram</button>
+    <button class="filter-pill" data-filter="tiktok">TikTok</button>
+    <button class="filter-pill" data-filter="youtube">YouTube</button>
+    <button class="filter-pill" data-filter="facebook">Facebook</button>
+  </div>
+
+  <section id="seguidores">
+    <div class="section-head"><h2>&#128101; Seguidores</h2><span class="count">6 produtos</span></div>
+    <div class="products">
+      <article class="card" data-network="instagram">
+        <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
+        <div class="card-body"><h3 class="card-title">Seguidores Instagram</h3><p class="card-desc">Seguidores reais e brasileiros. Crescimento organico e natural para o seu perfil.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>4,99</span></span></div><button class="btn-buy" data-sid="ig_seg_1k" data-name="Seguidores Instagram 1K" data-price="4,99" data-qty="1.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+      </article>
+      <article class="card" data-network="tiktok">
+        <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
+        <div class="card-body"><h3 class="card-title">Seguidores TikTok</h3><p class="card-desc">Aumente sua base de fas no TikTok com seguidores de qualidade e perfis reais.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>3,99</span></span></div><button class="btn-buy" data-sid="tt_seg_1k" data-name="Seguidores TikTok 1K" data-price="3,99" data-qty="1.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+      </article>
+      <article class="card" data-network="youtube">
+        <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
+        <div class="card-body"><h3 class="card-title">Inscritos YouTube</h3><p class="card-desc">Impulsione seu canal com inscritos reais. Melhore seu ranking e monetize mais rapido.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>6,99</span></span></div><button class="btn-buy" data-sid="yt_sub_1k" data-name="Inscritos YouTube 1K" data-price="6,99" data-qty="1.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+      </article>
+      <article class="card" data-network="facebook">
+        <div class="card-header"><div class="card-icon" style="background:#1877F2">&#128216;</div><span class="card-badge">Facebook</span></div>
+        <div class="card-body"><h3 class="card-title">Seguidores Facebook</h3><p class="card-desc">Curtidores e seguidores para sua pagina do Facebook. Entrega rapida.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>5,99</span></span></div><button class="btn-buy" data-sid="fb_seg_1k" data-name="Seguidores Facebook 1K" data-price="5,99" data-qty="1.000" data-icon="&#128216;" data-color="#1877F2">Comprar</button></div>
+      </article>
+      <article class="card" data-network="instagram">
+        <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge teal">Popular</span></div>
+        <div class="card-body"><h3 class="card-title">Seguidores Instagram &mdash; Pacote Pro</h3><p class="card-desc">5.000 seguidores brasileiros com garantia de reposicao e entrega em 48h.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>5.000 seguidores</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>19,90</span></span></div><button class="btn-buy" data-sid="ig_seg_5k" data-name="Seguidores Instagram 5K" data-price="19,90" data-qty="5.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+      </article>
+      <article class="card" data-network="tiktok">
+        <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge teal">Oferta</span></div>
+        <div class="card-body"><h3 class="card-title">Seguidores TikTok &mdash; Pacote 10K</h3><p class="card-desc">10.000 seguidores para turbinar seu TikTok. Entrega gradual para maximo realismo.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>10.000 seguidores</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>29,90</span></span></div><button class="btn-buy" data-sid="tt_seg_10k" data-name="Seguidores TikTok 10K" data-price="29,90" data-qty="10.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="visualizacoes">
+    <div class="section-head"><h2>&#9654;&#65039; Visualizacoes</h2><span class="count">4 produtos</span></div>
+    <div class="products">
+      <article class="card" data-network="youtube">
+        <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
+        <div class="card-body"><h3 class="card-title">Visualizacoes YouTube</h3><p class="card-desc">Aumente as views do seu video. Melhore seu ranking nos resultados de busca.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>A partir de 5.000 views</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>9,99</span></span></div><button class="btn-buy" data-sid="yt_view_5k" data-name="Visualizacoes YouTube 5K" data-price="9,99" data-qty="5.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+      </article>
+      <article class="card" data-network="tiktok">
+        <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
+        <div class="card-body"><h3 class="card-title">Visualizacoes TikTok</h3><p class="card-desc">Impulsione seus videos no TikTok com views reais. Aumento rapido de alcance.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>A partir de 5.000 views</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>7,99</span></span></div><button class="btn-buy" data-sid="tt_view_5k" data-name="Visualizacoes TikTok 5K" data-price="7,99" data-qty="5.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+      </article>
+      <article class="card" data-network="instagram">
+        <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
+        <div class="card-body"><h3 class="card-title">Views Instagram Reels</h3><p class="card-desc">Mais visualizacoes nos seus Reels. Algoritmo favorece videos com alto numero de views.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>A partir de 5.000 views</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>5,99</span></span></div><button class="btn-buy" data-sid="ig_view_5k" data-name="Views Instagram Reels 5K" data-price="5,99" data-qty="5.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+      </article>
+      <article class="card" data-network="youtube">
+        <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge teal">Pack</span></div>
+        <div class="card-body"><h3 class="card-title">Views YouTube &mdash; Pacote 15K</h3><p class="card-desc">15.000 views para acelerar o crescimento do seu canal. Entrega em 72h.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>15.000 views</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>14,99</span></span></div><button class="btn-buy" data-sid="yt_view_15k" data-name="Views YouTube 15K" data-price="14,99" data-qty="15.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="curtidas">
+    <div class="section-head"><h2>&#10084;&#65039; Curtidas</h2><span class="count">4 produtos</span></div>
+    <div class="products">
+      <article class="card" data-network="instagram">
+        <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
+        <div class="card-body"><h3 class="card-title">Curtidas Instagram</h3><p class="card-desc">Aumente o engajamento das suas fotos e reels com curtidas de usuarios reais.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>2,99</span></span></div><button class="btn-buy" data-sid="ig_like_1k" data-name="Curtidas Instagram 1K" data-price="2,99" data-qty="1.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+      </article>
+      <article class="card" data-network="tiktok">
+        <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
+        <div class="card-body"><h3 class="card-title">Curtidas TikTok</h3><p class="card-desc">Likes reais para seus videos TikTok. Melhore o desempenho no algoritmo.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>1,99</span></span></div><button class="btn-buy" data-sid="tt_like_1k" data-name="Curtidas TikTok 1K" data-price="1,99" data-qty="1.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+      </article>
+      <article class="card" data-network="facebook">
+        <div class="card-header"><div class="card-icon" style="background:#1877F2">&#128216;</div><span class="card-badge">Facebook</span></div>
+        <div class="card-body"><h3 class="card-title">Curtidas Facebook</h3><p class="card-desc">Curtidas para fotos e publicacoes da sua pagina ou perfil no Facebook.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>3,49</span></span></div><button class="btn-buy" data-sid="fb_like_1k" data-name="Curtidas Facebook 1K" data-price="3,49" data-qty="1.000" data-icon="&#128216;" data-color="#1877F2">Comprar</button></div>
+      </article>
+      <article class="card" data-network="youtube">
+        <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
+        <div class="card-body"><h3 class="card-title">Curtidas YouTube</h3><p class="card-desc">Likes para seus videos no YouTube. Aumente a credibilidade e ranqueamento.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>24,90</span></span></div><button class="btn-buy" data-sid="yt_like_1k" data-name="Curtidas YouTube 1K" data-price="24,90" data-qty="1.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="comentarios">
+    <div class="section-head"><h2>&#128172; Comentarios</h2><span class="count">3 produtos</span></div>
+    <div class="products">
+      <article class="card" data-network="instagram">
+        <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
+        <div class="card-body"><h3 class="card-title">Comentarios Instagram</h3><p class="card-desc">Comentarios positivos nas suas publicacoes. Aumente o engajamento e alcance organico.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>10 comentarios personalizados</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>4,99</span></span></div><button class="btn-buy" data-sid="ig_cmt_10" data-name="Comentarios Instagram 10" data-price="4,99" data-qty="10" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+      </article>
+      <article class="card" data-network="tiktok">
+        <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
+        <div class="card-body"><h3 class="card-title">Comentarios TikTok</h3><p class="card-desc">Comentarios reais em seus videos do TikTok. Impulsione a interacao e o alcance.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>10 comentarios personalizados</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>6,99</span></span></div><button class="btn-buy" data-sid="tt_cmt_10" data-name="Comentarios TikTok 10" data-price="6,99" data-qty="10" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+      </article>
+      <article class="card" data-network="youtube">
+        <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
+        <div class="card-body"><h3 class="card-title">Comentarios YouTube</h3><p class="card-desc">Comentarios positivos nos seus videos do YouTube. Melhore o engajamento do canal.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>10 comentarios personalizados</div></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>5,49</span></span></div><button class="btn-buy" data-sid="yt_cmt_10" data-name="Comentarios YouTube 10" data-price="5,49" data-qty="10" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>Seguidores<span>Cripto</span></div>
+        <p>Compre seguidores com Bitcoin, Lightning, USDT e PIX. Sem cadastro, sem rastro. Entrega automatica apos pagamento.</p>
+        <a href="https://wa.link/moshe" target="_blank" rel="noopener" class="wpp-link"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Fale no WhatsApp</a>
+      </div>
+      <div class="footer-col"><h4>Categorias</h4><ul><li><a href="#seguidores">Seguidores</a></li><li><a href="#visualizacoes">Visualizacoes</a></li><li><a href="#curtidas">Curtidas</a></li><li><a href="#comentarios">Comentarios</a></li></ul></div>
+      <div class="footer-col"><h4>Informacoes</h4><ul><li><a href="#">Como Funciona</a></li><li><a href="#">Perguntas Frequentes</a></li><li><a href="#">Politica de Privacidade</a></li><li><a href="#">Rastrear Pedido</a></li></ul></div>
+      <div class="footer-col"><h4>Atendimento</h4><ul><li><a href="https://wa.link/moshe" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://wa.link/moshe" target="_blank" rel="noopener">45 99980-1434</a></li><li><a href="#">Central de Ajuda</a></li></ul></div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p>&#169; 2026 SeguidoresCripto. Todos os direitos reservados.</p>
+      <div class="payment-methods">
+        <span class="pm-badge crypto">&#8383; BTC</span>
+        <span class="pm-badge crypto">&#9889; Lightning</span>
+        <span class="pm-badge crypto">&#128178; USDT</span>
+        <span class="pm-badge">PIX</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.link/moshe" target="_blank" rel="noopener" class="wpp-float" aria-label="Fale no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-service">
+        <div class="modal-icon" id="modalIcon"></div>
+        <div class="modal-service-info">
+          <strong id="modalTitle">Produto</strong>
+          <span id="modalQtyLabel">1.000 unidades</span>
+        </div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Fechar">
+        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <!-- STEP 1: form -->
+      <div class="step active" id="step1">
+        <div class="field">
+          <label for="linkInput">Link do seu perfil / publicacao</label>
+          <input type="url" id="linkInput" placeholder="https://instagram.com/seuperfil" autocomplete="off" inputmode="url">
+        </div>
+        <div class="field">
+          <label>Forma de pagamento</label>
+          <div class="pay-grid">
+            <label class="pay-option">
+              <input type="radio" name="payMethod" value="pix" checked>
+              <span class="pay-label"><span class="pay-label-ico">&#127974;</span><span class="pay-label-txt"><strong>PIX</strong><em>Instantaneo</em></span></span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="payMethod" value="lightning">
+              <span class="pay-label btc-lbl"><span class="pay-label-ico">&#9889;</span><span class="pay-label-txt"><strong>Lightning</strong><em>BTC Rapido</em></span></span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="payMethod" value="btc">
+              <span class="pay-label btc-lbl"><span class="pay-label-ico">&#8383;</span><span class="pay-label-txt"><strong>Bitcoin</strong><em>Onchain</em></span></span>
+            </label>
+            <label class="pay-option">
+              <input type="radio" name="payMethod" value="usdt">
+              <span class="pay-label btc-lbl"><span class="pay-label-ico">&#128178;</span><span class="pay-label-txt"><strong>USDT</strong><em>TRC-20</em></span></span>
+            </label>
+          </div>
+        </div>
+        <div class="price-row">
+          <span>Total</span>
+          <strong>R$ <span id="modalPrice">0,00</span></strong>
+        </div>
+        <button class="btn-pay" id="btnPay">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Gerar Pagamento
+        </button>
+        <p style="font-size:.75rem;color:var(--text-3);text-align:center">Entrega automatica apos confirmacao do pagamento</p>
+      </div>
+
+      <!-- STEP 2: invoice -->
+      <div class="step" id="step2">
+        <div class="order-id-row">
+          <span>Codigo do pedido</span>
+          <strong id="invoiceOrderId">-</strong>
+        </div>
+        <div id="invoiceBadge" class="invoice-badge">&#8987; Aguardando pagamento...</div>
+        <div class="qr-wrap">
+          <img id="qrImg" src="" alt="QR Code de pagamento" style="display:none">
+          <p class="qr-fallback" id="qrFallback" style="display:none"></p>
+        </div>
+        <div class="copy-row">
+          <div class="copy-input" id="copyValue"></div>
+          <button class="btn-copy" id="btnCopy">Copiar</button>
+        </div>
+        <div id="payDetails" style="font-size:.8rem;color:var(--text-3);display:none;line-height:1.6"></div>
+        <div class="status-polling">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusLabel">Aguardando pagamento...</span>
+        </div>
+        <p style="font-size:.75rem;color:var(--text-3)">Apos confirmar, o pedido e enviado automaticamente. Guarde o codigo acima.</p>
+      </div>
+
+      <!-- STEP 3: success -->
+      <div class="step" id="step3">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <p class="success-title">Pagamento confirmado! &#127881;</p>
+        <p class="success-sub">Seu pedido foi enviado ao sistema. Em ate 24h voce vera o resultado no seu perfil.</p>
+        <a href="https://wa.link/moshe" target="_blank" rel="noopener" class="btn-wpp-success">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Acompanhar pelo WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG: cole a URL do Worker apos deploy ──────────────────────────
+var WORKER_URL = 'https://SEU-WORKER.SEU-USUARIO.workers.dev';
+
+var currentOrderId = null;
+var pollInterval   = null;
+
+// ── Filtro de rede ────────────────────────────────────────────────────
+(function(){
+  var pills = document.querySelectorAll('.filter-pill');
+  var cards = document.querySelectorAll('.card[data-network]');
+  pills.forEach(function(p){
+    p.addEventListener('click', function(){
+      pills.forEach(function(x){ x.classList.remove('active'); });
+      p.classList.add('active');
+      var f = p.dataset.filter;
+      cards.forEach(function(c){
+        c.style.display = (f === 'all' || c.dataset.network === f) ? '' : 'none';
+      });
+    });
+  });
+  document.querySelectorAll('.nav-cat').forEach(function(c){
+    c.addEventListener('click', function(){
+      document.querySelectorAll('.nav-cat').forEach(function(x){ x.classList.remove('active'); });
+      c.classList.add('active');
+    });
+  });
+})();
+
+// ── Abrir modal ao clicar "Comprar" ───────────────────────────────────
+document.querySelectorAll('.btn-buy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.getElementById('modalIcon').textContent     = btn.dataset.icon;
+    document.getElementById('modalIcon').style.background = btn.dataset.color;
+    document.getElementById('modalTitle').textContent    = btn.dataset.name;
+    document.getElementById('modalQtyLabel').textContent = btn.dataset.qty + ' unidades';
+    document.getElementById('modalPrice').textContent    = btn.dataset.price;
+    document.getElementById('btnPay').dataset.sid        = btn.dataset.sid;
+    document.getElementById('linkInput').value           = '';
+    showStep(1);
+    document.getElementById('modalBackdrop').classList.add('open');
+    setTimeout(function(){ document.getElementById('linkInput').focus(); }, 250);
+  });
+});
+
+// ── Fechar modal ──────────────────────────────────────────────────────
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalBackdrop').addEventListener('click', function(e){
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeModal();
+});
+function closeModal(){
+  document.getElementById('modalBackdrop').classList.remove('open');
+  if (pollInterval){ clearInterval(pollInterval); pollInterval = null; }
+}
+function showStep(n){
+  [1,2,3].forEach(function(i){
+    document.getElementById('step'+i).classList.toggle('active', i===n);
+  });
+}
+
+// ── Criar pedido ──────────────────────────────────────────────────────
+document.getElementById('btnPay').addEventListener('click', async function(){
+  var btn  = this;
+  var link = document.getElementById('linkInput').value.trim();
+  var sid  = btn.dataset.sid;
+  var pm   = document.querySelector('input[name="payMethod"]:checked');
+  if (!link){
+    document.getElementById('linkInput').style.borderColor = 'var(--accent)';
+    document.getElementById('linkInput').focus();
+    return;
+  }
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Gerando pagamento...';
+  try {
+    var resp = await fetch(WORKER_URL + '/api/order', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ serviceId: sid, link: link, paymentMethod: pm.value }),
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Erro ao criar pedido');
+    currentOrderId = data.orderId;
+    renderInvoice(data);
+    showStep(2);
+    startPolling();
+  } catch(e) {
+    alert('Erro: ' + e.message + '\n\nFale conosco: wa.link/moshe');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> Gerar Pagamento';
+  }
+});
+
+// ── Renderizar invoice ────────────────────────────────────────────────
+function renderInvoice(data){
+  document.getElementById('invoiceOrderId').textContent = data.orderId;
+  var isPix = data.paymentMethod === 'pix';
+  var badge = document.getElementById('invoiceBadge');
+  badge.className = 'invoice-badge' + (isPix ? ' pix-badge' : '');
+  badge.textContent = isPix ? '&#127974; Aguardando PIX...' : '&#8383; Aguardando cripto...';
+  var qrImg = document.getElementById('qrImg');
+  var qrFallback = document.getElementById('qrFallback');
+  if (data.qrBase64){
+    qrImg.src = 'data:image/png;base64,' + data.qrBase64;
+    qrImg.style.display = '';
+    qrFallback.style.display = 'none';
+  } else if (data.qrCode){
+    qrFallback.textContent = data.qrCode;
+    qrFallback.style.display = '';
+    qrImg.style.display = 'none';
+  }
+  document.getElementById('copyValue').textContent = data.qrCode || data.payAddress || '';
+  var details = document.getElementById('payDetails');
+  if (!isPix && data.payAddress){
+    details.style.display = '';
+    details.innerHTML = '<strong>Endereco:</strong> ' + data.payAddress +
+      (data.payAmount ? '<br><strong>Valor:</strong> ' + data.payAmount + ' ' + (data.payCurrency||'').toUpperCase() : '');
+  } else {
+    details.style.display = 'none';
+  }
+}
+
+// ── Copiar codigo ─────────────────────────────────────────────────────
+document.getElementById('btnCopy').addEventListener('click', function(){
+  var val = document.getElementById('copyValue').textContent;
+  navigator.clipboard.writeText(val).then(function(){
+    var b = document.getElementById('btnCopy');
+    b.textContent = 'Copiado!';
+    setTimeout(function(){ b.textContent = 'Copiar'; }, 2000);
+  });
+});
+
+// ── Polling de status ─────────────────────────────────────────────────
+function startPolling(){
+  if (pollInterval) clearInterval(pollInterval);
+  pollInterval = setInterval(checkStatus, 6000);
+}
+async function checkStatus(){
+  if (!currentOrderId) return;
+  try {
+    var resp = await fetch(WORKER_URL + '/api/status/' + currentOrderId);
+    var data = await resp.json();
+    if (data.paymentStatus === 'confirmed'){
+      clearInterval(pollInterval); pollInterval = null;
+      document.getElementById('statusDot').classList.add('green');
+      showStep(3);
+    } else if (data.paymentStatus === 'failed'){
+      clearInterval(pollInterval); pollInterval = null;
+      document.getElementById('statusLabel').textContent = 'Pagamento falhou ou expirou. Feche e tente novamente.';
+      document.getElementById('statusDot').style.background = 'var(--accent)';
+    }
+  } catch(e){ /* tenta no proximo tick */ }
+}
+</script>
+</body>
+</html>
