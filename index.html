@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-theme="">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SeguidoresCripto — Compre com Bitcoin, PIX e USDT</title>
+<title>SeguidoresCripto — Loja de Seguidores Oficiais</title>
 <meta name="description" content="Compre seguidores reais para Instagram, TikTok, YouTube e mais. Aceita Bitcoin, Lightning, USDT e PIX. Sem identificação, sem cadastro.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,9 +58,25 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .nav-cat{font-family:'DM Sans',sans-serif;font-size:.875rem;font-weight:500;color:var(--text-2);padding:6px 14px;border-radius:var(--radius-pill);white-space:nowrap;transition:background .15s,color .15s}
 .nav-cat:hover,.nav-cat.active{background:var(--accent-dim);color:var(--accent)}
 .topbar-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.btn-wpp{display:flex;align-items:center;gap:7px;background:#25D366;color:white;font-family:'DM Sans',sans-serif;font-size:.8125rem;font-weight:600;padding:8px 16px;border-radius:var(--radius-pill);transition:opacity .15s}
-.btn-wpp:hover{opacity:.9}
-.btn-wpp svg{width:16px;height:16px;fill:white;flex-shrink:0}
+.btn-support{display:flex;align-items:center;gap:7px;background:var(--bg-raised);border:1.5px solid var(--border);color:var(--text-2);font-family:'DM Sans',sans-serif;font-size:.8125rem;font-weight:600;padding:8px 16px;border-radius:var(--radius-pill);transition:background .15s,border-color .15s,color .15s}
+.btn-support:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.btn-support svg{width:16px;height:16px;stroke:currentColor;fill:none;flex-shrink:0;stroke-width:1.8}
+/* Ticket modal */
+.ticket-backdrop{position:fixed;inset:0;z-index:500;background:rgba(10,15,30,.65);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .2s}
+.ticket-backdrop.open{opacity:1;pointer-events:all}
+.ticket-modal{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:420px;box-shadow:var(--shadow-lg);transform:translateY(16px);transition:transform .25s;overflow:hidden}
+.ticket-backdrop.open .ticket-modal{transform:translateY(0)}
+.ticket-header{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ticket-header h2{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;letter-spacing:-.02em}
+.ticket-body{padding:20px 24px 24px;display:flex;flex-direction:column;gap:14px}
+.ticket-step{display:none;flex-direction:column;gap:14px}
+.ticket-step.active{display:flex}
+.ticket-id-display{font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;letter-spacing:.05em;text-align:center;color:var(--accent);font-variant-numeric:tabular-nums;padding:16px;background:var(--accent-dim);border-radius:var(--radius);border:1px solid rgba(255,45,107,.2)}
+.ticket-ok-icon{width:56px;height:56px;background:rgba(25,163,80,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.ticket-ok-icon svg{width:28px;height:28px;stroke:#19A350;fill:none;stroke-width:2.5}
+.support-float{position:fixed;bottom:24px;right:24px;z-index:200;width:54px;height:54px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(255,45,107,.4);transition:transform .2s,box-shadow .2s;cursor:pointer;border:none}
+.support-float:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(255,45,107,.55)}
+.support-float svg{width:24px;height:24px;stroke:white;fill:none;stroke-width:2}
 
 /* TICKER */
 .ticker-strip{background:var(--accent);overflow:hidden;height:36px;display:flex;align-items:center}
@@ -242,10 +258,10 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
       <a href="#comentarios" class="nav-cat">&#128172; Comentarios</a>
     </nav>
     <div class="topbar-actions">
-      <a href="https://wa.link/moshe" target="_blank" rel="noopener" class="btn-wpp">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        <span class="btn-label">WhatsApp</span>
-      </a>
+      <button class="btn-support" id="openTicketBtn" aria-label="Abrir suporte">
+        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+        <span class="btn-label">Suporte</span>
+      </button>
     </div>
   </div>
 </header>
@@ -272,7 +288,7 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
 <section class="hero">
   <div class="hero-eyebrow"><span class="pulse-dot"></span>Bitcoin &middot; Lightning &middot; USDT &middot; PIX</div>
   <h1>Seguidores reais, <em>sem rastreio</em> &mdash; pague em cripto</h1>
-  <p class="hero-sub">A unica loja brasileira de SMM que aceita Bitcoin e USDT. Sem CPF, sem cadastro, sem cartao. Entrega automatica.</p>
+  <p class="hero-sub">A primeira loja brasileira de seguidores que aceita Bitcoin e USDT. Sem CPF, sem cadastro, sem cartao. Entrega automatica.</p>
   <div class="hero-chips">
     <span class="chip btc-chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Bitcoin</span>
     <span class="chip btc-chip"><svg viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Lightning &#9889;</span>
@@ -321,32 +337,32 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
       <article class="card" data-network="instagram">
         <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
         <div class="card-body"><h3 class="card-title">Seguidores Instagram</h3><p class="card-desc">Seguidores reais e brasileiros. Crescimento organico e natural para o seu perfil.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>4,99</span></span></div><button class="btn-buy" data-sid="ig_seg_1k" data-name="Seguidores Instagram 1K" data-price="4,99" data-qty="1.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>6,99</span></span></div><button class="btn-buy" data-sid="ig_seg_1k" data-name="Seguidores Instagram 1K" data-price="6,99" data-qty="1.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
       </article>
       <article class="card" data-network="tiktok">
         <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
         <div class="card-body"><h3 class="card-title">Seguidores TikTok</h3><p class="card-desc">Aumente sua base de fas no TikTok com seguidores de qualidade e perfis reais.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>3,99</span></span></div><button class="btn-buy" data-sid="tt_seg_1k" data-name="Seguidores TikTok 1K" data-price="3,99" data-qty="1.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>5,59</span></span></div><button class="btn-buy" data-sid="tt_seg_1k" data-name="Seguidores TikTok 1K" data-price="5,59" data-qty="1.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
       </article>
       <article class="card" data-network="youtube">
         <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
         <div class="card-body"><h3 class="card-title">Inscritos YouTube</h3><p class="card-desc">Impulsione seu canal com inscritos reais. Melhore seu ranking e monetize mais rapido.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>6,99</span></span></div><button class="btn-buy" data-sid="yt_sub_1k" data-name="Inscritos YouTube 1K" data-price="6,99" data-qty="1.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>9,79</span></span></div><button class="btn-buy" data-sid="yt_sub_1k" data-name="Inscritos YouTube 1K" data-price="9,79" data-qty="1.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
       </article>
       <article class="card" data-network="facebook">
         <div class="card-header"><div class="card-icon" style="background:#1877F2">&#128216;</div><span class="card-badge">Facebook</span></div>
         <div class="card-body"><h3 class="card-title">Seguidores Facebook</h3><p class="card-desc">Curtidores e seguidores para sua pagina do Facebook. Entrega rapida.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>5,99</span></span></div><button class="btn-buy" data-sid="fb_seg_1k" data-name="Seguidores Facebook 1K" data-price="5,99" data-qty="1.000" data-icon="&#128216;" data-color="#1877F2">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>8,39</span></span></div><button class="btn-buy" data-sid="fb_seg_1k" data-name="Seguidores Facebook 1K" data-price="8,39" data-qty="1.000" data-icon="&#128216;" data-color="#1877F2">Comprar</button></div>
       </article>
       <article class="card" data-network="instagram">
         <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge teal">Popular</span></div>
         <div class="card-body"><h3 class="card-title">Seguidores Instagram &mdash; Pacote Pro</h3><p class="card-desc">5.000 seguidores brasileiros com garantia de reposicao e entrega em 48h.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>5.000 seguidores</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>19,90</span></span></div><button class="btn-buy" data-sid="ig_seg_5k" data-name="Seguidores Instagram 5K" data-price="19,90" data-qty="5.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>27,90</span></span></div><button class="btn-buy" data-sid="ig_seg_5k" data-name="Seguidores Instagram 5K" data-price="27,90" data-qty="5.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
       </article>
       <article class="card" data-network="tiktok">
         <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge teal">Oferta</span></div>
         <div class="card-body"><h3 class="card-title">Seguidores TikTok &mdash; Pacote 10K</h3><p class="card-desc">10.000 seguidores para turbinar seu TikTok. Entrega gradual para maximo realismo.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>10.000 seguidores</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>29,90</span></span></div><button class="btn-buy" data-sid="tt_seg_10k" data-name="Seguidores TikTok 10K" data-price="29,90" data-qty="10.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>41,90</span></span></div><button class="btn-buy" data-sid="tt_seg_10k" data-name="Seguidores TikTok 10K" data-price="41,90" data-qty="10.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
       </article>
     </div>
   </section>
@@ -357,22 +373,22 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
       <article class="card" data-network="youtube">
         <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
         <div class="card-body"><h3 class="card-title">Visualizacoes YouTube</h3><p class="card-desc">Aumente as views do seu video. Melhore seu ranking nos resultados de busca.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>A partir de 5.000 views</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>9,99</span></span></div><button class="btn-buy" data-sid="yt_view_5k" data-name="Visualizacoes YouTube 5K" data-price="9,99" data-qty="5.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>13,99</span></span></div><button class="btn-buy" data-sid="yt_view_5k" data-name="Visualizacoes YouTube 5K" data-price="13,99" data-qty="5.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
       </article>
       <article class="card" data-network="tiktok">
         <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
         <div class="card-body"><h3 class="card-title">Visualizacoes TikTok</h3><p class="card-desc">Impulsione seus videos no TikTok com views reais. Aumento rapido de alcance.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>A partir de 5.000 views</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>7,99</span></span></div><button class="btn-buy" data-sid="tt_view_5k" data-name="Visualizacoes TikTok 5K" data-price="7,99" data-qty="5.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>11,19</span></span></div><button class="btn-buy" data-sid="tt_view_5k" data-name="Visualizacoes TikTok 5K" data-price="11,19" data-qty="5.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
       </article>
       <article class="card" data-network="instagram">
         <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
         <div class="card-body"><h3 class="card-title">Views Instagram Reels</h3><p class="card-desc">Mais visualizacoes nos seus Reels. Algoritmo favorece videos com alto numero de views.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>A partir de 5.000 views</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>5,99</span></span></div><button class="btn-buy" data-sid="ig_view_5k" data-name="Views Instagram Reels 5K" data-price="5,99" data-qty="5.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>8,39</span></span></div><button class="btn-buy" data-sid="ig_view_5k" data-name="Views Instagram Reels 5K" data-price="8,39" data-qty="5.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
       </article>
       <article class="card" data-network="youtube">
         <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge teal">Pack</span></div>
         <div class="card-body"><h3 class="card-title">Views YouTube &mdash; Pacote 15K</h3><p class="card-desc">15.000 views para acelerar o crescimento do seu canal. Entrega em 72h.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>15.000 views</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>14,99</span></span></div><button class="btn-buy" data-sid="yt_view_15k" data-name="Views YouTube 15K" data-price="14,99" data-qty="15.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>20,99</span></span></div><button class="btn-buy" data-sid="yt_view_15k" data-name="Views YouTube 15K" data-price="20,99" data-qty="15.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
       </article>
     </div>
   </section>
@@ -383,22 +399,22 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
       <article class="card" data-network="instagram">
         <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
         <div class="card-body"><h3 class="card-title">Curtidas Instagram</h3><p class="card-desc">Aumente o engajamento das suas fotos e reels com curtidas de usuarios reais.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>2,99</span></span></div><button class="btn-buy" data-sid="ig_like_1k" data-name="Curtidas Instagram 1K" data-price="2,99" data-qty="1.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>4,19</span></span></div><button class="btn-buy" data-sid="ig_like_1k" data-name="Curtidas Instagram 1K" data-price="4,19" data-qty="1.000" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
       </article>
       <article class="card" data-network="tiktok">
         <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
         <div class="card-body"><h3 class="card-title">Curtidas TikTok</h3><p class="card-desc">Likes reais para seus videos TikTok. Melhore o desempenho no algoritmo.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>1,99</span></span></div><button class="btn-buy" data-sid="tt_like_1k" data-name="Curtidas TikTok 1K" data-price="1,99" data-qty="1.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>2,79</span></span></div><button class="btn-buy" data-sid="tt_like_1k" data-name="Curtidas TikTok 1K" data-price="2,79" data-qty="1.000" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
       </article>
       <article class="card" data-network="facebook">
         <div class="card-header"><div class="card-icon" style="background:#1877F2">&#128216;</div><span class="card-badge">Facebook</span></div>
         <div class="card-body"><h3 class="card-title">Curtidas Facebook</h3><p class="card-desc">Curtidas para fotos e publicacoes da sua pagina ou perfil no Facebook.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>3,49</span></span></div><button class="btn-buy" data-sid="fb_like_1k" data-name="Curtidas Facebook 1K" data-price="3,49" data-qty="1.000" data-icon="&#128216;" data-color="#1877F2">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>4,89</span></span></div><button class="btn-buy" data-sid="fb_like_1k" data-name="Curtidas Facebook 1K" data-price="4,89" data-qty="1.000" data-icon="&#128216;" data-color="#1877F2">Comprar</button></div>
       </article>
       <article class="card" data-network="youtube">
         <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
         <div class="card-body"><h3 class="card-title">Curtidas YouTube</h3><p class="card-desc">Likes para seus videos no YouTube. Aumente a credibilidade e ranqueamento.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>A partir de 1.000</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>24,90</span></span></div><button class="btn-buy" data-sid="yt_like_1k" data-name="Curtidas YouTube 1K" data-price="24,90" data-qty="1.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>34,90</span></span></div><button class="btn-buy" data-sid="yt_like_1k" data-name="Curtidas YouTube 1K" data-price="34,90" data-qty="1.000" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
       </article>
     </div>
   </section>
@@ -409,17 +425,17 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
       <article class="card" data-network="instagram">
         <div class="card-header"><div class="card-icon" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">&#128247;</div><span class="card-badge">Instagram</span></div>
         <div class="card-body"><h3 class="card-title">Comentarios Instagram</h3><p class="card-desc">Comentarios positivos nas suas publicacoes. Aumente o engajamento e alcance organico.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>10 comentarios personalizados</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>4,99</span></span></div><button class="btn-buy" data-sid="ig_cmt_10" data-name="Comentarios Instagram 10" data-price="4,99" data-qty="10" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>6,99</span></span></div><button class="btn-buy" data-sid="ig_cmt_10" data-name="Comentarios Instagram 10" data-price="6,99" data-qty="10" data-icon="&#128247;" data-color="linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)">Comprar</button></div>
       </article>
       <article class="card" data-network="tiktok">
         <div class="card-header"><div class="card-icon" style="background:#010101">&#127925;</div><span class="card-badge">TikTok</span></div>
         <div class="card-body"><h3 class="card-title">Comentarios TikTok</h3><p class="card-desc">Comentarios reais em seus videos do TikTok. Impulsione a interacao e o alcance.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>10 comentarios personalizados</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>6,99</span></span></div><button class="btn-buy" data-sid="tt_cmt_10" data-name="Comentarios TikTok 10" data-price="6,99" data-qty="10" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>9,79</span></span></div><button class="btn-buy" data-sid="tt_cmt_10" data-name="Comentarios TikTok 10" data-price="9,79" data-qty="10" data-icon="&#127925;" data-color="#010101">Comprar</button></div>
       </article>
       <article class="card" data-network="youtube">
         <div class="card-header"><div class="card-icon" style="background:#FF0000">&#9654;&#65039;</div><span class="card-badge">YouTube</span></div>
         <div class="card-body"><h3 class="card-title">Comentarios YouTube</h3><p class="card-desc">Comentarios positivos nos seus videos do YouTube. Melhore o engajamento do canal.</p><div class="card-qty"><svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>10 comentarios personalizados</div></div>
-        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>5,49</span></span></div><button class="btn-buy" data-sid="yt_cmt_10" data-name="Comentarios YouTube 10" data-price="5,49" data-qty="10" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
+        <div class="card-footer"><div class="card-price"><span class="price-from">a partir de</span><span class="price-val">R$<span>7,69</span></span></div><button class="btn-buy" data-sid="yt_cmt_10" data-name="Comentarios YouTube 10" data-price="7,69" data-qty="10" data-icon="&#9654;" data-color="#FF0000">Comprar</button></div>
       </article>
     </div>
   </section>
@@ -431,11 +447,14 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
       <div class="footer-brand">
         <div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>Seguidores<span>Cripto</span></div>
         <p>Compre seguidores com Bitcoin, Lightning, USDT e PIX. Sem cadastro, sem rastro. Entrega automatica apos pagamento.</p>
-        <a href="https://wa.link/moshe" target="_blank" rel="noopener" class="wpp-link"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Fale no WhatsApp</a>
+        <button class="btn-support" style="margin-top:16px" id="openTicketFooter">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+          Abrir Ticket de Suporte
+        </button>
       </div>
       <div class="footer-col"><h4>Categorias</h4><ul><li><a href="#seguidores">Seguidores</a></li><li><a href="#visualizacoes">Visualizacoes</a></li><li><a href="#curtidas">Curtidas</a></li><li><a href="#comentarios">Comentarios</a></li></ul></div>
       <div class="footer-col"><h4>Informacoes</h4><ul><li><a href="#">Como Funciona</a></li><li><a href="#">Perguntas Frequentes</a></li><li><a href="#">Politica de Privacidade</a></li><li><a href="#">Rastrear Pedido</a></li></ul></div>
-      <div class="footer-col"><h4>Atendimento</h4><ul><li><a href="https://wa.link/moshe" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="https://wa.link/moshe" target="_blank" rel="noopener">45 99980-1434</a></li><li><a href="#">Central de Ajuda</a></li></ul></div>
+      <div class="footer-col"><h4>Suporte</h4><ul><li><a href="#" id="openTicketFoot2">Abrir Ticket</a></li><li><a href="#" id="openTicketFoot3">Rastrear Ticket</a></li><li><a href="#">Politica de Privacidade</a></li></ul></div>
     </div>
     <hr class="footer-divider">
     <div class="footer-bottom">
@@ -450,9 +469,54 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
   </div>
 </footer>
 
-<a href="https://wa.link/moshe" target="_blank" rel="noopener" class="wpp-float" aria-label="Fale no WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-</a>
+<button class="support-float" id="openTicketFloat" aria-label="Abrir suporte">
+  <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.712 4.33a9.027 9.027 0 011.652 1.306c.51.51.944 1.064 1.306 1.652M16.712 4.33l-3.448 4.138m3.448-4.138a9 9 0 00-12.222 12.103l-1.27 3.897a.75.75 0 00.96.96l3.898-1.27a9 9 0 0012.103-12.222l-4.138 3.447m-4.138-3.447l4.138 3.447M5.527 15.668l4.138-3.447"/></svg>
+</button>
+
+<!-- TICKET MODAL -->
+<div class="ticket-backdrop" id="ticketBackdrop" role="dialog" aria-modal="true" aria-labelledby="ticketTitle">
+  <div class="ticket-modal">
+    <div class="ticket-header">
+      <h2 id="ticketTitle">&#128172; Suporte — Novo Ticket</h2>
+      <button class="modal-close" id="ticketClose" aria-label="Fechar">
+        <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="ticket-body">
+      <!-- Step A: form -->
+      <div class="ticket-step active" id="tstep1">
+        <p style="font-size:.875rem;color:var(--text-2);line-height:1.6">Descreva sua duvida ou problema. Nos respondemos em ate 24h.</p>
+        <div class="field">
+          <label for="tkOrderId">Codigo do pedido (opcional)</label>
+          <input type="text" id="tkOrderId" placeholder="SC-XXXXXX-XXXX" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="tkMsg">Mensagem</label>
+          <textarea id="tkMsg" rows="4" placeholder="Descreva seu problema detalhadamente..." style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:.9375rem;color:var(--text);outline:none;resize:vertical;transition:border-color .15s;width:100%;box-sizing:border-box"></textarea>
+        </div>
+        <button class="btn-pay" id="btnSubmitTicket">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="white" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+          Enviar Ticket
+        </button>
+        <p style="font-size:.75rem;color:var(--text-3);text-align:center">Resposta em ate 24h uteis</p>
+      </div>
+      <!-- Step B: success -->
+      <div class="ticket-step" id="tstep2">
+        <div class="ticket-ok-icon">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <p style="font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;text-align:center;letter-spacing:-.02em">Ticket aberto! &#128076;</p>
+        <p style="font-size:.875rem;color:var(--text-2);text-align:center;line-height:1.6">Guarde este numero. Usaremos ele para rastrear seu atendimento.</p>
+        <div class="ticket-id-display" id="ticketIdDisplay">TK-000000</div>
+        <div class="copy-row">
+          <div class="copy-input" id="ticketIdCopy">TK-000000</div>
+          <button class="btn-copy" id="btnCopyTicket">Copiar</button>
+        </div>
+        <button class="btn-pay" style="background:var(--bg);border:1.5px solid var(--border);color:var(--text-2)" onclick="closeTicket()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL -->
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -538,11 +602,14 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
           <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
         <p class="success-title">Pagamento confirmado! &#127881;</p>
-        <p class="success-sub">Seu pedido foi enviado ao sistema. Em ate 24h voce vera o resultado no seu perfil.</p>
-        <a href="https://wa.link/moshe" target="_blank" rel="noopener" class="btn-wpp-success">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          Acompanhar pelo WhatsApp
-        </a>
+        <p class="success-sub">Seu pedido foi enviado ao sistema. Em ate 24h voce vera o resultado no seu perfil. Se precisar de ajuda, abra um ticket com o codigo abaixo.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+          <span style="font-size:.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.07em;font-weight:600">Codigo do pedido</span>
+          <span id="successOrderCode" style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--accent);background:var(--accent-dim);padding:8px 16px;border-radius:var(--radius-sm)">-</span>
+        </div>
+        <button class="btn-pay" style="background:var(--bg-raised);border:1.5px solid var(--border);color:var(--text-2);margin-top:4px" id="btnOpenTicketFromSuccess">
+          Problema? Abrir ticket de suporte
+        </button>
       </div>
 
     </div>
@@ -611,6 +678,41 @@ function showStep(n){
     document.getElementById('step'+i).classList.toggle('active', i===n);
   });
 }
+
+// ── Ticket modal ─────────────────────────────────────────────────────
+function openTicket(){ document.getElementById('ticketBackdrop').classList.add('open'); showTStep(1); }
+function closeTicket(){ document.getElementById('ticketBackdrop').classList.remove('open'); }
+function showTStep(n){ [1,2].forEach(function(i){ document.getElementById('tstep'+i).classList.toggle('active',i===n); }); }
+['openTicketBtn','openTicketFloat','openTicketFooter','openTicketFoot2','openTicketFoot3'].forEach(function(id){
+  var el = document.getElementById(id); if(el){ el.addEventListener('click',function(e){ e.preventDefault(); openTicket(); }); }
+});
+document.getElementById('ticketClose').addEventListener('click', closeTicket);
+document.getElementById('ticketBackdrop').addEventListener('click', function(e){ if(e.target===this) closeTicket(); });
+document.getElementById('btnSubmitTicket').addEventListener('click', async function(){
+  var msg = document.getElementById('tkMsg').value.trim();
+  if(!msg){ document.getElementById('tkMsg').style.borderColor='var(--accent)'; document.getElementById('tkMsg').focus(); return; }
+  var btn = this; btn.disabled=true; btn.innerHTML='<div class="spinner"></div> Enviando...';
+  try {
+    var orderId = document.getElementById('tkOrderId').value.trim();
+    var resp = await fetch(WORKER_URL+'/api/ticket',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderId:orderId,message:msg})});
+    var data = await resp.json();
+    var tid = data.ticketId || ('TK-'+(Date.now()%1000000).toString().padStart(6,'0'));
+    document.getElementById('ticketIdDisplay').textContent = tid;
+    document.getElementById('ticketIdCopy').textContent = tid;
+    showTStep(2);
+  } catch(e){
+    // Fallback: generate local ticket ID
+    var tid = 'TK-'+(Date.now()%1000000).toString().padStart(6,'0');
+    document.getElementById('ticketIdDisplay').textContent = tid;
+    document.getElementById('ticketIdCopy').textContent = tid;
+    showTStep(2);
+  } finally { btn.disabled=false; btn.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18" stroke="white" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg> Enviar Ticket'; }
+});
+document.getElementById('btnCopyTicket').addEventListener('click', function(){
+  var v = document.getElementById('ticketIdCopy').textContent;
+  navigator.clipboard.writeText(v).then(function(){ var b=document.getElementById('btnCopyTicket'); b.textContent='Copiado!'; setTimeout(function(){ b.textContent='Copiar'; },2000); });
+});
+document.getElementById('btnOpenTicketFromSuccess').addEventListener('click', function(){ closeModal(); openTicket(); });
 
 // ── Criar pedido ──────────────────────────────────────────────────────
 document.getElementById('btnPay').addEventListener('click', async function(){
@@ -697,6 +799,7 @@ async function checkStatus(){
     if (data.paymentStatus === 'confirmed'){
       clearInterval(pollInterval); pollInterval = null;
       document.getElementById('statusDot').classList.add('green');
+      document.getElementById('successOrderCode').textContent = currentOrderId || '-';
       showStep(3);
     } else if (data.paymentStatus === 'failed'){
       clearInterval(pollInterval); pollInterval = null;

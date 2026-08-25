@@ -21,28 +21,30 @@
 // ─── Catálogo de serviços ─────────────────────────────────────────────
 // Substitua os smmId pelos IDs reais do seu painel SMM
 // Para listar: POST { key: "SUA_KEY", action: "services" } na URL do painel
+// priceBRL = preço cobrado do cliente (margem 40% sobre custo SMM)
+// smmCost  = referência do custo base no painel (apenas documentação)
 const CATALOG = {
   // Seguidores
-  'ig_seg_1k':   { name: 'Seguidores Instagram 1K',    qty: 1000,  priceBRL: 4.99,  smmId: '0' },
-  'tt_seg_1k':   { name: 'Seguidores TikTok 1K',       qty: 1000,  priceBRL: 3.99,  smmId: '0' },
-  'yt_sub_1k':   { name: 'Inscritos YouTube 1K',       qty: 1000,  priceBRL: 6.99,  smmId: '0' },
-  'fb_seg_1k':   { name: 'Seguidores Facebook 1K',     qty: 1000,  priceBRL: 5.99,  smmId: '0' },
-  'ig_seg_5k':   { name: 'Seguidores Instagram 5K',    qty: 5000,  priceBRL: 19.90, smmId: '0' },
-  'tt_seg_10k':  { name: 'Seguidores TikTok 10K',      qty: 10000, priceBRL: 29.90, smmId: '0' },
+  'ig_seg_1k':   { name: 'Seguidores Instagram 1K',    qty: 1000,  priceBRL: 6.99,  smmCost: 4.99,  smmId: '0' },
+  'tt_seg_1k':   { name: 'Seguidores TikTok 1K',       qty: 1000,  priceBRL: 5.59,  smmCost: 3.99,  smmId: '0' },
+  'yt_sub_1k':   { name: 'Inscritos YouTube 1K',       qty: 1000,  priceBRL: 9.79,  smmCost: 6.99,  smmId: '0' },
+  'fb_seg_1k':   { name: 'Seguidores Facebook 1K',     qty: 1000,  priceBRL: 8.39,  smmCost: 5.99,  smmId: '0' },
+  'ig_seg_5k':   { name: 'Seguidores Instagram 5K',    qty: 5000,  priceBRL: 27.90, smmCost: 19.90, smmId: '0' },
+  'tt_seg_10k':  { name: 'Seguidores TikTok 10K',      qty: 10000, priceBRL: 41.90, smmCost: 29.90, smmId: '0' },
   // Visualizações
-  'yt_view_5k':  { name: 'Visualizações YouTube 5K',   qty: 5000,  priceBRL: 9.99,  smmId: '0' },
-  'tt_view_5k':  { name: 'Visualizações TikTok 5K',    qty: 5000,  priceBRL: 7.99,  smmId: '0' },
-  'ig_view_5k':  { name: 'Views Instagram Reels 5K',   qty: 5000,  priceBRL: 5.99,  smmId: '0' },
-  'yt_view_15k': { name: 'Views YouTube 15K',          qty: 15000, priceBRL: 14.99, smmId: '0' },
+  'yt_view_5k':  { name: 'Visualizações YouTube 5K',   qty: 5000,  priceBRL: 13.99, smmCost: 9.99,  smmId: '0' },
+  'tt_view_5k':  { name: 'Visualizações TikTok 5K',    qty: 5000,  priceBRL: 11.19, smmCost: 7.99,  smmId: '0' },
+  'ig_view_5k':  { name: 'Views Instagram Reels 5K',   qty: 5000,  priceBRL: 8.39,  smmCost: 5.99,  smmId: '0' },
+  'yt_view_15k': { name: 'Views YouTube 15K',          qty: 15000, priceBRL: 20.99, smmCost: 14.99, smmId: '0' },
   // Curtidas
-  'ig_like_1k':  { name: 'Curtidas Instagram 1K',      qty: 1000,  priceBRL: 2.99,  smmId: '0' },
-  'tt_like_1k':  { name: 'Curtidas TikTok 1K',         qty: 1000,  priceBRL: 1.99,  smmId: '0' },
-  'fb_like_1k':  { name: 'Curtidas Facebook 1K',       qty: 1000,  priceBRL: 3.49,  smmId: '0' },
-  'yt_like_1k':  { name: 'Curtidas YouTube 1K',        qty: 1000,  priceBRL: 24.90, smmId: '0' },
+  'ig_like_1k':  { name: 'Curtidas Instagram 1K',      qty: 1000,  priceBRL: 4.19,  smmCost: 2.99,  smmId: '0' },
+  'tt_like_1k':  { name: 'Curtidas TikTok 1K',         qty: 1000,  priceBRL: 2.79,  smmCost: 1.99,  smmId: '0' },
+  'fb_like_1k':  { name: 'Curtidas Facebook 1K',       qty: 1000,  priceBRL: 4.89,  smmCost: 3.49,  smmId: '0' },
+  'yt_like_1k':  { name: 'Curtidas YouTube 1K',        qty: 1000,  priceBRL: 34.90, smmCost: 24.90, smmId: '0' },
   // Comentários
-  'ig_cmt_10':   { name: 'Comentários Instagram 10',   qty: 10,    priceBRL: 4.99,  smmId: '0' },
-  'tt_cmt_10':   { name: 'Comentários TikTok 10',      qty: 10,    priceBRL: 6.99,  smmId: '0' },
-  'yt_cmt_10':   { name: 'Comentários YouTube 10',     qty: 10,    priceBRL: 5.49,  smmId: '0' },
+  'ig_cmt_10':   { name: 'Comentários Instagram 10',   qty: 10,    priceBRL: 6.99,  smmCost: 4.99,  smmId: '0' },
+  'tt_cmt_10':   { name: 'Comentários TikTok 10',      qty: 10,    priceBRL: 9.79,  smmCost: 6.99,  smmId: '0' },
+  'yt_cmt_10':   { name: 'Comentários YouTube 10',     qty: 10,    priceBRL: 7.69,  smmCost: 5.49,  smmId: '0' },
 };
 
 // ─── Entrada principal ────────────────────────────────────────────────
@@ -60,6 +62,14 @@ export default {
       if (path.startsWith('/api/status/') && request.method === 'GET') {
         const id = path.split('/').pop();
         return addCors(await handleGetStatus(id, env));
+      }
+
+      if (path === '/api/ticket' && request.method === 'POST')
+        return addCors(await handleCreateTicket(request, env));
+
+      if (path.startsWith('/api/ticket/') && request.method === 'GET') {
+        const tid = path.split('/').pop();
+        return addCors(await handleGetTicket(tid, env));
       }
 
       if (path === '/webhooks/nowpayments' && request.method === 'POST')
@@ -366,4 +376,29 @@ function hexToBytes(hex) {
   for (let i = 0; i < hex.length; i += 2)
     arr[i / 2] = parseInt(hex.substr(i, 2), 16);
   return arr;
+}
+
+// ─── Tickets de Suporte ───────────────────────────────────────────────
+async function handleCreateTicket(request, env) {
+  const body = await request.json().catch(() => ({}));
+  const { orderId = '', message = '' } = body;
+  if (!message.trim()) return jsonResponse({ error: 'Mensagem obrigatoria' }, 400);
+
+  const ticketId = 'TK-' + Date.now().toString(36).toUpperCase().slice(-6) +
+                   Math.random().toString(36).toUpperCase().slice(2, 5);
+  const ticket = {
+    ticketId,
+    orderId:   orderId.trim(),
+    message:   message.trim().slice(0, 2000),
+    status:    'open',
+    createdAt: new Date().toISOString(),
+  };
+  await env.ORDERS.put('ticket:' + ticketId, JSON.stringify(ticket), { expirationTtl: 60 * 60 * 24 * 90 }); // 90 dias
+  return jsonResponse({ ticketId, status: 'open' });
+}
+
+async function handleGetTicket(ticketId, env) {
+  const raw = await env.ORDERS.get('ticket:' + ticketId);
+  if (!raw) return jsonResponse({ error: 'Ticket nao encontrado' }, 404);
+  return jsonResponse(JSON.parse(raw));
 }
