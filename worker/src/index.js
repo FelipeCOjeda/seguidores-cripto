@@ -23,28 +23,47 @@
 // Para listar: POST { key: "SUA_KEY", action: "services" } na URL do painel
 // priceBRL = preço cobrado do cliente (margem 40% sobre custo SMM)
 // smmCost  = referência do custo base no painel (apenas documentação)
+// PREÇOS SMM: rate = R$/1000 unidades no painel SMMHub (https://smmhub.com.br)
+// ⚠️ Serviços marcados com REVISAR_PRECO têm custo > preço cobrado — ajuste priceBRL antes de ir live
 const CATALOG = {
   // Seguidores
-  'ig_seg_1k':   { name: 'Seguidores Instagram 1K',    qty: 1000,  priceBRL: 6.99,  smmCost: 4.99,  smmId: '0' },
-  'tt_seg_1k':   { name: 'Seguidores TikTok 1K',       qty: 1000,  priceBRL: 5.59,  smmCost: 3.99,  smmId: '0' },
-  'yt_sub_1k':   { name: 'Inscritos YouTube 1K',       qty: 1000,  priceBRL: 9.79,  smmCost: 6.99,  smmId: '0' },
-  'fb_seg_1k':   { name: 'Seguidores Facebook 1K',     qty: 1000,  priceBRL: 8.39,  smmCost: 5.99,  smmId: '0' },
-  'ig_seg_5k':   { name: 'Seguidores Instagram 5K',    qty: 5000,  priceBRL: 27.90, smmCost: 19.90, smmId: '0' },
-  'tt_seg_10k':  { name: 'Seguidores TikTok 10K',      qty: 10000, priceBRL: 41.90, smmCost: 29.90, smmId: '0' },
+  // smmId 192 = 🌎 IG Seguidores Mundiais [O MELHOR] R30, rate R$3.90/1K → custo R$3.90 p/ 1K ✓
+  'ig_seg_1k':   { name: 'Seguidores Instagram 1K',    qty: 1000,  priceBRL: 6.99,  smmCost: 3.90,  smmId: '192' },
+  // smmId 211 = 🌎 TikTok Seguidores Mundiais RÁPIDO, rate R$11/1K → custo R$11 p/ 1K ⚠️ REVISAR_PRECO
+  'tt_seg_1k':   { name: 'Seguidores TikTok 1K',       qty: 1000,  priceBRL: 14.90, smmCost: 11.00, smmId: '211' },
+  // smmId 1014 = 🌍 YouTube Inscritos Mundiais 500K/dia, rate R$1/1K → custo R$1 p/ 1K ✓
+  'yt_sub_1k':   { name: 'Inscritos YouTube 1K',       qty: 1000,  priceBRL: 9.79,  smmCost: 1.00,  smmId: '1014' },
+  // smmId 162 = 🌎 Facebook Seguidores Mundiais Página/Perfil, rate R$3.50/1K ✓
+  'fb_seg_1k':   { name: 'Seguidores Facebook 1K',     qty: 1000,  priceBRL: 8.39,  smmCost: 3.50,  smmId: '162' },
+  // smmId 192 = mesmo serviço IG, 5K = R$19.50 custo ✓
+  'ig_seg_5k':   { name: 'Seguidores Instagram 5K',    qty: 5000,  priceBRL: 27.90, smmCost: 19.50, smmId: '192' },
+  // smmId 939 = 🌍 TikTok Seguidores Mundiais 10K/dia R30, rate R$14/1K → 10K = R$140 ⚠️ REVISAR_PRECO
+  'tt_seg_10k':  { name: 'Seguidores TikTok 10K',      qty: 10000, priceBRL: 149.90, smmCost: 140.00, smmId: '939' },
   // Visualizações
-  'yt_view_5k':  { name: 'Visualizações YouTube 5K',   qty: 5000,  priceBRL: 13.99, smmCost: 9.99,  smmId: '0' },
-  'tt_view_5k':  { name: 'Visualizações TikTok 5K',    qty: 5000,  priceBRL: 11.19, smmCost: 7.99,  smmId: '0' },
-  'ig_view_5k':  { name: 'Views Instagram Reels 5K',   qty: 5000,  priceBRL: 8.39,  smmCost: 5.99,  smmId: '0' },
-  'yt_view_15k': { name: 'Views YouTube 15K',          qty: 15000, priceBRL: 20.99, smmCost: 14.99, smmId: '0' },
+  // smmId 463 = 🌍 YouTube Views Mundiais R60, rate R$5/1K → 5K = R$25 ⚠️ REVISAR_PRECO (cobrar R$29.90)
+  'yt_view_5k':  { name: 'Visualizações YouTube 5K',   qty: 5000,  priceBRL: 29.90, smmCost: 25.00, smmId: '463' },
+  // smmId 45 = 🌎 TikTok Views Mundiais [S2], rate R$0.25/1K → 5K = R$1.25 ✓
+  'tt_view_5k':  { name: 'Visualizações TikTok 5K',    qty: 5000,  priceBRL: 11.19, smmCost: 1.25,  smmId: '45' },
+  // smmId 800 = 🚀 IG Views Brasileiras Reels/Vídeo/IGTV 1.5M/dia, rate R$0.80/1K → 5K = R$4 ✓
+  'ig_view_5k':  { name: 'Views Instagram Reels 5K',   qty: 5000,  priceBRL: 8.39,  smmCost: 4.00,  smmId: '800' },
+  // smmId 463 = YT Views R60, 15K = R$75 ⚠️ REVISAR_PRECO
+  'yt_view_15k': { name: 'Views YouTube 15K',          qty: 15000, priceBRL: 79.90, smmCost: 75.00, smmId: '463' },
   // Curtidas
-  'ig_like_1k':  { name: 'Curtidas Instagram 1K',      qty: 1000,  priceBRL: 4.19,  smmCost: 2.99,  smmId: '0' },
-  'tt_like_1k':  { name: 'Curtidas TikTok 1K',         qty: 1000,  priceBRL: 2.79,  smmCost: 1.99,  smmId: '0' },
-  'fb_like_1k':  { name: 'Curtidas Facebook 1K',       qty: 1000,  priceBRL: 4.89,  smmCost: 3.49,  smmId: '0' },
-  'yt_like_1k':  { name: 'Curtidas YouTube 1K',        qty: 1000,  priceBRL: 34.90, smmCost: 24.90, smmId: '0' },
+  // smmId 1016 = 🇧🇷 IG Curtidas Brasileiras 5K/dia, rate R$1.90/1K → 1K = R$1.90 ✓
+  'ig_like_1k':  { name: 'Curtidas Instagram 1K',      qty: 1000,  priceBRL: 4.19,  smmCost: 1.90,  smmId: '1016' },
+  // smmId 898 = TikTok Curtidas Mundiais 80K/dia, rate R$0.70/1K ✓
+  'tt_like_1k':  { name: 'Curtidas TikTok 1K',         qty: 1000,  priceBRL: 2.79,  smmCost: 0.70,  smmId: '898' },
+  // smmId 167 = 🌍 Facebook Curtidas Mundiais Post 400k/dia SR, rate R$2.40/1K ✓
+  'fb_like_1k':  { name: 'Curtidas Facebook 1K',       qty: 1000,  priceBRL: 4.89,  smmCost: 2.40,  smmId: '167' },
+  // smmId 988 = 🌍 YouTube Likes Mundiais 100K/dia SR, rate R$4.50/1K ✓
+  'yt_like_1k':  { name: 'Curtidas YouTube 1K',        qty: 1000,  priceBRL: 34.90, smmCost: 4.50,  smmId: '988' },
   // Comentários
-  'ig_cmt_10':   { name: 'Comentários Instagram 10',   qty: 10,    priceBRL: 6.99,  smmCost: 4.99,  smmId: '0' },
-  'tt_cmt_10':   { name: 'Comentários TikTok 10',      qty: 10,    priceBRL: 9.79,  smmCost: 6.99,  smmId: '0' },
-  'yt_cmt_10':   { name: 'Comentários YouTube 10',     qty: 10,    priceBRL: 7.69,  smmCost: 5.49,  smmId: '0' },
+  // smmId 1007 = 🇧🇷 IG Comentários Brasileiros Personalizados 2K/dia, rate R$40/1K → 10 = R$0.40 ✓
+  'ig_cmt_10':   { name: 'Comentários Instagram 10',   qty: 10,    priceBRL: 6.99,  smmCost: 0.40,  smmId: '1007' },
+  // smmId 946 = 🌍 TikTok Comentários Mundiais Aleatórios 500/dia, rate R$9.70/1K → 10 = R$0.097 ✓
+  'tt_cmt_10':   { name: 'Comentários TikTok 10',      qty: 10,    priceBRL: 9.79,  smmCost: 0.10,  smmId: '946' },
+  // smmId 421 = 🌍 YouTube Comentários Mundiais Personalizados, rate R$30/1K → 10 = R$0.30 ✓
+  'yt_cmt_10':   { name: 'Comentários YouTube 10',     qty: 10,    priceBRL: 7.69,  smmCost: 0.30,  smmId: '421' },
 };
 
 // ─── Entrada principal ────────────────────────────────────────────────
@@ -406,7 +425,7 @@ function hexToBytes(hex) {
 async function handleCreateTicket(request, env) {
   const body = await request.json().catch(() => ({}));
   const { orderId = '', message = '' } = body;
-  if (!message.trim()) return jsonResponse({ error: 'Mensagem obrigatoria' }, 400);
+  if (!message.trim()) return json({ error: 'Mensagem obrigatoria' }, 400);
 
   const ticketId = 'TK-' + Date.now().toString(36).toUpperCase().slice(-6) +
                    Math.random().toString(36).toUpperCase().slice(2, 5);
@@ -418,11 +437,11 @@ async function handleCreateTicket(request, env) {
     createdAt: new Date().toISOString(),
   };
   await env.ORDERS.put('ticket:' + ticketId, JSON.stringify(ticket), { expirationTtl: 60 * 60 * 24 * 90 }); // 90 dias
-  return jsonResponse({ ticketId, status: 'open' });
+  return json({ ticketId, status: 'open' });
 }
 
 async function handleGetTicket(ticketId, env) {
   const raw = await env.ORDERS.get('ticket:' + ticketId);
-  if (!raw) return jsonResponse({ error: 'Ticket nao encontrado' }, 404);
-  return jsonResponse(JSON.parse(raw));
+  if (!raw) return json({ error: 'Ticket nao encontrado' }, 404);
+  return json(JSON.parse(raw));
 }
