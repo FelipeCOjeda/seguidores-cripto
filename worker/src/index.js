@@ -39,14 +39,14 @@ const CATALOG = {
   'ig_seg_50k':   { name: 'Seguidores Instagram 50K',    qty: 50000,  priceBRL: 199.90, smmCost: 195.00, smmId: '192' },
   'ig_seg_100k':  { name: 'Seguidores Instagram 100K',   qty: 100000, priceBRL: 369.90, smmCost: 390.00, smmId: '192' },
 
-  // ── INSTAGRAM — Seguidores BR 🇧🇷 (TODO: preencher smmId) ────────────
-  'ig_seg_br_100':  { name: 'Seguidores BR Instagram 100',  qty: 100,   priceBRL: 2.49,   smmCost: 0.00, smmId: 'TODO' },
-  'ig_seg_br_500':  { name: 'Seguidores BR Instagram 500',  qty: 500,   priceBRL: 7.90,   smmCost: 0.00, smmId: 'TODO' },
-  'ig_seg_br_1k':   { name: 'Seguidores BR Instagram 1K',   qty: 1000,  priceBRL: 12.90,  smmCost: 0.00, smmId: 'TODO' },
-  'ig_seg_br_2k':   { name: 'Seguidores BR Instagram 2K',   qty: 2000,  priceBRL: 24.90,  smmCost: 0.00, smmId: 'TODO' },
-  'ig_seg_br_5k':   { name: 'Seguidores BR Instagram 5K',   qty: 5000,  priceBRL: 54.90,  smmCost: 0.00, smmId: 'TODO' },
-  'ig_seg_br_10k':  { name: 'Seguidores BR Instagram 10K',  qty: 10000, priceBRL: 99.90,  smmCost: 0.00, smmId: 'TODO' },
-  'ig_seg_br_20k':  { name: 'Seguidores BR Instagram 20K',  qty: 20000, priceBRL: 189.90, smmCost: 0.00, smmId: 'TODO' },
+  // ── INSTAGRAM — Seguidores BR 🇧🇷 (smmId 937, R$9.00/1K · R30 · MELHOR OPÇÃO) ──
+  'ig_seg_br_100':  { name: 'Seguidores BR Instagram 100',  qty: 100,   priceBRL: 2.49,   smmCost: 0.90,  smmId: '937' },
+  'ig_seg_br_500':  { name: 'Seguidores BR Instagram 500',  qty: 500,   priceBRL: 7.90,   smmCost: 4.50,  smmId: '937' },
+  'ig_seg_br_1k':   { name: 'Seguidores BR Instagram 1K',   qty: 1000,  priceBRL: 12.90,  smmCost: 9.00,  smmId: '937' },
+  'ig_seg_br_2k':   { name: 'Seguidores BR Instagram 2K',   qty: 2000,  priceBRL: 24.90,  smmCost: 18.00, smmId: '937' },
+  'ig_seg_br_5k':   { name: 'Seguidores BR Instagram 5K',   qty: 5000,  priceBRL: 59.90,  smmCost: 45.00, smmId: '937' },
+  'ig_seg_br_10k':  { name: 'Seguidores BR Instagram 10K',  qty: 10000, priceBRL: 119.90, smmCost: 90.00, smmId: '937' },
+  'ig_seg_br_20k':  { name: 'Seguidores BR Instagram 20K',  qty: 20000, priceBRL: 229.90, smmCost: 180.00,smmId: '937' },
 
   // ── INSTAGRAM — Curtidas Brasileiras (smmId 1016, R$1.90/1K) ─────────
   'ig_like_100':  { name: 'Curtidas Instagram 100',  qty: 100,   priceBRL: 0.79,   smmCost: 0.19,  smmId: '1016' },
@@ -68,12 +68,12 @@ const CATALOG = {
   'ig_view_100k':  { name: 'Views Reels Instagram 100K', qty: 100000, priceBRL: 99.90,  smmCost: 80.00, smmId: '800' },
   'ig_view_500k':  { name: 'Views Reels Instagram 500K', qty: 500000, priceBRL: 449.90, smmCost: 400.00,smmId: '800' },
 
-  // ── INSTAGRAM — Views BR 🇧🇷 (TODO: preencher smmId) ─────────────────
-  'ig_view_br_1k':   { name: 'Views BR Reels Instagram 1K',   qty: 1000,   priceBRL: 3.49,   smmCost: 0.00, smmId: 'TODO' },
-  'ig_view_br_5k':   { name: 'Views BR Reels Instagram 5K',   qty: 5000,   priceBRL: 14.90,  smmCost: 0.00, smmId: 'TODO' },
-  'ig_view_br_10k':  { name: 'Views BR Reels Instagram 10K',  qty: 10000,  priceBRL: 24.90,  smmCost: 0.00, smmId: 'TODO' },
-  'ig_view_br_50k':  { name: 'Views BR Reels Instagram 50K',  qty: 50000,  priceBRL: 99.90,  smmCost: 0.00, smmId: 'TODO' },
-  'ig_view_br_100k': { name: 'Views BR Reels Instagram 100K', qty: 100000, priceBRL: 189.90, smmCost: 0.00, smmId: 'TODO' },
+  // ── INSTAGRAM — Views BR 🇧🇷 (smmId 800, R$0.80/1K · "Visualizações Brasileiras") ──
+  'ig_view_br_1k':   { name: 'Views BR Reels Instagram 1K',   qty: 1000,   priceBRL: 3.49,   smmCost: 0.80,  smmId: '800' },
+  'ig_view_br_5k':   { name: 'Views BR Reels Instagram 5K',   qty: 5000,   priceBRL: 14.90,  smmCost: 4.00,  smmId: '800' },
+  'ig_view_br_10k':  { name: 'Views BR Reels Instagram 10K',  qty: 10000,  priceBRL: 24.90,  smmCost: 8.00,  smmId: '800' },
+  'ig_view_br_50k':  { name: 'Views BR Reels Instagram 50K',  qty: 50000,  priceBRL: 99.90,  smmCost: 40.00, smmId: '800' },
+  'ig_view_br_100k': { name: 'Views BR Reels Instagram 100K', qty: 100000, priceBRL: 189.90, smmCost: 80.00, smmId: '800' },
 
   // ── INSTAGRAM — Comentários BR (smmId 1007, R$40/1K) ─────────────────
   'ig_cmt_10':   { name: 'Comentários Instagram 10',  qty: 10,  priceBRL: 6.99,  smmCost: 0.40, smmId: '1007' },
