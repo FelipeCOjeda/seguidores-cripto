@@ -300,6 +300,91 @@ const CATALOG = {
   'rb_seg_1k':    { name: 'Seguidores Roblox 1K',    qty: 1000,  priceBRL: 8.99,   smmCost: 4.50,  smmId: '806' },
   'rb_seg_5k':    { name: 'Seguidores Roblox 5K',    qty: 5000,  priceBRL: 39.90,  smmCost: 4.50,  smmId: '806' },
   'rb_seg_10k':   { name: 'Seguidores Roblox 10K',   qty: 10000, priceBRL: 74.90,  smmCost: 4.50,  smmId: '806' },
+
+  // ── ROBLOX — Membros Comunidade (smmId 856, R$8.75/1K)
+  'rb_mem_100':   { name: 'Membros Comunidade Roblox 100',   qty: 100,  priceBRL: 2.49,   smmCost: 8.75,  smmId: '856' },
+  'rb_mem_500':   { name: 'Membros Comunidade Roblox 500',   qty: 500,  priceBRL: 9.90,   smmCost: 8.75,  smmId: '856' },
+  'rb_mem_1k':    { name: 'Membros Comunidade Roblox 1K',    qty: 1000, priceBRL: 17.90,  smmCost: 8.75,  smmId: '856' },
+  'rb_mem_5k':    { name: 'Membros Comunidade Roblox 5K',    qty: 5000, priceBRL: 79.90,  smmCost: 8.75,  smmId: '856' },
+
+  // ── ROBLOX — Favoritos para Jogo (smmId 861, R$7.97/1K)
+  'rb_fav_100':   { name: 'Favoritos Jogo Roblox 100',   qty: 100,  priceBRL: 2.29,  smmCost: 7.97,  smmId: '861' },
+  'rb_fav_500':   { name: 'Favoritos Jogo Roblox 500',   qty: 500,  priceBRL: 8.90,  smmCost: 7.97,  smmId: '861' },
+  'rb_fav_1k':    { name: 'Favoritos Jogo Roblox 1K',    qty: 1000, priceBRL: 15.90, smmCost: 7.97,  smmId: '861' },
+  'rb_fav_5k':    { name: 'Favoritos Jogo Roblox 5K',    qty: 5000, priceBRL: 69.90, smmCost: 7.97,  smmId: '861' },
+
+  // ── INSTAGRAM — Membros Canal BR (smmId 438, R$6.00/1K · R30)
+  'ig_canal_100':  { name: 'Membros Canal Instagram 100',  qty: 100,   priceBRL: 1.79,   smmCost: 6.00,  smmId: '438' },
+  'ig_canal_500':  { name: 'Membros Canal Instagram 500',  qty: 500,   priceBRL: 7.90,   smmCost: 6.00,  smmId: '438' },
+  'ig_canal_1k':   { name: 'Membros Canal Instagram 1K',   qty: 1000,  priceBRL: 12.90,  smmCost: 6.00,  smmId: '438' },
+  'ig_canal_5k':   { name: 'Membros Canal Instagram 5K',   qty: 5000,  priceBRL: 54.90,  smmCost: 6.00,  smmId: '438' },
+  'ig_canal_10k':  { name: 'Membros Canal Instagram 10K',  qty: 10000, priceBRL: 99.90,  smmCost: 6.00,  smmId: '438' },
+
+  // ── INSTAGRAM — Compartilhamentos Mundiais (smmId 131, R$0.08/1K)
+  'ig_share_1k':   { name: 'Compartilhamentos Instagram 1K',   qty: 1000,  priceBRL: 0.79,   smmCost: 0.08,  smmId: '131' },
+  'ig_share_5k':   { name: 'Compartilhamentos Instagram 5K',   qty: 5000,  priceBRL: 2.49,   smmCost: 0.08,  smmId: '131' },
+  'ig_share_10k':  { name: 'Compartilhamentos Instagram 10K',  qty: 10000, priceBRL: 3.99,   smmCost: 0.08,  smmId: '131' },
+  'ig_share_50k':  { name: 'Compartilhamentos Instagram 50K',  qty: 50000, priceBRL: 14.90,  smmCost: 0.08,  smmId: '131' },
+  'ig_share_100k': { name: 'Compartilhamentos Instagram 100K', qty: 100000,priceBRL: 24.90,  smmCost: 0.08,  smmId: '131' },
+
+  // ── INSTAGRAM — Views em Post/Carrossel (smmId 805, R$0.70/1K)
+  'ig_post_1k':    { name: 'Views Post/Carrossel Instagram 1K',   qty: 1000,  priceBRL: 1.49,   smmCost: 0.70,  smmId: '805' },
+  'ig_post_5k':    { name: 'Views Post/Carrossel Instagram 5K',   qty: 5000,  priceBRL: 5.99,   smmCost: 0.70,  smmId: '805' },
+  'ig_post_10k':   { name: 'Views Post/Carrossel Instagram 10K',  qty: 10000, priceBRL: 10.90,  smmCost: 0.70,  smmId: '805' },
+  'ig_post_50k':   { name: 'Views Post/Carrossel Instagram 50K',  qty: 50000, priceBRL: 49.90,  smmCost: 0.70,  smmId: '805' },
+  'ig_post_100k':  { name: 'Views Post/Carrossel Instagram 100K', qty: 100000,priceBRL: 89.90,  smmCost: 0.70,  smmId: '805' },
+
+  // ── TIKTOK — Salvamentos (smmId 909, R$0.50/1K)
+  'tt_save_1k':    { name: 'Salvamentos TikTok 1K',   qty: 1000,  priceBRL: 1.19,   smmCost: 0.50,  smmId: '909' },
+  'tt_save_5k':    { name: 'Salvamentos TikTok 5K',   qty: 5000,  priceBRL: 4.90,   smmCost: 0.50,  smmId: '909' },
+  'tt_save_10k':   { name: 'Salvamentos TikTok 10K',  qty: 10000, priceBRL: 8.90,   smmCost: 0.50,  smmId: '909' },
+  'tt_save_50k':   { name: 'Salvamentos TikTok 50K',  qty: 50000, priceBRL: 39.90,  smmCost: 0.50,  smmId: '909' },
+
+  // ── KWAI — Curtidas BR (smmId 701, R$1.70/1K)
+  'kw_like_br_100': { name: 'Curtidas BR Kwai 100', qty: 100,  priceBRL: 0.49,  smmCost: 1.70,  smmId: '701' },
+  'kw_like_br_500': { name: 'Curtidas BR Kwai 500', qty: 500,  priceBRL: 1.99,  smmCost: 1.70,  smmId: '701' },
+  'kw_like_br_1k':  { name: 'Curtidas BR Kwai 1K',  qty: 1000, priceBRL: 3.49,  smmCost: 1.70,  smmId: '701' },
+  'kw_like_br_5k':  { name: 'Curtidas BR Kwai 5K',  qty: 5000, priceBRL: 14.90, smmCost: 1.70,  smmId: '701' },
+
+  // ── KWAI — Visualizações (smmId 677, R$2.30/1K)
+  'kw_view_1k':    { name: 'Visualizações Kwai 1K',   qty: 1000,  priceBRL: 4.99,   smmCost: 2.30,  smmId: '677' },
+  'kw_view_5k':    { name: 'Visualizações Kwai 5K',   qty: 5000,  priceBRL: 19.90,  smmCost: 2.30,  smmId: '677' },
+  'kw_view_10k':   { name: 'Visualizações Kwai 10K',  qty: 10000, priceBRL: 34.90,  smmCost: 2.30,  smmId: '677' },
+  'kw_view_50k':   { name: 'Visualizações Kwai 50K',  qty: 50000, priceBRL: 159.90, smmCost: 2.30,  smmId: '677' },
+
+  // ── FACEBOOK — Views em Story (smmId 950, R$4.50/1K)
+  'fb_story_100':  { name: 'Views Story Facebook 100',  qty: 100,  priceBRL: 1.49,   smmCost: 4.50,  smmId: '950' },
+  'fb_story_500':  { name: 'Views Story Facebook 500',  qty: 500,  priceBRL: 4.99,   smmCost: 4.50,  smmId: '950' },
+  'fb_story_1k':   { name: 'Views Story Facebook 1K',   qty: 1000, priceBRL: 8.90,   smmCost: 4.50,  smmId: '950' },
+  'fb_story_5k':   { name: 'Views Story Facebook 5K',   qty: 5000, priceBRL: 39.90,  smmCost: 4.50,  smmId: '950' },
+
+  // ── WHATSAPP — Membros Canal Mundiais (smmId 1020, R$7.80/1K · R30)
+  'wa_mem_100':    { name: 'Membros WhatsApp Canal 100',  qty: 100,  priceBRL: 1.99,   smmCost: 7.80,  smmId: '1020' },
+  'wa_mem_500':    { name: 'Membros WhatsApp Canal 500',  qty: 500,  priceBRL: 7.90,   smmCost: 7.80,  smmId: '1020' },
+  'wa_mem_1k':     { name: 'Membros WhatsApp Canal 1K',   qty: 1000, priceBRL: 14.90,  smmCost: 7.80,  smmId: '1020' },
+  'wa_mem_5k':     { name: 'Membros WhatsApp Canal 5K',   qty: 5000, priceBRL: 64.90,  smmCost: 7.80,  smmId: '1020' },
+
+  // ── COINMARKETCAP — Curtidas (smmId 35, R$5.70/1K)
+  'cmc_like_100':  { name: 'Curtidas CoinMarketCap 100', qty: 100,  priceBRL: 1.49,   smmCost: 5.70,  smmId: '35' },
+  'cmc_like_500':  { name: 'Curtidas CoinMarketCap 500', qty: 500,  priceBRL: 5.90,   smmCost: 5.70,  smmId: '35' },
+  'cmc_like_1k':   { name: 'Curtidas CoinMarketCap 1K',  qty: 1000, priceBRL: 9.90,   smmCost: 5.70,  smmId: '35' },
+  'cmc_like_5k':   { name: 'Curtidas CoinMarketCap 5K',  qty: 5000, priceBRL: 44.90,  smmCost: 5.70,  smmId: '35' },
+
+  // ── KICK — Seguidores (smmId 81, R$23.90/1K · R30)
+  'kick_seg_100':  { name: 'Seguidores Kick 100',  qty: 100,  priceBRL: 5.99,   smmCost: 23.90, smmId: '81' },
+  'kick_seg_500':  { name: 'Seguidores Kick 500',  qty: 500,  priceBRL: 24.90,  smmCost: 23.90, smmId: '81' },
+  'kick_seg_1k':   { name: 'Seguidores Kick 1K',   qty: 1000, priceBRL: 44.90,  smmCost: 23.90, smmId: '81' },
+  'kick_seg_5k':   { name: 'Seguidores Kick 5K',   qty: 5000, priceBRL: 199.90, smmCost: 23.90, smmId: '81' },
+
+  // ── SNACKVIDEO — Seguidores BR (smmId 101, R$7.55/1K)
+  'sv_seg_br_100': { name: 'Seguidores BR SnackVideo 100', qty: 100,  priceBRL: 1.99,   smmCost: 7.55,  smmId: '101' },
+  'sv_seg_br_500': { name: 'Seguidores BR SnackVideo 500', qty: 500,  priceBRL: 7.90,   smmCost: 7.55,  smmId: '101' },
+  'sv_seg_br_1k':  { name: 'Seguidores BR SnackVideo 1K',  qty: 1000, priceBRL: 13.90,  smmCost: 7.55,  smmId: '101' },
+
+  // ── SNACKVIDEO — Curtidas BR (smmId 100, R$6.00/1K)
+  'sv_like_br_100': { name: 'Curtidas BR SnackVideo 100', qty: 100,  priceBRL: 1.49,   smmCost: 6.00,  smmId: '100' },
+  'sv_like_br_500': { name: 'Curtidas BR SnackVideo 500', qty: 500,  priceBRL: 5.90,   smmCost: 6.00,  smmId: '100' },
+  'sv_like_br_1k':  { name: 'Curtidas BR SnackVideo 1K',  qty: 1000, priceBRL: 10.90,  smmCost: 6.00,  smmId: '100' },
 };
 
 // ─── D1: inicializar schema ───────────────────────────────────────────

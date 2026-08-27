@@ -392,6 +392,8 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
     <button class="net-tab" data-net="linkedin" role="tab">💼 LinkedIn</button>
     <button class="net-tab" data-net="coinmarketcap" role="tab">🪙 CoinMarketCap</button>
     <button class="net-tab" data-net="roblox" role="tab">🎮 Roblox</button>
+    <button class="net-tab" data-net="kick" role="tab">🟩 Kick</button>
+    <button class="net-tab" data-net="snackvideo" role="tab">🍿 SnackVideo</button>
   </div>
 
   <!-- Configurador -->
@@ -711,7 +713,25 @@ var SERVICES = {
         {sid:'ig_story_1k',  qty:1000,  price:'8,90'},
         {sid:'ig_story_5k',  qty:5000,  price:'34,90'},
         {sid:'ig_story_10k', qty:10000, price:'64,90'},
-        {sid:'ig_story_20k', qty:20000, price:'119,90'}]}
+        {sid:'ig_story_20k', qty:20000, price:'119,90'}]},
+      canal:{label:'Membros Canal BR', tiers:[
+        {sid:'ig_canal_100',  qty:100,   price:'1,79'},
+        {sid:'ig_canal_500',  qty:500,   price:'7,90'},
+        {sid:'ig_canal_1k',   qty:1000,  price:'12,90'},
+        {sid:'ig_canal_5k',   qty:5000,  price:'54,90'},
+        {sid:'ig_canal_10k',  qty:10000, price:'99,90'}]},
+      compartilhamentos:{label:'Compartilhamentos', tiers:[
+        {sid:'ig_share_1k',   qty:1000,  price:'0,79'},
+        {sid:'ig_share_5k',   qty:5000,  price:'2,49'},
+        {sid:'ig_share_10k',  qty:10000, price:'3,99'},
+        {sid:'ig_share_50k',  qty:50000, price:'14,90'},
+        {sid:'ig_share_100k', qty:100000,price:'24,90'}]},
+      views_post:{label:'Views Post/Carrossel', tiers:[
+        {sid:'ig_post_1k',   qty:1000,  price:'1,49'},
+        {sid:'ig_post_5k',   qty:5000,  price:'5,99'},
+        {sid:'ig_post_10k',  qty:10000, price:'10,90'},
+        {sid:'ig_post_50k',  qty:50000, price:'49,90'},
+        {sid:'ig_post_100k', qty:100000,price:'89,90'}]}
     }
   },
   tiktok:{
@@ -770,7 +790,12 @@ var SERVICES = {
       compartilhamentos:{label:'Compartilhamentos', tiers:[
         {sid:'tt_share_1k',  qty:1000,  price:'1,79'},
         {sid:'tt_share_5k',  qty:5000,  price:'7,90'},
-        {sid:'tt_share_10k', qty:10000, price:'14,90'}]}
+        {sid:'tt_share_10k', qty:10000, price:'14,90'}]},
+      salvamentos:{label:'Salvamentos', tiers:[
+        {sid:'tt_save_1k',  qty:1000,  price:'1,19'},
+        {sid:'tt_save_5k',  qty:5000,  price:'4,90'},
+        {sid:'tt_save_10k', qty:10000, price:'8,90'},
+        {sid:'tt_save_50k', qty:50000, price:'39,90'}]}
     }
   },
   youtube:{
@@ -852,7 +877,12 @@ var SERVICES = {
         {sid:'fb_view_5k',   qty:5000,  price:'8,90'},
         {sid:'fb_view_10k',  qty:10000, price:'14,90'},
         {sid:'fb_view_50k',  qty:50000, price:'62,90'},
-        {sid:'fb_view_100k', qty:100000,price:'114,90'}]}
+        {sid:'fb_view_100k', qty:100000,price:'114,90'}]},
+      story:{label:'Views Story', tiers:[
+        {sid:'fb_story_100',  qty:100,  price:'1,49'},
+        {sid:'fb_story_500',  qty:500,  price:'4,99'},
+        {sid:'fb_story_1k',   qty:1000, price:'8,90'},
+        {sid:'fb_story_5k',   qty:5000, price:'39,90'}]}
     }
   },
   twitter:{
@@ -902,7 +932,12 @@ var SERVICES = {
         {sid:'wa_mem_br_100', qty:100,  price:'2,99'},
         {sid:'wa_mem_br_500', qty:500,  price:'12,90'},
         {sid:'wa_mem_br_1k',  qty:1000, price:'22,90'},
-        {sid:'wa_mem_br_5k',  qty:5000, price:'99,90'}]}
+        {sid:'wa_mem_br_5k',  qty:5000, price:'99,90'}]},
+      membros:{label:'Membros Canal', tiers:[
+        {sid:'wa_mem_100', qty:100,  price:'1,99'},
+        {sid:'wa_mem_500', qty:500,  price:'7,90'},
+        {sid:'wa_mem_1k',  qty:1000, price:'14,90'},
+        {sid:'wa_mem_5k',  qty:5000, price:'64,90'}]}
     }
   },
   threads:{
@@ -927,7 +962,17 @@ var SERVICES = {
         {sid:'kw_seg_br_100', qty:100,  price:'1,99'},
         {sid:'kw_seg_br_500', qty:500,  price:'7,90'},
         {sid:'kw_seg_br_1k',  qty:1000, price:'12,90'},
-        {sid:'kw_seg_br_5k',  qty:5000, price:'54,90'}]}
+        {sid:'kw_seg_br_5k',  qty:5000, price:'54,90'}]},
+      curtidas_br:{label:'Curtidas BR 🇧🇷', tiers:[
+        {sid:'kw_like_br_100', qty:100,  price:'0,49'},
+        {sid:'kw_like_br_500', qty:500,  price:'1,99'},
+        {sid:'kw_like_br_1k',  qty:1000, price:'3,49'},
+        {sid:'kw_like_br_5k',  qty:5000, price:'14,90'}]},
+      views:{label:'Visualizacoes', tiers:[
+        {sid:'kw_view_1k',   qty:1000,  price:'4,99'},
+        {sid:'kw_view_5k',   qty:5000,  price:'19,90'},
+        {sid:'kw_view_10k',  qty:10000, price:'34,90'},
+        {sid:'kw_view_50k',  qty:50000, price:'159,90'}]}
     }
   },
   linkedin:{
@@ -946,7 +991,12 @@ var SERVICES = {
         {sid:'cmc_seg_100', qty:100,  price:'2,29'},
         {sid:'cmc_seg_500', qty:500,  price:'9,90'},
         {sid:'cmc_seg_1k',  qty:1000, price:'16,90'},
-        {sid:'cmc_seg_5k',  qty:5000, price:'69,90'}]}
+        {sid:'cmc_seg_5k',  qty:5000, price:'69,90'}]},
+      curtidas:{label:'Curtidas', tiers:[
+        {sid:'cmc_like_100', qty:100,  price:'1,49'},
+        {sid:'cmc_like_500', qty:500,  price:'5,90'},
+        {sid:'cmc_like_1k',  qty:1000, price:'9,90'},
+        {sid:'cmc_like_5k',  qty:5000, price:'44,90'}]}
     }
   },
   roblox:{
@@ -957,7 +1007,40 @@ var SERVICES = {
         {sid:'rb_seg_500',  qty:500,   price:'5,99'},
         {sid:'rb_seg_1k',   qty:1000,  price:'8,99'},
         {sid:'rb_seg_5k',   qty:5000,  price:'39,90'},
-        {sid:'rb_seg_10k',  qty:10000, price:'74,90'}]}
+        {sid:'rb_seg_10k',  qty:10000, price:'74,90'}]},
+      membros_comunidade:{label:'Membros Comunidade', tiers:[
+        {sid:'rb_mem_100', qty:100,  price:'2,49'},
+        {sid:'rb_mem_500', qty:500,  price:'9,90'},
+        {sid:'rb_mem_1k',  qty:1000, price:'17,90'},
+        {sid:'rb_mem_5k',  qty:5000, price:'79,90'}]},
+      favoritos_jogo:{label:'Favoritos para Jogo', tiers:[
+        {sid:'rb_fav_100', qty:100,  price:'2,29'},
+        {sid:'rb_fav_500', qty:500,  price:'8,90'},
+        {sid:'rb_fav_1k',  qty:1000, price:'15,90'},
+        {sid:'rb_fav_5k',  qty:5000, price:'69,90'}]}
+    }
+  },
+  kick:{
+    label:'Kick', icon:'🟩', color:'#53FC18',
+    types:{
+      seguidores:{label:'Seguidores', tiers:[
+        {sid:'kick_seg_100', qty:100,  price:'5,99'},
+        {sid:'kick_seg_500', qty:500,  price:'24,90'},
+        {sid:'kick_seg_1k',  qty:1000, price:'44,90'},
+        {sid:'kick_seg_5k',  qty:5000, price:'199,90'}]}
+    }
+  },
+  snackvideo:{
+    label:'SnackVideo', icon:'🍿', color:'#FF3B5C',
+    types:{
+      seguidores_br:{label:'Seguidores BR 🇧🇷', tiers:[
+        {sid:'sv_seg_br_100', qty:100,  price:'1,99'},
+        {sid:'sv_seg_br_500', qty:500,  price:'7,90'},
+        {sid:'sv_seg_br_1k',  qty:1000, price:'13,90'}]},
+      curtidas_br:{label:'Curtidas BR 🇧🇷', tiers:[
+        {sid:'sv_like_br_100', qty:100,  price:'1,49'},
+        {sid:'sv_like_br_500', qty:500,  price:'5,90'},
+        {sid:'sv_like_br_1k',  qty:1000, price:'10,90'}]}
     }
   }
 };
