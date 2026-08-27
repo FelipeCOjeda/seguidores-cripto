@@ -26,53 +26,235 @@
 // PREÇOS SMM: rate = R$/1000 unidades no painel SMMHub (https://smmhub.com.br)
 // ⚠️ Serviços marcados com REVISAR_PRECO têm custo > preço cobrado — ajuste priceBRL antes de ir live
 const CATALOG = {
-  // Seguidores
-  // smmId 192 = 🌎 IG Seguidores Mundiais [O MELHOR] R30, rate R$3.90/1K → custo R$3.90 p/ 1K ✓
-  'ig_seg_1k':   { name: 'Seguidores Instagram 1K',    qty: 1000,  priceBRL: 6.99,  smmCost: 3.90,  smmId: '192' },
-  // smmId 211 = 🌎 TikTok Seguidores Mundiais RÁPIDO, rate R$11/1K → custo R$11 p/ 1K ⚠️ REVISAR_PRECO
-  'tt_seg_1k':   { name: 'Seguidores TikTok 1K',       qty: 1000,  priceBRL: 14.90, smmCost: 11.00, smmId: '211' },
-  // smmId 1014 = 🌍 YouTube Inscritos Mundiais 500K/dia, rate R$1/1K → custo R$1 p/ 1K ✓
-  'yt_sub_1k':   { name: 'Inscritos YouTube 1K',       qty: 1000,  priceBRL: 9.79,  smmCost: 1.00,  smmId: '1014' },
-  // smmId 162 = 🌎 Facebook Seguidores Mundiais Página/Perfil, rate R$3.50/1K ✓
-  'fb_seg_1k':   { name: 'Seguidores Facebook 1K',     qty: 1000,  priceBRL: 8.39,  smmCost: 3.50,  smmId: '162' },
-  // smmId 192 = mesmo serviço IG, 5K = R$19.50 custo ✓
-  'ig_seg_5k':   { name: 'Seguidores Instagram 5K',    qty: 5000,  priceBRL: 27.90, smmCost: 19.50, smmId: '192' },
-  // smmId 939 = 🌍 TikTok Seguidores Mundiais 10K/dia R30, rate R$14/1K → 10K = R$140 ⚠️ REVISAR_PRECO
-  'tt_seg_10k':  { name: 'Seguidores TikTok 10K',      qty: 10000, priceBRL: 149.90, smmCost: 140.00, smmId: '939' },
-  // Visualizações
-  // smmId 463 = 🌍 YouTube Views Mundiais R60, rate R$5/1K → 5K = R$25 ⚠️ REVISAR_PRECO (cobrar R$29.90)
-  'yt_view_5k':  { name: 'Visualizações YouTube 5K',   qty: 5000,  priceBRL: 29.90, smmCost: 25.00, smmId: '463' },
-  // smmId 45 = 🌎 TikTok Views Mundiais [S2], rate R$0.25/1K → 5K = R$1.25 ✓
-  'tt_view_5k':  { name: 'Visualizações TikTok 5K',    qty: 5000,  priceBRL: 11.19, smmCost: 1.25,  smmId: '45' },
-  // smmId 800 = 🚀 IG Views Brasileiras Reels/Vídeo/IGTV 1.5M/dia, rate R$0.80/1K → 5K = R$4 ✓
-  'ig_view_5k':  { name: 'Views Instagram Reels 5K',   qty: 5000,  priceBRL: 8.39,  smmCost: 4.00,  smmId: '800' },
-  // smmId 463 = YT Views R60, 15K = R$75 ⚠️ REVISAR_PRECO
-  'yt_view_15k': { name: 'Views YouTube 15K',          qty: 15000, priceBRL: 79.90, smmCost: 75.00, smmId: '463' },
-  // Curtidas
-  // smmId 1016 = 🇧🇷 IG Curtidas Brasileiras 5K/dia, rate R$1.90/1K → 1K = R$1.90 ✓
-  'ig_like_1k':  { name: 'Curtidas Instagram 1K',      qty: 1000,  priceBRL: 4.19,  smmCost: 1.90,  smmId: '1016' },
-  // smmId 898 = TikTok Curtidas Mundiais 80K/dia, rate R$0.70/1K ✓
-  'tt_like_1k':  { name: 'Curtidas TikTok 1K',         qty: 1000,  priceBRL: 2.79,  smmCost: 0.70,  smmId: '898' },
-  // smmId 167 = 🌍 Facebook Curtidas Mundiais Post 400k/dia SR, rate R$2.40/1K ✓
-  'fb_like_1k':  { name: 'Curtidas Facebook 1K',       qty: 1000,  priceBRL: 4.89,  smmCost: 2.40,  smmId: '167' },
-  // smmId 988 = 🌍 YouTube Likes Mundiais 100K/dia SR, rate R$4.50/1K ✓
-  'yt_like_1k':  { name: 'Curtidas YouTube 1K',        qty: 1000,  priceBRL: 34.90, smmCost: 4.50,  smmId: '988' },
-  // Comentários
-  // smmId 1007 = 🇧🇷 IG Comentários Brasileiros Personalizados 2K/dia, rate R$40/1K → 10 = R$0.40 ✓
-  'ig_cmt_10':   { name: 'Comentários Instagram 10',   qty: 10,    priceBRL: 6.99,  smmCost: 0.40,  smmId: '1007' },
-  // smmId 946 = 🌍 TikTok Comentários Mundiais Aleatórios 500/dia, rate R$9.70/1K → 10 = R$0.097 ✓
-  'tt_cmt_10':   { name: 'Comentários TikTok 10',      qty: 10,    priceBRL: 9.79,  smmCost: 0.10,  smmId: '946' },
-  // smmId 421 = 🌍 YouTube Comentários Mundiais Personalizados, rate R$30/1K → 10 = R$0.30 ✓
-  'yt_cmt_10':   { name: 'Comentários YouTube 10',     qty: 10,    priceBRL: 7.69,  smmCost: 0.30,  smmId: '421' },
+
+  // ── INSTAGRAM — Seguidores Mundiais (smmId 192, R$3.90/1K) ───────────
+  'ig_seg_100':   { name: 'Seguidores Instagram 100',    qty: 100,    priceBRL: 1.19,   smmCost: 0.39,   smmId: '192' },
+  'ig_seg_250':   { name: 'Seguidores Instagram 250',    qty: 250,    priceBRL: 2.49,   smmCost: 0.98,   smmId: '192' },
+  'ig_seg_500':   { name: 'Seguidores Instagram 500',    qty: 500,    priceBRL: 3.99,   smmCost: 1.95,   smmId: '192' },
+  'ig_seg_1k':    { name: 'Seguidores Instagram 1K',     qty: 1000,   priceBRL: 6.99,   smmCost: 3.90,   smmId: '192' },
+  'ig_seg_2k':    { name: 'Seguidores Instagram 2K',     qty: 2000,   priceBRL: 12.90,  smmCost: 7.80,   smmId: '192' },
+  'ig_seg_5k':    { name: 'Seguidores Instagram 5K',     qty: 5000,   priceBRL: 27.90,  smmCost: 19.50,  smmId: '192' },
+  'ig_seg_10k':   { name: 'Seguidores Instagram 10K',    qty: 10000,  priceBRL: 49.90,  smmCost: 39.00,  smmId: '192' },
+  'ig_seg_20k':   { name: 'Seguidores Instagram 20K',    qty: 20000,  priceBRL: 89.90,  smmCost: 78.00,  smmId: '192' },
+  'ig_seg_50k':   { name: 'Seguidores Instagram 50K',    qty: 50000,  priceBRL: 199.90, smmCost: 195.00, smmId: '192' },
+  'ig_seg_100k':  { name: 'Seguidores Instagram 100K',   qty: 100000, priceBRL: 369.90, smmCost: 390.00, smmId: '192' },
+
+  // ── INSTAGRAM — Seguidores BR 🇧🇷 (TODO: preencher smmId) ────────────
+  'ig_seg_br_100':  { name: 'Seguidores BR Instagram 100',  qty: 100,   priceBRL: 2.49,   smmCost: 0.00, smmId: 'TODO' },
+  'ig_seg_br_500':  { name: 'Seguidores BR Instagram 500',  qty: 500,   priceBRL: 7.90,   smmCost: 0.00, smmId: 'TODO' },
+  'ig_seg_br_1k':   { name: 'Seguidores BR Instagram 1K',   qty: 1000,  priceBRL: 12.90,  smmCost: 0.00, smmId: 'TODO' },
+  'ig_seg_br_2k':   { name: 'Seguidores BR Instagram 2K',   qty: 2000,  priceBRL: 24.90,  smmCost: 0.00, smmId: 'TODO' },
+  'ig_seg_br_5k':   { name: 'Seguidores BR Instagram 5K',   qty: 5000,  priceBRL: 54.90,  smmCost: 0.00, smmId: 'TODO' },
+  'ig_seg_br_10k':  { name: 'Seguidores BR Instagram 10K',  qty: 10000, priceBRL: 99.90,  smmCost: 0.00, smmId: 'TODO' },
+  'ig_seg_br_20k':  { name: 'Seguidores BR Instagram 20K',  qty: 20000, priceBRL: 189.90, smmCost: 0.00, smmId: 'TODO' },
+
+  // ── INSTAGRAM — Curtidas Brasileiras (smmId 1016, R$1.90/1K) ─────────
+  'ig_like_100':  { name: 'Curtidas Instagram 100',  qty: 100,   priceBRL: 0.79,   smmCost: 0.19,  smmId: '1016' },
+  'ig_like_500':  { name: 'Curtidas Instagram 500',  qty: 500,   priceBRL: 2.29,   smmCost: 0.95,  smmId: '1016' },
+  'ig_like_1k':   { name: 'Curtidas Instagram 1K',   qty: 1000,  priceBRL: 4.19,   smmCost: 1.90,  smmId: '1016' },
+  'ig_like_2k':   { name: 'Curtidas Instagram 2K',   qty: 2000,  priceBRL: 7.90,   smmCost: 3.80,  smmId: '1016' },
+  'ig_like_5k':   { name: 'Curtidas Instagram 5K',   qty: 5000,  priceBRL: 17.90,  smmCost: 9.50,  smmId: '1016' },
+  'ig_like_10k':  { name: 'Curtidas Instagram 10K',  qty: 10000, priceBRL: 32.90,  smmCost: 19.00, smmId: '1016' },
+  'ig_like_20k':  { name: 'Curtidas Instagram 20K',  qty: 20000, priceBRL: 59.90,  smmCost: 38.00, smmId: '1016' },
+  'ig_like_50k':  { name: 'Curtidas Instagram 50K',  qty: 50000, priceBRL: 139.90, smmCost: 95.00, smmId: '1016' },
+
+  // ── INSTAGRAM — Views Reels (smmId 800, R$0.80/1K) ───────────────────
+  'ig_view_1k':    { name: 'Views Reels Instagram 1K',   qty: 1000,   priceBRL: 1.99,   smmCost: 0.80,  smmId: '800' },
+  'ig_view_2k':    { name: 'Views Reels Instagram 2K',   qty: 2000,   priceBRL: 3.49,   smmCost: 1.60,  smmId: '800' },
+  'ig_view_5k':    { name: 'Views Reels Instagram 5K',   qty: 5000,   priceBRL: 8.39,   smmCost: 4.00,  smmId: '800' },
+  'ig_view_10k':   { name: 'Views Reels Instagram 10K',  qty: 10000,  priceBRL: 14.90,  smmCost: 8.00,  smmId: '800' },
+  'ig_view_25k':   { name: 'Views Reels Instagram 25K',  qty: 25000,  priceBRL: 29.90,  smmCost: 20.00, smmId: '800' },
+  'ig_view_50k':   { name: 'Views Reels Instagram 50K',  qty: 50000,  priceBRL: 54.90,  smmCost: 40.00, smmId: '800' },
+  'ig_view_100k':  { name: 'Views Reels Instagram 100K', qty: 100000, priceBRL: 99.90,  smmCost: 80.00, smmId: '800' },
+  'ig_view_500k':  { name: 'Views Reels Instagram 500K', qty: 500000, priceBRL: 449.90, smmCost: 400.00,smmId: '800' },
+
+  // ── INSTAGRAM — Views BR 🇧🇷 (TODO: preencher smmId) ─────────────────
+  'ig_view_br_1k':   { name: 'Views BR Reels Instagram 1K',   qty: 1000,   priceBRL: 3.49,   smmCost: 0.00, smmId: 'TODO' },
+  'ig_view_br_5k':   { name: 'Views BR Reels Instagram 5K',   qty: 5000,   priceBRL: 14.90,  smmCost: 0.00, smmId: 'TODO' },
+  'ig_view_br_10k':  { name: 'Views BR Reels Instagram 10K',  qty: 10000,  priceBRL: 24.90,  smmCost: 0.00, smmId: 'TODO' },
+  'ig_view_br_50k':  { name: 'Views BR Reels Instagram 50K',  qty: 50000,  priceBRL: 99.90,  smmCost: 0.00, smmId: 'TODO' },
+  'ig_view_br_100k': { name: 'Views BR Reels Instagram 100K', qty: 100000, priceBRL: 189.90, smmCost: 0.00, smmId: 'TODO' },
+
+  // ── INSTAGRAM — Comentários BR (smmId 1007, R$40/1K) ─────────────────
+  'ig_cmt_10':   { name: 'Comentários Instagram 10',  qty: 10,  priceBRL: 6.99,  smmCost: 0.40, smmId: '1007' },
+  'ig_cmt_20':   { name: 'Comentários Instagram 20',  qty: 20,  priceBRL: 12.90, smmCost: 0.80, smmId: '1007' },
+  'ig_cmt_30':   { name: 'Comentários Instagram 30',  qty: 30,  priceBRL: 17.90, smmCost: 1.20, smmId: '1007' },
+  'ig_cmt_50':   { name: 'Comentários Instagram 50',  qty: 50,  priceBRL: 27.90, smmCost: 2.00, smmId: '1007' },
+  'ig_cmt_100':  { name: 'Comentários Instagram 100', qty: 100, priceBRL: 49.90, smmCost: 4.00, smmId: '1007' },
+
+  // ── TIKTOK — Seguidores Mundiais (smmId 211, R$11/1K) ────────────────
+  'tt_seg_100':   { name: 'Seguidores TikTok 100',   qty: 100,   priceBRL: 1.99,   smmCost: 1.10,  smmId: '211' },
+  'tt_seg_500':   { name: 'Seguidores TikTok 500',   qty: 500,   priceBRL: 7.90,   smmCost: 5.50,  smmId: '211' },
+  'tt_seg_1k':    { name: 'Seguidores TikTok 1K',    qty: 1000,  priceBRL: 14.90,  smmCost: 11.00, smmId: '211' },
+  'tt_seg_2k':    { name: 'Seguidores TikTok 2K',    qty: 2000,  priceBRL: 27.90,  smmCost: 22.00, smmId: '211' },
+  'tt_seg_5k':    { name: 'Seguidores TikTok 5K',    qty: 5000,  priceBRL: 64.90,  smmCost: 55.00, smmId: '939' },
+  'tt_seg_10k':   { name: 'Seguidores TikTok 10K',   qty: 10000, priceBRL: 119.90, smmCost: 140.00,smmId: '939' },
+  'tt_seg_20k':   { name: 'Seguidores TikTok 20K',   qty: 20000, priceBRL: 219.90, smmCost: 280.00,smmId: '939' },
+  'tt_seg_50k':   { name: 'Seguidores TikTok 50K',   qty: 50000, priceBRL: 499.90, smmCost: 700.00,smmId: '939' },
+
+  // ── TIKTOK — Seguidores BR 🇧🇷 (TODO: preencher smmId) ───────────────
+  'tt_seg_br_500':  { name: 'Seguidores BR TikTok 500',  qty: 500,   priceBRL: 14.90,  smmCost: 0.00, smmId: 'TODO' },
+  'tt_seg_br_1k':   { name: 'Seguidores BR TikTok 1K',   qty: 1000,  priceBRL: 24.90,  smmCost: 0.00, smmId: 'TODO' },
+  'tt_seg_br_2k':   { name: 'Seguidores BR TikTok 2K',   qty: 2000,  priceBRL: 44.90,  smmCost: 0.00, smmId: 'TODO' },
+  'tt_seg_br_5k':   { name: 'Seguidores BR TikTok 5K',   qty: 5000,  priceBRL: 109.90, smmCost: 0.00, smmId: 'TODO' },
+  'tt_seg_br_10k':  { name: 'Seguidores BR TikTok 10K',  qty: 10000, priceBRL: 199.90, smmCost: 0.00, smmId: 'TODO' },
+
+  // ── TIKTOK — Curtidas (smmId 898, R$0.70/1K) ─────────────────────────
+  'tt_like_100':  { name: 'Curtidas TikTok 100',   qty: 100,    priceBRL: 0.59,   smmCost: 0.07,  smmId: '898' },
+  'tt_like_500':  { name: 'Curtidas TikTok 500',   qty: 500,    priceBRL: 1.99,   smmCost: 0.35,  smmId: '898' },
+  'tt_like_1k':   { name: 'Curtidas TikTok 1K',    qty: 1000,   priceBRL: 2.79,   smmCost: 0.70,  smmId: '898' },
+  'tt_like_5k':   { name: 'Curtidas TikTok 5K',    qty: 5000,   priceBRL: 11.90,  smmCost: 3.50,  smmId: '898' },
+  'tt_like_10k':  { name: 'Curtidas TikTok 10K',   qty: 10000,  priceBRL: 21.90,  smmCost: 7.00,  smmId: '898' },
+  'tt_like_50k':  { name: 'Curtidas TikTok 50K',   qty: 50000,  priceBRL: 99.90,  smmCost: 35.00, smmId: '898' },
+  'tt_like_100k': { name: 'Curtidas TikTok 100K',  qty: 100000, priceBRL: 179.90, smmCost: 70.00, smmId: '898' },
+
+  // ── TIKTOK — Visualizações (smmId 45, R$0.25/1K) ─────────────────────
+  'tt_view_1k':    { name: 'Views TikTok 1K',    qty: 1000,    priceBRL: 1.49,   smmCost: 0.25,  smmId: '45' },
+  'tt_view_5k':    { name: 'Views TikTok 5K',    qty: 5000,    priceBRL: 5.90,   smmCost: 1.25,  smmId: '45' },
+  'tt_view_10k':   { name: 'Views TikTok 10K',   qty: 10000,   priceBRL: 11.19,  smmCost: 2.50,  smmId: '45' },
+  'tt_view_25k':   { name: 'Views TikTok 25K',   qty: 25000,   priceBRL: 24.90,  smmCost: 6.25,  smmId: '45' },
+  'tt_view_50k':   { name: 'Views TikTok 50K',   qty: 50000,   priceBRL: 44.90,  smmCost: 12.50, smmId: '45' },
+  'tt_view_100k':  { name: 'Views TikTok 100K',  qty: 100000,  priceBRL: 84.90,  smmCost: 25.00, smmId: '45' },
+  'tt_view_500k':  { name: 'Views TikTok 500K',  qty: 500000,  priceBRL: 369.90, smmCost: 125.00,smmId: '45' },
+  'tt_view_1m':    { name: 'Views TikTok 1M',    qty: 1000000, priceBRL: 699.90, smmCost: 250.00,smmId: '45' },
+
+  // ── TIKTOK — Visualizações BR 🇧🇷 (TODO: preencher smmId) ─────────────
+  'tt_view_br_1k':    { name: 'Views BR TikTok 1K',    qty: 1000,   priceBRL: 2.99,   smmCost: 0.00, smmId: 'TODO' },
+  'tt_view_br_5k':    { name: 'Views BR TikTok 5K',    qty: 5000,   priceBRL: 12.90,  smmCost: 0.00, smmId: 'TODO' },
+  'tt_view_br_10k':   { name: 'Views BR TikTok 10K',   qty: 10000,  priceBRL: 22.90,  smmCost: 0.00, smmId: 'TODO' },
+  'tt_view_br_50k':   { name: 'Views BR TikTok 50K',   qty: 50000,  priceBRL: 99.90,  smmCost: 0.00, smmId: 'TODO' },
+  'tt_view_br_100k':  { name: 'Views BR TikTok 100K',  qty: 100000, priceBRL: 179.90, smmCost: 0.00, smmId: 'TODO' },
+
+  // ── TIKTOK — Comentários (smmId 946, R$9.70/1K) ──────────────────────
+  'tt_cmt_10':   { name: 'Comentários TikTok 10',  qty: 10,  priceBRL: 9.79,  smmCost: 0.10, smmId: '946' },
+  'tt_cmt_20':   { name: 'Comentários TikTok 20',  qty: 20,  priceBRL: 18.90, smmCost: 0.19, smmId: '946' },
+  'tt_cmt_30':   { name: 'Comentários TikTok 30',  qty: 30,  priceBRL: 24.90, smmCost: 0.29, smmId: '946' },
+  'tt_cmt_50':   { name: 'Comentários TikTok 50',  qty: 50,  priceBRL: 39.90, smmCost: 0.49, smmId: '946' },
+  'tt_cmt_100':  { name: 'Comentários TikTok 100', qty: 100, priceBRL: 69.90, smmCost: 0.97, smmId: '946' },
+
+  // ── YOUTUBE — Inscritos Mundiais (smmId 1014, R$1/1K) ────────────────
+  'yt_sub_100':   { name: 'Inscritos YouTube 100',   qty: 100,    priceBRL: 2.49,   smmCost: 0.10,  smmId: '1014' },
+  'yt_sub_500':   { name: 'Inscritos YouTube 500',   qty: 500,    priceBRL: 5.99,   smmCost: 0.50,  smmId: '1014' },
+  'yt_sub_1k':    { name: 'Inscritos YouTube 1K',    qty: 1000,   priceBRL: 9.79,   smmCost: 1.00,  smmId: '1014' },
+  'yt_sub_2k':    { name: 'Inscritos YouTube 2K',    qty: 2000,   priceBRL: 18.90,  smmCost: 2.00,  smmId: '1014' },
+  'yt_sub_5k':    { name: 'Inscritos YouTube 5K',    qty: 5000,   priceBRL: 44.90,  smmCost: 5.00,  smmId: '1014' },
+  'yt_sub_10k':   { name: 'Inscritos YouTube 10K',   qty: 10000,  priceBRL: 79.90,  smmCost: 10.00, smmId: '1014' },
+  'yt_sub_20k':   { name: 'Inscritos YouTube 20K',   qty: 20000,  priceBRL: 149.90, smmCost: 20.00, smmId: '1014' },
+  'yt_sub_50k':   { name: 'Inscritos YouTube 50K',   qty: 50000,  priceBRL: 349.90, smmCost: 50.00, smmId: '1014' },
+  'yt_sub_100k':  { name: 'Inscritos YouTube 100K',  qty: 100000, priceBRL: 649.90, smmCost: 100.00,smmId: '1014' },
+
+  // ── YOUTUBE — Inscritos BR 🇧🇷 (TODO: preencher smmId) ───────────────
+  'yt_sub_br_100':  { name: 'Inscritos BR YouTube 100',  qty: 100,   priceBRL: 4.99,   smmCost: 0.00, smmId: 'TODO' },
+  'yt_sub_br_500':  { name: 'Inscritos BR YouTube 500',  qty: 500,   priceBRL: 12.90,  smmCost: 0.00, smmId: 'TODO' },
+  'yt_sub_br_1k':   { name: 'Inscritos BR YouTube 1K',   qty: 1000,  priceBRL: 19.90,  smmCost: 0.00, smmId: 'TODO' },
+  'yt_sub_br_2k':   { name: 'Inscritos BR YouTube 2K',   qty: 2000,  priceBRL: 37.90,  smmCost: 0.00, smmId: 'TODO' },
+  'yt_sub_br_5k':   { name: 'Inscritos BR YouTube 5K',   qty: 5000,  priceBRL: 89.90,  smmCost: 0.00, smmId: 'TODO' },
+  'yt_sub_br_10k':  { name: 'Inscritos BR YouTube 10K',  qty: 10000, priceBRL: 169.90, smmCost: 0.00, smmId: 'TODO' },
+
+  // ── YOUTUBE — Curtidas (smmId 988, R$4.50/1K) ────────────────────────
+  'yt_like_100':  { name: 'Curtidas YouTube 100',  qty: 100,   priceBRL: 4.99,   smmCost: 0.45,  smmId: '988' },
+  'yt_like_500':  { name: 'Curtidas YouTube 500',  qty: 500,   priceBRL: 19.90,  smmCost: 2.25,  smmId: '988' },
+  'yt_like_1k':   { name: 'Curtidas YouTube 1K',   qty: 1000,  priceBRL: 34.90,  smmCost: 4.50,  smmId: '988' },
+  'yt_like_2k':   { name: 'Curtidas YouTube 2K',   qty: 2000,  priceBRL: 64.90,  smmCost: 9.00,  smmId: '988' },
+  'yt_like_5k':   { name: 'Curtidas YouTube 5K',   qty: 5000,  priceBRL: 149.90, smmCost: 22.50, smmId: '988' },
+  'yt_like_10k':  { name: 'Curtidas YouTube 10K',  qty: 10000, priceBRL: 279.90, smmCost: 45.00, smmId: '988' },
+
+  // ── YOUTUBE — Visualizações (smmId 463, R$5/1K) ──────────────────────
+  'yt_view_500':   { name: 'Views YouTube 500',    qty: 500,    priceBRL: 3.49,    smmCost: 2.50,  smmId: '463' },
+  'yt_view_1k':    { name: 'Views YouTube 1K',     qty: 1000,   priceBRL: 5.99,    smmCost: 5.00,  smmId: '463' },
+  'yt_view_2k':    { name: 'Views YouTube 2K',     qty: 2000,   priceBRL: 10.90,   smmCost: 10.00, smmId: '463' },
+  'yt_view_5k':    { name: 'Views YouTube 5K',     qty: 5000,   priceBRL: 24.90,   smmCost: 25.00, smmId: '463' },
+  'yt_view_10k':   { name: 'Views YouTube 10K',    qty: 10000,  priceBRL: 44.90,   smmCost: 50.00, smmId: '463' },
+  'yt_view_15k':   { name: 'Views YouTube 15K',    qty: 15000,  priceBRL: 64.90,   smmCost: 75.00, smmId: '463' },
+  'yt_view_25k':   { name: 'Views YouTube 25K',    qty: 25000,  priceBRL: 99.90,   smmCost: 125.00,smmId: '463' },
+  'yt_view_50k':   { name: 'Views YouTube 50K',    qty: 50000,  priceBRL: 179.90,  smmCost: 250.00,smmId: '463' },
+  'yt_view_100k':  { name: 'Views YouTube 100K',   qty: 100000, priceBRL: 329.90,  smmCost: 500.00,smmId: '463' },
+  'yt_view_500k':  { name: 'Views YouTube 500K',   qty: 500000, priceBRL: 1499.90, smmCost: 2500.00,smmId: '463' },
+
+  // ── YOUTUBE — Visualizações BR 🇧🇷 (TODO: preencher smmId) ───────────
+  'yt_view_br_1k':   { name: 'Views BR YouTube 1K',   qty: 1000,  priceBRL: 9.90,   smmCost: 0.00, smmId: 'TODO' },
+  'yt_view_br_5k':   { name: 'Views BR YouTube 5K',   qty: 5000,  priceBRL: 39.90,  smmCost: 0.00, smmId: 'TODO' },
+  'yt_view_br_10k':  { name: 'Views BR YouTube 10K',  qty: 10000, priceBRL: 69.90,  smmCost: 0.00, smmId: 'TODO' },
+  'yt_view_br_25k':  { name: 'Views BR YouTube 25K',  qty: 25000, priceBRL: 159.90, smmCost: 0.00, smmId: 'TODO' },
+  'yt_view_br_50k':  { name: 'Views BR YouTube 50K',  qty: 50000, priceBRL: 299.90, smmCost: 0.00, smmId: 'TODO' },
+
+  // ── YOUTUBE — Comentários (smmId 421, R$30/1K) ───────────────────────
+  'yt_cmt_10':   { name: 'Comentários YouTube 10',  qty: 10,  priceBRL: 7.69,  smmCost: 0.30, smmId: '421' },
+  'yt_cmt_20':   { name: 'Comentários YouTube 20',  qty: 20,  priceBRL: 13.90, smmCost: 0.60, smmId: '421' },
+  'yt_cmt_30':   { name: 'Comentários YouTube 30',  qty: 30,  priceBRL: 19.90, smmCost: 0.90, smmId: '421' },
+  'yt_cmt_50':   { name: 'Comentários YouTube 50',  qty: 50,  priceBRL: 29.90, smmCost: 1.50, smmId: '421' },
+  'yt_cmt_100':  { name: 'Comentários YouTube 100', qty: 100, priceBRL: 54.90, smmCost: 3.00, smmId: '421' },
+
+  // ── FACEBOOK — Seguidores (smmId 162, R$3.50/1K) ─────────────────────
+  'fb_seg_100':   { name: 'Seguidores Facebook 100',   qty: 100,   priceBRL: 1.49,   smmCost: 0.35,  smmId: '162' },
+  'fb_seg_500':   { name: 'Seguidores Facebook 500',   qty: 500,   priceBRL: 4.99,   smmCost: 1.75,  smmId: '162' },
+  'fb_seg_1k':    { name: 'Seguidores Facebook 1K',    qty: 1000,  priceBRL: 8.39,   smmCost: 3.50,  smmId: '162' },
+  'fb_seg_2k':    { name: 'Seguidores Facebook 2K',    qty: 2000,  priceBRL: 15.90,  smmCost: 7.00,  smmId: '162' },
+  'fb_seg_5k':    { name: 'Seguidores Facebook 5K',    qty: 5000,  priceBRL: 34.90,  smmCost: 17.50, smmId: '162' },
+  'fb_seg_10k':   { name: 'Seguidores Facebook 10K',   qty: 10000, priceBRL: 64.90,  smmCost: 35.00, smmId: '162' },
+  'fb_seg_20k':   { name: 'Seguidores Facebook 20K',   qty: 20000, priceBRL: 119.90, smmCost: 70.00, smmId: '162' },
+
+  // ── FACEBOOK — Curtidas (smmId 167, R$2.40/1K) ───────────────────────
+  'fb_like_100':  { name: 'Curtidas Facebook 100',  qty: 100,   priceBRL: 0.99,  smmCost: 0.24, smmId: '167' },
+  'fb_like_500':  { name: 'Curtidas Facebook 500',  qty: 500,   priceBRL: 2.99,  smmCost: 1.20, smmId: '167' },
+  'fb_like_1k':   { name: 'Curtidas Facebook 1K',   qty: 1000,  priceBRL: 4.89,  smmCost: 2.40, smmId: '167' },
+  'fb_like_5k':   { name: 'Curtidas Facebook 5K',   qty: 5000,  priceBRL: 19.90, smmCost: 12.00,smmId: '167' },
+  'fb_like_10k':  { name: 'Curtidas Facebook 10K',  qty: 10000, priceBRL: 37.90, smmCost: 24.00,smmId: '167' },
+
+  // ── FACEBOOK — Visualizações (TODO: preencher smmId) ─────────────────
+  'fb_view_1k':    { name: 'Views Facebook 1K',    qty: 1000,   priceBRL: 1.99,   smmCost: 0.00, smmId: 'TODO' },
+  'fb_view_5k':    { name: 'Views Facebook 5K',    qty: 5000,   priceBRL: 8.90,   smmCost: 0.00, smmId: 'TODO' },
+  'fb_view_10k':   { name: 'Views Facebook 10K',   qty: 10000,  priceBRL: 14.90,  smmCost: 0.00, smmId: 'TODO' },
+  'fb_view_50k':   { name: 'Views Facebook 50K',   qty: 50000,  priceBRL: 62.90,  smmCost: 0.00, smmId: 'TODO' },
+  'fb_view_100k':  { name: 'Views Facebook 100K',  qty: 100000, priceBRL: 114.90, smmCost: 0.00, smmId: 'TODO' },
 };
+
+// ─── D1: inicializar schema ───────────────────────────────────────────
+async function initDb(env) {
+  if (!env.DB) return;
+  await env.DB.exec(`
+    CREATE TABLE IF NOT EXISTS orders (
+      id               TEXT PRIMARY KEY,
+      service_id       TEXT NOT NULL,
+      service_name     TEXT NOT NULL,
+      smm_id           TEXT NOT NULL,
+      qty              INTEGER NOT NULL,
+      link             TEXT NOT NULL,
+      price_brl        REAL NOT NULL,
+      payment_method   TEXT NOT NULL,
+      tax_number       TEXT,
+      payment_status   TEXT DEFAULT 'pending',
+      smm_order_id     TEXT,
+      smm_status       TEXT DEFAULT 'pending',
+      invoice_id       TEXT,
+      pay_address      TEXT,
+      pay_amount       REAL,
+      pay_currency     TEXT,
+      qr_code          TEXT,
+      payment_url      TEXT,
+      retry_count      INTEGER DEFAULT 0,
+      refund_status    TEXT,
+      created_at       TEXT NOT NULL,
+      updated_at       TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS idx_orders_payment_status ON orders(payment_status);
+    CREATE INDEX IF NOT EXISTS idx_orders_smm_status     ON orders(smm_status);
+    CREATE INDEX IF NOT EXISTS idx_orders_created_at     ON orders(created_at);
+    CREATE INDEX IF NOT EXISTS idx_orders_invoice_id     ON orders(invoice_id);
+  `);
+}
 
 // ─── Entrada principal ────────────────────────────────────────────────
 export default {
+  // ── HTTP handler ──
   async fetch(request, env) {
     const url  = new URL(request.url);
     const path = url.pathname;
 
     if (request.method === 'OPTIONS') return corsOk();
+
+    // Inicializa D1 lazily na primeira requisição
+    await initDb(env).catch(e => console.warn('initDb:', e.message));
 
     try {
       if (path === '/api/order' && request.method === 'POST')
@@ -97,12 +279,26 @@ export default {
       if (path === '/webhooks/depix' && request.method === 'POST')
         return handleDePIXWebhook(request, env);
 
+      // Admin panel — token obrigatório
+      if (path === '/admin' && request.method === 'GET')
+        return handleAdmin(request, env);
+
       return addCors(json({ error: 'Not found' }, 404));
     } catch (e) {
       console.error(e);
       return addCors(json({ error: 'Internal error', detail: e.message }, 500));
     }
-  }
+  },
+
+  // ── Cron handler ──
+  async scheduled(event, env, ctx) {
+    await initDb(env).catch(() => {});
+    if (event.cron === '*/5 * * * *') {
+      ctx.waitUntil(retryPendingSmmOrders(env));
+    } else if (event.cron === '0 9 * * 1') {
+      ctx.waitUntil(runCatalogHealthCheck(env));
+    }
+  },
 };
 
 // ─── POST /api/order ──────────────────────────────────────────────────
@@ -124,11 +320,16 @@ async function handleCreateOrder(request, env) {
   const service = CATALOG[serviceId];
   if (!service) return json({ error: 'Service not found' }, 404);
 
+  // Serviços com smmId pendente de mapeamento ainda não estão disponíveis
+  if (service.smmId === 'TODO')
+    return json({ error: 'Serviço temporariamente indisponível. Tente outro.' }, 503);
+
   const validPayments = ['pix', 'btc', 'lightning', 'usdt', 'eth'];
   if (!validPayments.includes(paymentMethod))
     return json({ error: 'Invalid paymentMethod. Use: ' + validPayments.join(', ') }, 400);
 
   const orderId = 'SC-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
+  const now = new Date().toISOString();
 
   const order = {
     id: orderId,
@@ -149,16 +350,18 @@ async function handleCreateOrder(request, env) {
     payCurrency: null,
     qrCode: null,
     qrBase64: null,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    paymentUrl: null,
+    retryCount: 0,
+    createdAt: now,
+    updatedAt: now,
   };
 
   try {
     if (paymentMethod === 'pix') {
       const chk = await createDePIXCheckout(service.priceBRL, order.taxNumber, orderId, service.name, env);
-      order.invoiceId   = chk.id;                  // chk_01j...
-      order.qrCode      = chk.pix?.qr_code || null;
-      order.paymentUrl  = chk.payment_url || null;
+      order.invoiceId   = chk.id;
+      order.qrCode      = chk.qrCode     || null;
+      order.paymentUrl  = chk.qrCodeUrl  || null;
     } else {
       const payCurrency = paymentMethod === 'btc'       ? 'btc'
                         : paymentMethod === 'lightning'  ? 'btcln'
@@ -176,6 +379,8 @@ async function handleCreateOrder(request, env) {
     return json({ error: 'Payment provider error', detail: e.message }, 502);
   }
 
+  // Persiste em D1 (permanente) + KV (compatibilidade, 7 dias)
+  await saveOrderD1(order, env);
   await env.ORDERS.put(orderId, JSON.stringify(order), { expirationTtl: 604800 });
 
   return json({
@@ -191,24 +396,30 @@ async function handleCreateOrder(request, env) {
     qrBase64:      order.qrBase64,
     paymentUrl:    order.paymentUrl || null,
     status:        order.paymentStatus,
+    statusUrl:     `${env.WORKER_BASE_URL || ''}/api/status/${orderId}`,
   }, 201);
 }
 
 // ─── GET /api/status/:id ──────────────────────────────────────────────
 async function handleGetStatus(orderId, env) {
-  const raw = await env.ORDERS.get(orderId);
-  if (!raw) return json({ error: 'Order not found' }, 404);
-  const order = JSON.parse(raw);
+  // Tenta D1 primeiro, fallback para KV (pedidos antigos)
+  let order = await getOrderD1(orderId, env);
+  if (!order) {
+    const raw = await env.ORDERS.get(orderId);
+    if (!raw) return json({ error: 'Order not found' }, 404);
+    order = JSON.parse(raw);
+  }
   return json({
     orderId:       order.id,
-    serviceName:   order.serviceName,
+    serviceName:   order.serviceName || order.service_name,
     qty:           order.qty,
     link:          order.link,
-    paymentStatus: order.paymentStatus,
-    smmStatus:     order.smmStatus,
-    smmOrderId:    order.smmOrderId,
-    createdAt:     order.createdAt,
-    updatedAt:     order.updatedAt,
+    paymentStatus: order.paymentStatus || order.payment_status,
+    smmStatus:     order.smmStatus || order.smm_status,
+    smmOrderId:    order.smmOrderId || order.smm_order_id,
+    retryCount:    order.retryCount  || order.retry_count || 0,
+    createdAt:     order.createdAt   || order.created_at,
+    updatedAt:     order.updatedAt   || order.updated_at,
   });
 }
 
@@ -224,98 +435,145 @@ async function handleNowPaymentsWebhook(request, env) {
     if (!valid) return new Response('Invalid signature', { status: 403 });
   }
 
-  const { order_id, payment_status } = body;
+  const { order_id, payment_status, payment_id } = body;
   if (!order_id) return new Response('Missing order_id', { status: 400 });
 
-  const raw = await env.ORDERS.get(order_id);
-  if (!raw) return new Response('Order not found', { status: 404 });
-  const order = JSON.parse(raw);
+  // Idempotência: se payment_id já foi processado, ignora
+  if (payment_id && env.DB) {
+    const dup = await env.DB.prepare(
+      `SELECT id FROM orders WHERE invoice_id = ? AND payment_status = 'confirmed'`
+    ).bind(String(payment_id)).first().catch(() => null);
+    if (dup) return new Response('OK'); // já processado
+  }
+
+  let order = await getOrderD1(order_id, env);
+  if (!order) {
+    const raw = await env.ORDERS.get(order_id);
+    if (!raw) return new Response('Order not found', { status: 404 });
+    order = JSON.parse(raw);
+    // Migra para D1 se ainda não estava lá
+    await saveOrderD1(order, env);
+  }
 
   const confirmed = ['confirmed', 'sending', 'finished'].includes(payment_status);
-  if (confirmed && order.paymentStatus !== 'confirmed') {
-    order.paymentStatus = 'confirmed';
-    order.updatedAt = new Date().toISOString();
+  const now = new Date().toISOString();
+  if (confirmed && order.payment_status !== 'confirmed') {
+    order.payment_status = 'confirmed';
+    order.updated_at = now;
     await dispatchSmmOrder(order, env);
-    await env.ORDERS.put(order.id, JSON.stringify(order), { expirationTtl: 604800 });
+    await updateOrderD1(order, env);
+    await env.ORDERS.put(order_id, JSON.stringify(toKvOrder(order)), { expirationTtl: 604800 });
   } else if (['failed', 'expired'].includes(payment_status)) {
-    order.paymentStatus = 'failed';
-    order.updatedAt = new Date().toISOString();
-    await env.ORDERS.put(order.id, JSON.stringify(order), { expirationTtl: 604800 });
+    order.payment_status = 'failed';
+    order.updated_at = now;
+    await updateOrderD1(order, env);
+    await env.ORDERS.put(order_id, JSON.stringify(toKvOrder(order)), { expirationTtl: 604800 });
   }
 
   return new Response('OK');
 }
 
 // ─── POST /webhooks/depix ─────────────────────────────────────────────
-// DePix envia o objeto checkout completo (ou embrulhado em { checkout: {...} })
+// Eulen envia: { id, status, externalId, amountInCents, ... }
+// status values: pending | under_review | approved | depix_sent | delayed | expired | refunded | canceled | error
 async function handleDePIXWebhook(request, env) {
   const raw = await request.json().catch(() => null);
   if (!raw) return new Response('Bad Request', { status: 400 });
 
-  const checkout = raw.checkout || raw;           // suporta ambos os formatos
-  const { id: checkoutId, status, metadata } = checkout;
-  const orderId = metadata?.order_id;
-  if (!orderId) return new Response('OK');        // webhook sem order_id → ignorar
+  // Suporta payload envolto em { data: {...} } ou direto
+  const payload = raw.data || raw;
+  const { id: checkoutId, status, externalId } = payload;
+  const orderId = externalId;
+  if (!orderId) return new Response('OK');        // webhook sem externalId → ignorar
 
-  const stored = await env.ORDERS.get(orderId);
-  if (!stored) return new Response('OK');
-  const order = JSON.parse(stored);
+  // Idempotência: se checkoutId já foi confirmado, ignorar
+  if (checkoutId && env.DB) {
+    const dup = await env.DB.prepare(
+      `SELECT id FROM orders WHERE invoice_id = ? AND payment_status = 'confirmed'`
+    ).bind(String(checkoutId)).first().catch(() => null);
+    if (dup) return new Response('OK');
+  }
 
-  const PAID = ['approved', 'completed'];
-  const FAILED = ['cancelled', 'expired'];
+  let order = await getOrderD1(orderId, env);
+  if (!order) {
+    const stored = await env.ORDERS.get(orderId);
+    if (!stored) return new Response('OK');
+    order = JSON.parse(stored);
+    await saveOrderD1(order, env);
+  }
 
-  if (PAID.includes(status) && order.paymentStatus !== 'confirmed') {
-    order.paymentStatus   = 'confirmed';
-    order.depixCheckoutId = checkoutId;
-    order.updatedAt       = new Date().toISOString();
+  const PAID   = ['approved', 'depix_sent'];
+  const FAILED = ['expired', 'refunded', 'canceled', 'error'];
+  const now = new Date().toISOString();
+
+  if (PAID.includes(status) && order.payment_status !== 'confirmed') {
+    order.payment_status   = 'confirmed';
+    order.invoice_id       = order.invoice_id || checkoutId;
+    order.updated_at       = now;
     await dispatchSmmOrder(order, env);
-    await env.ORDERS.put(orderId, JSON.stringify(order), { expirationTtl: 604800 });
-  } else if (FAILED.includes(status) && order.paymentStatus === 'pending') {
-    order.paymentStatus = 'failed';
-    order.updatedAt     = new Date().toISOString();
-    await env.ORDERS.put(orderId, JSON.stringify(order), { expirationTtl: 604800 });
+    await updateOrderD1(order, env);
+    await env.ORDERS.put(orderId, JSON.stringify(toKvOrder(order)), { expirationTtl: 604800 });
+  } else if (FAILED.includes(status) && order.payment_status === 'pending') {
+    order.payment_status = 'failed';
+    order.updated_at     = now;
+    await updateOrderD1(order, env);
+    await env.ORDERS.put(orderId, JSON.stringify(toKvOrder(order)), { expirationTtl: 604800 });
   }
 
   return new Response('OK');
 }
 
-// ─── SMM Panel: disparar pedido ───────────────────────────────────────
+// ─── SMM Panel: disparar pedido (com retry até 3x) ────────────────────
 async function dispatchSmmOrder(order, env) {
+  // Normaliza campos (D1 usa snake_case, legado usa camelCase)
+  const smmId   = order.smm_id   || order.smmId;
+  const link    = order.link;
+  const qty     = order.qty;
+  const orderId = order.id;
+
   if (!env.SMM_API_KEY || !env.SMM_API_URL) {
     console.warn('SMM API not configured');
-    order.smmStatus = 'pending';
+    order.smm_status = order.smmStatus = 'pending';
     return;
   }
-  if (order.smmId === '0') {
-    console.warn(`smmId='0' para ${order.serviceId} — configure o CATALOG no worker`);
-    order.smmStatus = 'needs_config';
+  if (!smmId || smmId === '0' || smmId === 'TODO') {
+    console.warn(`smmId inválido '${smmId}' para pedido ${orderId}`);
+    order.smm_status = order.smmStatus = 'needs_config';
     return;
   }
-  try {
-    const form = new URLSearchParams({
-      key:      env.SMM_API_KEY,
-      action:   'add',
-      service:  order.smmId,
-      link:     order.link,
-      quantity: String(order.qty),
-    });
-    const resp = await fetch(env.SMM_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: form.toString(),
-    });
-    const data = await resp.json();
-    if (data.order) {
-      order.smmOrderId = String(data.order);
-      order.smmStatus  = 'processing';
-    } else {
-      order.smmStatus = 'failed';
-      console.error('SMM error:', JSON.stringify(data));
+
+  let lastError = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const form = new URLSearchParams({
+        key:      env.SMM_API_KEY,
+        action:   'add',
+        service:  smmId,
+        link:     link,
+        quantity: String(qty),
+      });
+      const resp = await fetch(env.SMM_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: form.toString(),
+      });
+      const data = await resp.json();
+      if (data.order) {
+        order.smm_order_id = order.smmOrderId = String(data.order);
+        order.smm_status   = order.smmStatus  = 'processing';
+        return; // sucesso
+      }
+      lastError = JSON.stringify(data);
+      console.error(`SMM attempt ${attempt + 1} error:`, lastError);
+    } catch (e) {
+      lastError = e.message;
+      console.error(`SMM attempt ${attempt + 1} exception:`, lastError);
     }
-  } catch (e) {
-    order.smmStatus = 'failed';
-    console.error('SMM dispatch error:', e.message);
+    // Backoff: 0, 2s, 4s
+    if (attempt < 2) await new Promise(r => setTimeout(r, (attempt + 1) * 2000));
   }
+  order.smm_status = order.smmStatus = 'failed';
+  console.error(`SMM falhou após 3 tentativas para ${orderId}: ${lastError}`);
 }
 
 // ─── NOWPayments: criar invoice ───────────────────────────────────────
@@ -337,41 +595,277 @@ async function createNowPaymentsInvoice(amountBRL, payCurrency, orderId, descrip
   return resp.json();
 }
 
-// ─── Mercado Pago PIX: criar invoice ──────────────────────────────────
-// ─── DePix: criar checkout PIX ───────────────────────────────────────
-// Docs: POST https://api.depixapp.com/api/checkouts
-// amount em centavos, payer_tax_number obrigatório no trilho pix
+// ─── Eulen (DePix): criar depósito PIX ───────────────────────────────
+// Docs: https://docs.eulen.app
+// POST https://depix.eulen.app/api/deposit
+// Resposta: { response: { id, qrCopyPaste, qrImageUrl }, async: false }
 async function createDePIXCheckout(amountBRL, taxNumber, orderId, description, env) {
   const amountCents = Math.round(amountBRL * 100);
-  const baseUrl     = env.WORKER_BASE_URL || '';
 
   const body = {
-    amount:           amountCents,
-    payer_tax_number: taxNumber,                  // CPF/CNPJ (somente dígitos)
-    description:      description.slice(0, 500),
-    expires_in:       1200,                       // 20min — máximo para trilho pix
-    callback_url:     `${baseUrl}/webhooks/depix`,
-    metadata:         { order_id: orderId },
+    amountInCents:    amountCents,
+    endUserTaxNumber: taxNumber,                          // CPF/CNPJ somente dígitos
+    endUserFullName:  'Cliente SeguidoresCripto',         // nome do pagador (obrigatório)
+    // externalId é usado para rastrear o pedido no webhook
+    externalId:       orderId,
   };
 
-  const resp = await fetch('https://api.depixapp.com/api/checkouts', {
+  const resp = await fetch('https://depix.eulen.app/api/deposit', {
     method: 'POST',
     headers: {
-      'Authorization':    `Bearer ${env.DEPIX_API_KEY}`,
-      'Content-Type':     'application/json',
-      'Idempotency-Key':  `pix-${orderId}`,       // evita QR duplicado em retry
+      'Authorization': `Bearer ${env.DEPIX_API_KEY}`,
+      'Content-Type':  'application/json',
     },
     body: JSON.stringify(body),
   });
 
   if (!resp.ok) {
     const err = await resp.json().catch(() => ({}));
-    const msg = err?.response?.errorMessage || err?.error?.message || `DePix HTTP ${resp.status}`;
+    const msg = err?.response?.errorMessage || err?.message || `Eulen HTTP ${resp.status}`;
     throw new Error(msg);
   }
 
-  return resp.json();
-  // Resposta: { id, status: "pending", pix: { qr_code }, payment_url, ... }
+  const data = await resp.json();
+  // Normalizar para o formato que o Worker espera:
+  //   data.id        → deposit ID
+  //   data.qrCode    → PIX copia-e-cola
+  //   data.qrCodeUrl → imagem do QR
+  return {
+    id:         data.response?.id         || data.id,
+    qrCode:     data.response?.qrCopyPaste || data.qrCopyPaste,
+    qrCodeUrl:  data.response?.qrImageUrl  || data.qrImageUrl,
+    raw:        data,
+  };
+}
+
+// ─── D1: helpers de persistência ─────────────────────────────────────
+async function saveOrderD1(order, env) {
+  if (!env.DB) return;
+  const o = toD1Order(order);
+  await env.DB.prepare(`
+    INSERT OR IGNORE INTO orders
+      (id,service_id,service_name,smm_id,qty,link,price_brl,payment_method,
+       tax_number,payment_status,smm_order_id,smm_status,invoice_id,
+       pay_address,pay_amount,pay_currency,qr_code,payment_url,
+       retry_count,created_at,updated_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+  `).bind(
+    o.id, o.service_id, o.service_name, o.smm_id, o.qty, o.link,
+    o.price_brl, o.payment_method, o.tax_number, o.payment_status,
+    o.smm_order_id, o.smm_status, o.invoice_id,
+    o.pay_address, o.pay_amount, o.pay_currency, o.qr_code, o.payment_url,
+    o.retry_count, o.created_at, o.updated_at
+  ).run().catch(e => console.warn('saveOrderD1:', e.message));
+}
+
+async function updateOrderD1(order, env) {
+  if (!env.DB) return;
+  const o = toD1Order(order);
+  await env.DB.prepare(`
+    UPDATE orders SET
+      payment_status=?, smm_order_id=?, smm_status=?,
+      retry_count=?, invoice_id=?, updated_at=?
+    WHERE id=?
+  `).bind(
+    o.payment_status, o.smm_order_id, o.smm_status,
+    o.retry_count, o.invoice_id, o.updated_at, o.id
+  ).run().catch(e => console.warn('updateOrderD1:', e.message));
+}
+
+async function getOrderD1(orderId, env) {
+  if (!env.DB) return null;
+  return env.DB.prepare('SELECT * FROM orders WHERE id=?').bind(orderId).first()
+    .catch(() => null);
+}
+
+// Converte camelCase → snake_case para D1
+function toD1Order(o) {
+  return {
+    id:             o.id,
+    service_id:     o.serviceId    || o.service_id,
+    service_name:   o.serviceName  || o.service_name,
+    smm_id:         o.smmId        || o.smm_id,
+    qty:            o.qty,
+    link:           o.link,
+    price_brl:      o.priceBRL     || o.price_brl,
+    payment_method: o.paymentMethod|| o.payment_method,
+    tax_number:     o.taxNumber    || o.tax_number    || null,
+    payment_status: o.paymentStatus|| o.payment_status|| 'pending',
+    smm_order_id:   o.smmOrderId   || o.smm_order_id  || null,
+    smm_status:     o.smmStatus    || o.smm_status     || 'pending',
+    invoice_id:     o.invoiceId    || o.invoice_id     || null,
+    pay_address:    o.payAddress   || o.pay_address    || null,
+    pay_amount:     o.payAmount    || o.pay_amount     || null,
+    pay_currency:   o.payCurrency  || o.pay_currency   || null,
+    qr_code:        o.qrCode       || o.qr_code        || null,
+    payment_url:    o.paymentUrl   || o.payment_url    || null,
+    retry_count:    o.retryCount   || o.retry_count    || 0,
+    created_at:     o.createdAt    || o.created_at,
+    updated_at:     o.updatedAt    || o.updated_at,
+  };
+}
+
+// Converte D1 (snake_case) → KV (camelCase) para compatibilidade
+function toKvOrder(o) {
+  return {
+    id: o.id, serviceId: o.service_id, serviceName: o.service_name,
+    smmId: o.smm_id, qty: o.qty, link: o.link, priceBRL: o.price_brl,
+    paymentMethod: o.payment_method, taxNumber: o.tax_number,
+    paymentStatus: o.payment_status, smmOrderId: o.smm_order_id,
+    smmStatus: o.smm_status, invoiceId: o.invoice_id,
+    payAddress: o.pay_address, payAmount: o.pay_amount,
+    payCurrency: o.pay_currency, qrCode: o.qr_code,
+    paymentUrl: o.payment_url, retryCount: o.retry_count,
+    createdAt: o.created_at, updatedAt: o.updated_at,
+  };
+}
+
+// ─── Cron: retry pedidos SMM pendentes (*/5 min) ──────────────────────
+async function retryPendingSmmOrders(env) {
+  if (!env.DB || !env.SMM_API_KEY) return;
+  const cutoff = new Date(Date.now() - 15 * 60 * 1000).toISOString();
+  const { results } = await env.DB.prepare(`
+    SELECT * FROM orders
+    WHERE payment_status = 'confirmed'
+      AND (smm_order_id IS NULL OR smm_status = 'failed')
+      AND retry_count < 3
+      AND created_at < ?
+  `).bind(cutoff).all().catch(() => ({ results: [] }));
+
+  console.log(`[retry-cron] ${results.length} pedidos pendentes encontrados`);
+
+  for (const order of results) {
+    order.retry_count = (order.retry_count || 0) + 1;
+    order.updated_at  = new Date().toISOString();
+    await dispatchSmmOrder(order, env);
+    await updateOrderD1(order, env);
+    // Sincroniza KV também
+    const raw = await env.ORDERS.get(order.id).catch(() => null);
+    if (raw) {
+      const kvOrder = { ...JSON.parse(raw), ...toKvOrder(order) };
+      await env.ORDERS.put(order.id, JSON.stringify(kvOrder), { expirationTtl: 604800 });
+    }
+    console.log(`[retry-cron] ${order.id} → smm_status: ${order.smm_status}`);
+  }
+}
+
+// ─── Cron: auditoria semanal do catálogo (toda segunda 9h UTC) ────────
+async function runCatalogHealthCheck(env) {
+  if (!env.SMM_API_KEY || !env.SMM_API_URL) return;
+  try {
+    const form = new URLSearchParams({ key: env.SMM_API_KEY, action: 'services' });
+    const resp = await fetch(env.SMM_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: form.toString(),
+    });
+    const services = await resp.json();
+    const smmMap = {};
+    for (const s of (Array.isArray(services) ? services : [])) {
+      smmMap[String(s.service)] = s;
+    }
+
+    const issues = [];
+    for (const [sid, item] of Object.entries(CATALOG)) {
+      if (item.smmId === 'TODO') continue;
+      const remote = smmMap[item.smmId];
+      if (!remote) {
+        issues.push(`${sid}: smmId ${item.smmId} NÃO encontrado no painel`);
+      } else if (remote.status !== 'Active') {
+        issues.push(`${sid}: smmId ${item.smmId} inativo (${remote.status})`);
+      } else {
+        // Verifica variação de preço > 15%
+        const remoteRate = parseFloat(remote.rate);
+        if (!isNaN(remoteRate) && item.smmCost > 0) {
+          const diff = Math.abs(remoteRate - item.smmCost) / item.smmCost;
+          if (diff > 0.15) {
+            issues.push(`${sid}: preço mudou ${(diff*100).toFixed(0)}% (era ${item.smmCost}, agora ${remoteRate})`);
+          }
+        }
+      }
+    }
+
+    if (issues.length > 0) {
+      console.warn('[catalog-health] PROBLEMAS:\n' + issues.join('\n'));
+    } else {
+      console.log('[catalog-health] Tudo OK — ' + Object.keys(CATALOG).length + ' SIDs verificados');
+    }
+  } catch (e) {
+    console.error('[catalog-health] Erro:', e.message);
+  }
+}
+
+// ─── Admin panel (/admin?token=...) ───────────────────────────────────
+async function handleAdmin(request, env) {
+  const url   = new URL(request.url);
+  const token = url.searchParams.get('token') || '';
+  const adminToken = env.ADMIN_TOKEN || 'admin123';
+  if (token !== adminToken)
+    return new Response('Unauthorized', { status: 401 });
+
+  if (!env.DB)
+    return new Response('D1 não configurado', { status: 503 });
+
+  const [stats24h, stats7d, stats30d, byStatus, failed, topServices] = await Promise.all([
+    env.DB.prepare(`SELECT COUNT(*) as cnt, SUM(price_brl) as rev FROM orders WHERE payment_status='confirmed' AND created_at > datetime('now','-1 day')`).first(),
+    env.DB.prepare(`SELECT COUNT(*) as cnt, SUM(price_brl) as rev FROM orders WHERE payment_status='confirmed' AND created_at > datetime('now','-7 days')`).first(),
+    env.DB.prepare(`SELECT COUNT(*) as cnt, SUM(price_brl) as rev FROM orders WHERE payment_status='confirmed' AND created_at > datetime('now','-30 days')`).first(),
+    env.DB.prepare(`SELECT payment_status, COUNT(*) as cnt FROM orders GROUP BY payment_status ORDER BY cnt DESC`).all(),
+    env.DB.prepare(`SELECT id, service_name, price_brl, smm_status, retry_count, created_at FROM orders WHERE smm_status='failed' OR (payment_status='confirmed' AND smm_order_id IS NULL) ORDER BY created_at DESC LIMIT 20`).all(),
+    env.DB.prepare(`SELECT service_name, COUNT(*) as cnt, SUM(price_brl) as rev FROM orders WHERE payment_status='confirmed' GROUP BY service_name ORDER BY rev DESC LIMIT 10`).all(),
+  ]).catch(e => { throw new Error('DB error: ' + e.message); });
+
+  const fmtBRL = v => 'R$' + (v || 0).toFixed(2).replace('.', ',');
+  const rows   = (arr) => (arr?.results || []).map(r =>
+    `<tr>${Object.values(r).map(v => `<td>${v ?? '—'}</td>`).join('')}</tr>`
+  ).join('');
+
+  const html = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
+<title>Admin — seguidoreslike.com</title>
+<style>
+  body{font-family:monospace;background:#0d1117;color:#e2e8f0;padding:2rem;margin:0}
+  h1{color:#00d67f;margin-bottom:1.5rem}h2{color:#60a5fa;margin:1.5rem 0 .5rem}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+  .card{background:#161b27;border:1px solid #272d42;border-radius:8px;padding:1rem}
+  .card .label{font-size:.7rem;color:#7c849c;text-transform:uppercase;letter-spacing:.08em}
+  .card .value{font-size:1.5rem;color:#fff;font-weight:bold;margin-top:.25rem}
+  .card .sub{font-size:.8rem;color:#7c849c}
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th{text-align:left;color:#7c849c;padding:.4rem .6rem;border-bottom:1px solid #272d42}
+  td{padding:.4rem .6rem;border-bottom:1px solid #1a1f2e;color:#c8d0e0}
+  tr:hover td{background:#161b27}
+  .badge{padding:.15rem .4rem;border-radius:4px;font-size:.7rem;font-weight:bold}
+  .ok{background:rgba(0,214,127,.15);color:#00d67f}
+  .fail{background:rgba(248,113,113,.15);color:#f87171}
+  .pend{background:rgba(251,191,36,.15);color:#fbbf24}
+  a{color:#60a5fa}
+</style></head><body>
+<h1>📊 Admin — seguidoreslike.com</h1>
+<p style="color:#7c849c;margin-bottom:1.5rem">Atualizado em ${new Date().toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})}</p>
+<div class="cards">
+  <div class="card"><div class="label">Receita 24h</div><div class="value">${fmtBRL(stats24h?.rev)}</div><div class="sub">${stats24h?.cnt || 0} pedidos</div></div>
+  <div class="card"><div class="label">Receita 7 dias</div><div class="value">${fmtBRL(stats7d?.rev)}</div><div class="sub">${stats7d?.cnt || 0} pedidos</div></div>
+  <div class="card"><div class="label">Receita 30 dias</div><div class="value">${fmtBRL(stats30d?.rev)}</div><div class="sub">${stats30d?.cnt || 0} pedidos</div></div>
+  <div class="card"><div class="label">Falhas ativas</div><div class="value" style="color:#f87171">${failed?.results?.length || 0}</div><div class="sub">precisam atenção</div></div>
+</div>
+<h2>Por status</h2>
+<table><thead><tr><th>Status</th><th>Total</th></tr></thead><tbody>
+${(byStatus?.results||[]).map(r=>`<tr><td>${r.payment_status}</td><td>${r.cnt}</td></tr>`).join('')}
+</tbody></table>
+<h2>Falhas / pendentes (SMM)</h2>
+<table><thead><tr><th>Pedido</th><th>Serviço</th><th>Valor</th><th>SMM Status</th><th>Retries</th><th>Criado</th></tr></thead><tbody>
+${(failed?.results||[]).map(r=>`<tr><td><a href="/api/status/${r.id}">${r.id}</a></td><td>${r.service_name}</td><td>${fmtBRL(r.price_brl)}</td><td><span class="badge fail">${r.smm_status||'pending'}</span></td><td>${r.retry_count||0}</td><td>${r.created_at?.slice(0,16)}</td></tr>`).join('')}
+</tbody></table>
+<h2>Top 10 serviços (por receita)</h2>
+<table><thead><tr><th>Serviço</th><th>Vendas</th><th>Receita</th></tr></thead><tbody>
+${(topServices?.results||[]).map(r=>`<tr><td>${r.service_name}</td><td>${r.cnt}</td><td>${fmtBRL(r.rev)}</td></tr>`).join('')}
+</tbody></table>
+<p style="margin-top:2rem;color:#7c849c;font-size:.75rem">🔄 <a href="?token=${adminToken}">Atualizar</a></p>
+</body></html>`;
+
+  return new Response(html, {
+    headers: { 'Content-Type': 'text/html;charset=UTF-8', 'X-Robots-Tag': 'noindex' },
+  });
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────

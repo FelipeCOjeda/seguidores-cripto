@@ -3,22 +3,33 @@ main = "src/index.js"
 compatibility_date = "2024-09-01"
 compatibility_flags = ["nodejs_compat"]
 
-# KV namespace para pedidos
-# Crie com: wrangler kv namespace create ORDERS
-# Cole o id retornado abaixo
+# ── Cron triggers ────────────────────────────────────────────────────────
+# Retry pedidos SMM pendentes a cada 5 minutos
+# Auditoria semanal de catálogo toda segunda às 9h UTC
+[triggers]
+crons = ["*/5 * * * *", "0 9 * * 1"]
+
+# ── KV namespace (legado + tickets) ─────────────────────────────────────
 [[kv_namespaces]]
 binding = "ORDERS"
 id = "85ed42c644454bf88d3518dd53837d7a"
 preview_id = "3160da09f99d417cb9eab82b65b8de76"
 
-# Variáveis não-secretas
+# ── D1 — armazenamento persistente de pedidos ────────────────────────────
+[[d1_databases]]
+binding  = "DB"
+database_name = "seguidores-cripto-db"
+database_id   = "a6ec75ea-4901-4cbd-b2a6-70d3cdddf275"
+
+# ── Variáveis não-secretas ───────────────────────────────────────────────
 [vars]
 WORKER_BASE_URL = "https://seguidores-cripto-worker.felipecojeda.workers.dev"
 SMM_API_URL     = "https://smmhub.com.br/api/v2"
 
-# Segredos — configure via CLI (nunca coloque aqui):
+# ── Segredos — configure via CLI (nunca coloque aqui) ────────────────────
 # wrangler secret put DEPIX_API_KEY          ← token JWT DePix (prod)
 # wrangler secret put NOWPAYMENTS_API_KEY    ← BTC / Lightning / USDT
 # wrangler secret put NOWPAYMENTS_IPN_SECRET ← assinatura webhook NOWPayments
 # wrangler secret put SMM_API_KEY            ← painel SMM (ex: SMMHub)
+# wrangler secret put ADMIN_TOKEN            ← token secreto para /admin
 
