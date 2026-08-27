@@ -92,12 +92,12 @@ const CATALOG = {
   'tt_seg_20k':   { name: 'Seguidores TikTok 20K',   qty: 20000, priceBRL: 219.90, smmCost: 280.00,smmId: '939' },
   'tt_seg_50k':   { name: 'Seguidores TikTok 50K',   qty: 50000, priceBRL: 499.90, smmCost: 700.00,smmId: '939' },
 
-  // ── TIKTOK — Seguidores BR 🇧🇷 (TODO: preencher smmId) ───────────────
-  'tt_seg_br_500':  { name: 'Seguidores BR TikTok 500',  qty: 500,   priceBRL: 14.90,  smmCost: 0.00, smmId: 'TODO' },
-  'tt_seg_br_1k':   { name: 'Seguidores BR TikTok 1K',   qty: 1000,  priceBRL: 24.90,  smmCost: 0.00, smmId: 'TODO' },
-  'tt_seg_br_2k':   { name: 'Seguidores BR TikTok 2K',   qty: 2000,  priceBRL: 44.90,  smmCost: 0.00, smmId: 'TODO' },
-  'tt_seg_br_5k':   { name: 'Seguidores BR TikTok 5K',   qty: 5000,  priceBRL: 109.90, smmCost: 0.00, smmId: 'TODO' },
-  'tt_seg_br_10k':  { name: 'Seguidores BR TikTok 10K',  qty: 10000, priceBRL: 199.90, smmCost: 0.00, smmId: 'TODO' },
+  // ── TIKTOK — Seguidores BR 🇧🇷 (smmId 220, R$30/1K · Orgânicos 97% · R30) ──
+  'tt_seg_br_500':  { name: 'Seguidores BR TikTok 500',  qty: 500,   priceBRL: 21.90,  smmCost: 15.00, smmId: '220' },
+  'tt_seg_br_1k':   { name: 'Seguidores BR TikTok 1K',   qty: 1000,  priceBRL: 41.90,  smmCost: 30.00, smmId: '220' },
+  'tt_seg_br_2k':   { name: 'Seguidores BR TikTok 2K',   qty: 2000,  priceBRL: 81.90,  smmCost: 60.00, smmId: '220' },
+  'tt_seg_br_5k':   { name: 'Seguidores BR TikTok 5K',   qty: 5000,  priceBRL: 199.90, smmCost: 150.00,smmId: '220' },
+  'tt_seg_br_10k':  { name: 'Seguidores BR TikTok 10K',  qty: 10000, priceBRL: 389.90, smmCost: 300.00,smmId: '220' },
 
   // ── TIKTOK — Curtidas (smmId 898, R$0.70/1K) ─────────────────────────
   'tt_like_100':  { name: 'Curtidas TikTok 100',   qty: 100,    priceBRL: 0.59,   smmCost: 0.07,  smmId: '898' },
@@ -118,12 +118,8 @@ const CATALOG = {
   'tt_view_500k':  { name: 'Views TikTok 500K',  qty: 500000,  priceBRL: 369.90, smmCost: 125.00,smmId: '45' },
   'tt_view_1m':    { name: 'Views TikTok 1M',    qty: 1000000, priceBRL: 699.90, smmCost: 250.00,smmId: '45' },
 
-  // ── TIKTOK — Visualizações BR 🇧🇷 (TODO: preencher smmId) ─────────────
-  'tt_view_br_1k':    { name: 'Views BR TikTok 1K',    qty: 1000,   priceBRL: 2.99,   smmCost: 0.00, smmId: 'TODO' },
-  'tt_view_br_5k':    { name: 'Views BR TikTok 5K',    qty: 5000,   priceBRL: 12.90,  smmCost: 0.00, smmId: 'TODO' },
-  'tt_view_br_10k':   { name: 'Views BR TikTok 10K',   qty: 10000,  priceBRL: 22.90,  smmCost: 0.00, smmId: 'TODO' },
-  'tt_view_br_50k':   { name: 'Views BR TikTok 50K',   qty: 50000,  priceBRL: 99.90,  smmCost: 0.00, smmId: 'TODO' },
-  'tt_view_br_100k':  { name: 'Views BR TikTok 100K',  qty: 100000, priceBRL: 179.90, smmCost: 0.00, smmId: 'TODO' },
+  // ── TIKTOK — Views BR: SMMHub NÃO oferece views BR em vídeo TikTok.
+  // Removido do catálogo para não bloquear pedidos com 503.
 
   // ── TIKTOK — Comentários (smmId 946, R$9.70/1K) ──────────────────────
   'tt_cmt_10':   { name: 'Comentários TikTok 10',  qty: 10,  priceBRL: 9.79,  smmCost: 0.10, smmId: '946' },
@@ -143,13 +139,8 @@ const CATALOG = {
   'yt_sub_50k':   { name: 'Inscritos YouTube 50K',   qty: 50000,  priceBRL: 349.90, smmCost: 50.00, smmId: '1014' },
   'yt_sub_100k':  { name: 'Inscritos YouTube 100K',  qty: 100000, priceBRL: 649.90, smmCost: 100.00,smmId: '1014' },
 
-  // ── YOUTUBE — Inscritos BR 🇧🇷 (TODO: preencher smmId) ───────────────
-  'yt_sub_br_100':  { name: 'Inscritos BR YouTube 100',  qty: 100,   priceBRL: 4.99,   smmCost: 0.00, smmId: 'TODO' },
-  'yt_sub_br_500':  { name: 'Inscritos BR YouTube 500',  qty: 500,   priceBRL: 12.90,  smmCost: 0.00, smmId: 'TODO' },
-  'yt_sub_br_1k':   { name: 'Inscritos BR YouTube 1K',   qty: 1000,  priceBRL: 19.90,  smmCost: 0.00, smmId: 'TODO' },
-  'yt_sub_br_2k':   { name: 'Inscritos BR YouTube 2K',   qty: 2000,  priceBRL: 37.90,  smmCost: 0.00, smmId: 'TODO' },
-  'yt_sub_br_5k':   { name: 'Inscritos BR YouTube 5K',   qty: 5000,  priceBRL: 89.90,  smmCost: 0.00, smmId: 'TODO' },
-  'yt_sub_br_10k':  { name: 'Inscritos BR YouTube 10K',  qty: 10000, priceBRL: 169.90, smmCost: 0.00, smmId: 'TODO' },
+  // ── YOUTUBE — Inscritos BR: SMMHub NÃO oferece inscritos BR para YouTube.
+  // Removido do catálogo para não bloquear pedidos com 503.
 
   // ── YOUTUBE — Curtidas (smmId 988, R$4.50/1K) ────────────────────────
   'yt_like_100':  { name: 'Curtidas YouTube 100',  qty: 100,   priceBRL: 4.99,   smmCost: 0.45,  smmId: '988' },
@@ -171,12 +162,12 @@ const CATALOG = {
   'yt_view_100k':  { name: 'Views YouTube 100K',   qty: 100000, priceBRL: 329.90,  smmCost: 500.00,smmId: '463' },
   'yt_view_500k':  { name: 'Views YouTube 500K',   qty: 500000, priceBRL: 1499.90, smmCost: 2500.00,smmId: '463' },
 
-  // ── YOUTUBE — Visualizações BR 🇧🇷 (TODO: preencher smmId) ───────────
-  'yt_view_br_1k':   { name: 'Views BR YouTube 1K',   qty: 1000,  priceBRL: 9.90,   smmCost: 0.00, smmId: 'TODO' },
-  'yt_view_br_5k':   { name: 'Views BR YouTube 5K',   qty: 5000,  priceBRL: 39.90,  smmCost: 0.00, smmId: 'TODO' },
-  'yt_view_br_10k':  { name: 'Views BR YouTube 10K',  qty: 10000, priceBRL: 69.90,  smmCost: 0.00, smmId: 'TODO' },
-  'yt_view_br_25k':  { name: 'Views BR YouTube 25K',  qty: 25000, priceBRL: 159.90, smmCost: 0.00, smmId: 'TODO' },
-  'yt_view_br_50k':  { name: 'Views BR YouTube 50K',  qty: 50000, priceBRL: 299.90, smmCost: 0.00, smmId: 'TODO' },
+  // ── YOUTUBE — Tráfego BR 🇧🇷 (smmId 710, R$1.90/1K · Origem YouTube) ────
+  'yt_view_br_1k':   { name: 'Views BR YouTube 1K',   qty: 1000,  priceBRL: 9.90,   smmCost: 1.90,  smmId: '710' },
+  'yt_view_br_5k':   { name: 'Views BR YouTube 5K',   qty: 5000,  priceBRL: 39.90,  smmCost: 9.50,  smmId: '710' },
+  'yt_view_br_10k':  { name: 'Views BR YouTube 10K',  qty: 10000, priceBRL: 69.90,  smmCost: 19.00, smmId: '710' },
+  'yt_view_br_25k':  { name: 'Views BR YouTube 25K',  qty: 25000, priceBRL: 159.90, smmCost: 47.50, smmId: '710' },
+  'yt_view_br_50k':  { name: 'Views BR YouTube 50K',  qty: 50000, priceBRL: 299.90, smmCost: 95.00, smmId: '710' },
 
   // ── YOUTUBE — Comentários (smmId 421, R$30/1K) ───────────────────────
   'yt_cmt_10':   { name: 'Comentários YouTube 10',  qty: 10,  priceBRL: 7.69,  smmCost: 0.30, smmId: '421' },
@@ -201,12 +192,12 @@ const CATALOG = {
   'fb_like_5k':   { name: 'Curtidas Facebook 5K',   qty: 5000,  priceBRL: 19.90, smmCost: 12.00,smmId: '167' },
   'fb_like_10k':  { name: 'Curtidas Facebook 10K',  qty: 10000, priceBRL: 37.90, smmCost: 24.00,smmId: '167' },
 
-  // ── FACEBOOK — Visualizações (TODO: preencher smmId) ─────────────────
-  'fb_view_1k':    { name: 'Views Facebook 1K',    qty: 1000,   priceBRL: 1.99,   smmCost: 0.00, smmId: 'TODO' },
-  'fb_view_5k':    { name: 'Views Facebook 5K',    qty: 5000,   priceBRL: 8.90,   smmCost: 0.00, smmId: 'TODO' },
-  'fb_view_10k':   { name: 'Views Facebook 10K',   qty: 10000,  priceBRL: 14.90,  smmCost: 0.00, smmId: 'TODO' },
-  'fb_view_50k':   { name: 'Views Facebook 50K',   qty: 50000,  priceBRL: 62.90,  smmCost: 0.00, smmId: 'TODO' },
-  'fb_view_100k':  { name: 'Views Facebook 100K',  qty: 100000, priceBRL: 114.90, smmCost: 0.00, smmId: 'TODO' },
+  // ── FACEBOOK — Visualizações (smmId 890, R$1.00/1K · Retenção 3s) ─────
+  'fb_view_1k':    { name: 'Views Facebook 1K',    qty: 1000,   priceBRL: 1.99,   smmCost: 1.00,  smmId: '890' },
+  'fb_view_5k':    { name: 'Views Facebook 5K',    qty: 5000,   priceBRL: 8.90,   smmCost: 5.00,  smmId: '890' },
+  'fb_view_10k':   { name: 'Views Facebook 10K',   qty: 10000,  priceBRL: 14.90,  smmCost: 10.00, smmId: '890' },
+  'fb_view_50k':   { name: 'Views Facebook 50K',   qty: 50000,  priceBRL: 62.90,  smmCost: 50.00, smmId: '890' },
+  'fb_view_100k':  { name: 'Views Facebook 100K',  qty: 100000, priceBRL: 119.90, smmCost: 100.00,smmId: '890' },
 };
 
 // ─── D1: inicializar schema ───────────────────────────────────────────
@@ -282,6 +273,28 @@ export default {
       // Admin panel — token obrigatório
       if (path === '/admin' && request.method === 'GET')
         return handleAdmin(request, env);
+
+      // Admin: lista serviços do painel SMM (para mapeamento do CATALOG)
+      if (path === '/admin/smm-services' && request.method === 'GET') {
+        const url2 = new URL(request.url);
+        const tok  = url2.searchParams.get('token') || '';
+        if (tok !== (env.ADMIN_TOKEN || 'admin123'))
+          return new Response('Unauthorized', { status: 401 });
+        if (!env.SMM_API_KEY || !env.SMM_API_URL)
+          return json({ error: 'SMM_API_KEY ou SMM_API_URL nao configurado' }, 503);
+        const form = new URLSearchParams({ key: env.SMM_API_KEY, action: 'services' });
+        const resp = await fetch(env.SMM_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: form.toString(),
+        });
+        const services = await resp.json();
+        const q = (url2.searchParams.get('q') || '').toLowerCase();
+        const filtered = q ? services.filter(s => (s.name || '').toLowerCase().includes(q)) : services;
+        return new Response(JSON.stringify(filtered, null, 2), {
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
 
       return addCors(json({ error: 'Not found' }, 404));
     } catch (e) {
