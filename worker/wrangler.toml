@@ -7,7 +7,7 @@ compatibility_flags = ["nodejs_compat"]
 # Retry pedidos SMM pendentes a cada 5 minutos
 # Auditoria semanal de catálogo toda segunda às 9h UTC
 [triggers]
-crons = ["*/5 * * * *", "0 9 * * 1"]
+crons = ["*/5 * * * *", "0 */2 * * *"]
 
 # ── KV namespace (legado + tickets) ─────────────────────────────────────
 [[kv_namespaces]]

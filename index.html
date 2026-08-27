@@ -384,6 +384,14 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
     <button class="net-tab" data-net="tiktok" role="tab">&#127925; TikTok</button>
     <button class="net-tab" data-net="youtube" role="tab">&#9654;&#65039; YouTube</button>
     <button class="net-tab" data-net="facebook" role="tab">&#128216; Facebook</button>
+    <button class="net-tab" data-net="twitter" role="tab">🐦 Twitter/X</button>
+    <button class="net-tab" data-net="telegram" role="tab">✈️ Telegram</button>
+    <button class="net-tab" data-net="whatsapp" role="tab">💬 WhatsApp</button>
+    <button class="net-tab" data-net="threads" role="tab">🧵 Threads</button>
+    <button class="net-tab" data-net="kwai" role="tab">🎬 Kwai</button>
+    <button class="net-tab" data-net="linkedin" role="tab">💼 LinkedIn</button>
+    <button class="net-tab" data-net="coinmarketcap" role="tab">🪙 CoinMarketCap</button>
+    <button class="net-tab" data-net="roblox" role="tab">🎮 Roblox</button>
   </div>
 
   <!-- Configurador -->
@@ -698,7 +706,12 @@ var SERVICES = {
         {sid:'ig_cmt_20',  qty:20,  price:'12,90'},
         {sid:'ig_cmt_30',  qty:30,  price:'17,90'},
         {sid:'ig_cmt_50',  qty:50,  price:'27,90'},
-        {sid:'ig_cmt_100', qty:100, price:'49,90'}]}
+        {sid:'ig_cmt_100', qty:100, price:'49,90'}]},
+      story:{label:'Views Story BR 🇧🇷', tiers:[
+        {sid:'ig_story_1k',  qty:1000,  price:'8,90'},
+        {sid:'ig_story_5k',  qty:5000,  price:'34,90'},
+        {sid:'ig_story_10k', qty:10000, price:'64,90'},
+        {sid:'ig_story_20k', qty:20000, price:'119,90'}]}
     }
   },
   tiktok:{
@@ -747,7 +760,17 @@ var SERVICES = {
         {sid:'tt_cmt_20',  qty:20,  price:'18,90'},
         {sid:'tt_cmt_30',  qty:30,  price:'24,90'},
         {sid:'tt_cmt_50',  qty:50,  price:'39,90'},
-        {sid:'tt_cmt_100', qty:100, price:'69,90'}]}
+        {sid:'tt_cmt_100', qty:100, price:'69,90'}]},
+      curtidas_br:{label:'Curtidas BR 🇧🇷', tiers:[
+        {sid:'tt_like_br_100',  qty:100,   price:'0,79'},
+        {sid:'tt_like_br_500',  qty:500,   price:'3,49'},
+        {sid:'tt_like_br_1k',   qty:1000,  price:'6,99'},
+        {sid:'tt_like_br_5k',   qty:5000,  price:'29,90'},
+        {sid:'tt_like_br_10k',  qty:10000, price:'54,90'}]},
+      compartilhamentos:{label:'Compartilhamentos', tiers:[
+        {sid:'tt_share_1k',  qty:1000,  price:'1,79'},
+        {sid:'tt_share_5k',  qty:5000,  price:'7,90'},
+        {sid:'tt_share_10k', qty:10000, price:'14,90'}]}
     }
   },
   youtube:{
@@ -777,6 +800,12 @@ var SERVICES = {
         {sid:'yt_like_2k',   qty:2000, price:'64,90'},
         {sid:'yt_like_5k',   qty:5000, price:'149,90'},
         {sid:'yt_like_10k',  qty:10000,price:'279,90'}]},
+      curtidas_br:{label:'Curtidas BR 🇧🇷', tiers:[
+        {sid:'yt_like_br_100', qty:100,  price:'7,99'},
+        {sid:'yt_like_br_500', qty:500,  price:'34,90'},
+        {sid:'yt_like_br_1k',  qty:1000, price:'64,90'},
+        {sid:'yt_like_br_2k',  qty:2000, price:'119,90'},
+        {sid:'yt_like_br_5k',  qty:5000, price:'279,90'}]},
       views:{label:'Visualizacoes', tiers:[
         {sid:'yt_view_500',  qty:500,   price:'3,49'},
         {sid:'yt_view_1k',   qty:1000,  price:'5,99'},
@@ -825,10 +854,117 @@ var SERVICES = {
         {sid:'fb_view_50k',  qty:50000, price:'62,90'},
         {sid:'fb_view_100k', qty:100000,price:'114,90'}]}
     }
+  },
+  twitter:{
+    label:'Twitter/X', icon:'🐦', color:'#000000',
+    types:{
+      seguidores:{label:'Seguidores', tiers:[
+        {sid:'tw_seg_100',  qty:100,   price:'4,99'},
+        {sid:'tw_seg_500',  qty:500,   price:'17,90'},
+        {sid:'tw_seg_1k',   qty:1000,  price:'32,90'},
+        {sid:'tw_seg_2k',   qty:2000,  price:'59,90'},
+        {sid:'tw_seg_5k',   qty:5000,  price:'139,90'},
+        {sid:'tw_seg_10k',  qty:10000, price:'259,90'}]},
+      curtidas:{label:'Curtidas', tiers:[
+        {sid:'tw_like_100',  qty:100,   price:'3,99'},
+        {sid:'tw_like_500',  qty:500,   price:'14,90'},
+        {sid:'tw_like_1k',   qty:1000,  price:'24,90'},
+        {sid:'tw_like_5k',   qty:5000,  price:'109,90'},
+        {sid:'tw_like_10k',  qty:10000, price:'199,90'}]},
+      views:{label:'Visualizacoes', tiers:[
+        {sid:'tw_view_1k',   qty:1000,  price:'0,99'},
+        {sid:'tw_view_5k',   qty:5000,  price:'3,49'},
+        {sid:'tw_view_10k',  qty:10000, price:'5,99'},
+        {sid:'tw_view_50k',  qty:50000, price:'24,90'},
+        {sid:'tw_view_100k', qty:100000,price:'44,90'}]}
+    }
+  },
+  telegram:{
+    label:'Telegram', icon:'✈️', color:'#2CA5E0',
+    types:{
+      membros:{label:'Membros', tiers:[
+        {sid:'tg_mem_100',  qty:100,  price:'1,49'},
+        {sid:'tg_mem_500',  qty:500,  price:'5,99'},
+        {sid:'tg_mem_1k',   qty:1000, price:'9,90'},
+        {sid:'tg_mem_5k',   qty:5000, price:'44,90'},
+        {sid:'tg_mem_10k',  qty:10000,price:'84,90'}]},
+      views:{label:'Visualizacoes', tiers:[
+        {sid:'tg_view_1k',   qty:1000,  price:'0,49'},
+        {sid:'tg_view_5k',   qty:5000,  price:'1,99'},
+        {sid:'tg_view_10k',  qty:10000, price:'3,49'},
+        {sid:'tg_view_100k', qty:100000,price:'24,90'}]}
+    }
+  },
+  whatsapp:{
+    label:'WhatsApp', icon:'💬', color:'#25D366',
+    types:{
+      membros_br:{label:'Membros Canal BR 🇧🇷', tiers:[
+        {sid:'wa_mem_br_100', qty:100,  price:'2,99'},
+        {sid:'wa_mem_br_500', qty:500,  price:'12,90'},
+        {sid:'wa_mem_br_1k',  qty:1000, price:'22,90'},
+        {sid:'wa_mem_br_5k',  qty:5000, price:'99,90'}]}
+    }
+  },
+  threads:{
+    label:'Threads', icon:'🧵', color:'#000000',
+    types:{
+      seguidores:{label:'Seguidores', tiers:[
+        {sid:'th_seg_100', qty:100,  price:'1,09'},
+        {sid:'th_seg_500', qty:500,  price:'3,99'},
+        {sid:'th_seg_1k',  qty:1000, price:'6,99'},
+        {sid:'th_seg_5k',  qty:5000, price:'29,90'}]},
+      curtidas:{label:'Curtidas', tiers:[
+        {sid:'th_like_100', qty:100,  price:'0,99'},
+        {sid:'th_like_500', qty:500,  price:'3,49'},
+        {sid:'th_like_1k',  qty:1000, price:'5,99'},
+        {sid:'th_like_5k',  qty:5000, price:'24,90'}]}
+    }
+  },
+  kwai:{
+    label:'Kwai', icon:'🎬', color:'#FF5F00',
+    types:{
+      seguidores_br:{label:'Seguidores BR 🇧🇷', tiers:[
+        {sid:'kw_seg_br_100', qty:100,  price:'1,99'},
+        {sid:'kw_seg_br_500', qty:500,  price:'7,90'},
+        {sid:'kw_seg_br_1k',  qty:1000, price:'12,90'},
+        {sid:'kw_seg_br_5k',  qty:5000, price:'54,90'}]}
+    }
+  },
+  linkedin:{
+    label:'LinkedIn', icon:'💼', color:'#0A66C2',
+    types:{
+      seguidores:{label:'Seguidores', tiers:[
+        {sid:'li_seg_100', qty:100,  price:'22,90'},
+        {sid:'li_seg_500', qty:500,  price:'89,90'},
+        {sid:'li_seg_1k',  qty:1000, price:'159,90'}]}
+    }
+  },
+  coinmarketcap:{
+    label:'CoinMarketCap', icon:'🪙', color:'#17C783',
+    types:{
+      seguidores:{label:'Seguidores', tiers:[
+        {sid:'cmc_seg_100', qty:100,  price:'2,29'},
+        {sid:'cmc_seg_500', qty:500,  price:'9,90'},
+        {sid:'cmc_seg_1k',  qty:1000, price:'16,90'},
+        {sid:'cmc_seg_5k',  qty:5000, price:'69,90'}]}
+    }
+  },
+  roblox:{
+    label:'Roblox', icon:'🎮', color:'#CC0000',
+    types:{
+      seguidores:{label:'Seguidores', tiers:[
+        {sid:'rb_seg_100',  qty:100,   price:'1,49'},
+        {sid:'rb_seg_500',  qty:500,   price:'5,99'},
+        {sid:'rb_seg_1k',   qty:1000,  price:'8,99'},
+        {sid:'rb_seg_5k',   qty:5000,  price:'39,90'},
+        {sid:'rb_seg_10k',  qty:10000, price:'74,90'}]}
+    }
   }
 };
 
 function fmtQty(n){ return n >= 1000 ? (n/1000).toLocaleString('pt-BR') + 'K' : n.toString(); }
+
+var disabledSkus = [];
 
 var activeNet  = 'instagram';
 var activeType = null;
@@ -864,12 +1000,19 @@ function renderQtyPills(){
   tiers.forEach(function(tier){
     var btn = document.createElement('button');
     btn.className = 'qty-pill' + (tier === activeTier ? ' active' : '');
+    btn.dataset.sid = tier.sid;
     btn.innerHTML = fmtQty(tier.qty) + ' <span class="qty-price">R$ ' + tier.price + '</span>';
-    btn.addEventListener('click', function(){
-      activeTier = tier;
-      renderQtyPills();
-      updateBuyRow();
-    });
+    if(disabledSkus.indexOf(tier.sid) !== -1){
+      btn.disabled = true;
+      btn.style.opacity = '0.35';
+      btn.title = 'Serviço temporariamente indisponível';
+    } else {
+      btn.addEventListener('click', function(){
+        activeTier = tier;
+        renderQtyPills();
+        updateBuyRow();
+      });
+    }
     container.appendChild(btn);
   });
 }
@@ -932,6 +1075,18 @@ document.getElementById('btnBuyMain').addEventListener('click', function(){
 // Inicializa com Instagram selecionado
 renderTypePills();
 updateBuyRow();
+
+// ── Catálogo: desabilita tiers indisponíveis (scan a cada 2h no worker) ─
+(function loadCatalogStatus(){
+  fetch(WORKER_URL + '/api/catalog-status')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      disabledSkus = Array.isArray(d.disabled) ? d.disabled : [];
+      // re-render pills ativos para aplicar estado desabilitado
+      if(activeType) renderQtyPills();
+    })
+    .catch(function(){}); // falha silenciosa — não bloqueia a UI
+})();
 
 // ── Abrir modal ao clicar "Comprar" (proxy) ───────────────────────────
 document.querySelectorAll('.btn-buy').forEach(function(btn){
