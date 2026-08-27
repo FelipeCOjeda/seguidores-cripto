@@ -180,6 +180,15 @@ button{cursor:pointer;font-family:inherit;border:none;background:none}
 .type-pill:active,.qty-pill:active{transform:scale(.97)}
 .qty-pill .qty-price{font-size:.8125rem;font-weight:400;color:var(--text-3)}
 .qty-pill.active .qty-price{color:var(--accent);opacity:.8}
+/* ── Drip-feed step ───────────────────────────────────────────────── */
+.drip-toggle-label{display:inline-flex;align-items:center;gap:6px;margin-left:auto;cursor:pointer;font-size:.82rem;font-weight:700;color:var(--accent);letter-spacing:.01em}
+.drip-toggle-label input[type=checkbox]{width:15px;height:15px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.drip-info{font-size:.78rem;color:var(--text-3);margin:4px 0 8px;line-height:1.45;max-width:520px}
+.drip-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.drip-pill{display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 16px;border-radius:var(--radius-pill);border:1.5px solid var(--border);background:var(--bg);font-family:'Sora',sans-serif;font-size:.85rem;font-weight:700;color:var(--text-2);cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+.drip-pill small{font-size:.72rem;font-weight:400;color:var(--text-3)}
+.drip-pill:hover,.drip-pill.active{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+.drip-pill.active small{color:var(--accent);opacity:.8}
 .config-divider{border:none;border-top:1px solid var(--border)}
 .config-buy-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--bg);border-radius:var(--radius-sm);padding:16px 20px;border:1px solid var(--border)}
 .config-summary{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
@@ -396,6 +405,21 @@ footer{background:var(--bg-raised);border-top:1px solid var(--border)}
     <div class="config-step" id="qtyStep" style="display:none">
       <div class="config-label-row"><span class="config-step-num">2</span>Quantidade</div>
       <div class="qty-pills" id="qtyPills"></div>
+    </div>
+    <hr class="config-divider" id="dripDivider" style="display:none">
+    <div class="config-step" id="dripStep" style="display:none">
+      <div class="config-label-row">
+        <span class="config-step-num">3</span>Entrega
+        <label class="drip-toggle-label">
+          <input type="checkbox" id="dripCheck"> Drip-feed
+        </label>
+      </div>
+      <p class="drip-info">📈 Os números sobem aos poucos em vez de chegarem todos de uma vez &mdash; simula crescimento orgânico e reduz risco de detecção pelo algoritmo.</p>
+      <div class="drip-pills" id="dripPills" style="display:none">
+        <button class="drip-pill active" data-runs="7" data-interval="1440">🐢 Lento <small>~7 dias</small></button>
+        <button class="drip-pill" data-runs="3" data-interval="480">🚶 Moderado <small>~24h</small></button>
+        <button class="drip-pill" data-runs="2" data-interval="240">🏃 Rápido <small>~8h</small></button>
+      </div>
     </div>
     <hr class="config-divider" id="buyDivider" style="display:none">
     <div class="config-buy-row" id="buyRow" style="display:none">
@@ -870,6 +894,30 @@ var disabledSkus = [];
 var activeNet  = 'instagram';
 var activeType = null;
 var activeTier = null;
+var dripRuns     = 0;
+var dripInterval = 0;
+
+// Drip-feed incompatível com comentários (precisam de texto único por envio)
+function isDripCompatible(){
+  return activeTier && activeType &&
+    activeType.indexOf('comentario') === -1 &&
+    activeType.indexOf('cmt') === -1;
+}
+
+function renderDripStep(){
+  var dripStep = document.getElementById('dripStep');
+  var dripDiv  = document.getElementById('dripDivider');
+  if(!isDripCompatible()){
+    dripStep.style.display = 'none';
+    dripDiv.style.display  = 'none';
+    document.getElementById('dripCheck').checked      = false;
+    document.getElementById('dripPills').style.display = 'none';
+    dripRuns = 0; dripInterval = 0;
+    return;
+  }
+  dripStep.style.display = 'flex';
+  dripDiv.style.display  = '';
+}
 
 function renderTypePills(){
   var net = SERVICES[activeNet];
@@ -885,6 +933,7 @@ function renderTypePills(){
       renderTypePills();
       renderQtyPills();
       updateBuyRow();
+      renderDripStep();
     });
     container.appendChild(btn);
   });
@@ -912,6 +961,7 @@ function renderQtyPills(){
         activeTier = tier;
         renderQtyPills();
         updateBuyRow();
+        renderDripStep();
       });
     }
     container.appendChild(btn);
@@ -950,11 +1000,16 @@ document.querySelectorAll('.net-tab').forEach(function(tab){
     renderTypePills();
     renderQtyPills();
     updateBuyRow();
-    // reset qty + buy row
-    document.getElementById('qtyStep').style.display = 'none';
+    // reset qty + drip + buy row
+    document.getElementById('qtyStep').style.display    = 'none';
     document.getElementById('qtyDivider').style.display = 'none';
-    document.getElementById('buyRow').style.display = 'none';
+    document.getElementById('dripStep').style.display   = 'none';
+    document.getElementById('dripDivider').style.display= 'none';
+    document.getElementById('buyRow').style.display     = 'none';
     document.getElementById('buyDivider').style.display = 'none';
+    document.getElementById('dripCheck').checked        = false;
+    document.getElementById('dripPills').style.display  = 'none';
+    dripRuns = 0; dripInterval = 0;
   });
 });
 
@@ -968,9 +1023,39 @@ document.getElementById('btnBuyMain').addEventListener('click', function(){
   proxy.dataset.name  = netData.label + ' — ' + typeData.label + ' ' + fmtQty(activeTier.qty);
   proxy.dataset.price = activeTier.price;
   proxy.dataset.qty   = fmtQty(activeTier.qty);
-  proxy.dataset.icon  = netData.icon;
-  proxy.dataset.color = netData.color;
+  proxy.dataset.icon         = netData.icon;
+  proxy.dataset.color        = netData.color;
+  proxy.dataset.drip_runs    = dripRuns;
+  proxy.dataset.drip_interval= dripInterval;
   proxy.click();
+});
+
+// ── Drip-feed: checkbox toggle ───────────────────────────────────────
+document.getElementById('dripCheck').addEventListener('change', function(){
+  var pills = document.getElementById('dripPills');
+  if(this.checked){
+    pills.style.display = 'flex';
+    var firstPill = pills.querySelector('.drip-pill');
+    document.querySelectorAll('.drip-pill').forEach(function(p){ p.classList.remove('active'); });
+    if(firstPill){
+      firstPill.classList.add('active');
+      dripRuns     = parseInt(firstPill.dataset.runs,10);
+      dripInterval = parseInt(firstPill.dataset.interval,10);
+    }
+  } else {
+    pills.style.display = 'none';
+    dripRuns = 0; dripInterval = 0;
+  }
+});
+
+// ── Drip-feed: selecionar velocidade ─────────────────────────────────
+document.querySelectorAll('.drip-pill').forEach(function(pill){
+  pill.addEventListener('click', function(){
+    document.querySelectorAll('.drip-pill').forEach(function(p){ p.classList.remove('active'); });
+    this.classList.add('active');
+    dripRuns     = parseInt(this.dataset.runs,10);
+    dripInterval = parseInt(this.dataset.interval,10);
+  });
 });
 
 // Inicializa com Instagram selecionado
@@ -997,8 +1082,10 @@ document.querySelectorAll('.btn-buy').forEach(function(btn){
     document.getElementById('modalTitle').textContent     = btn.dataset.name;
     document.getElementById('modalQtyLabel').textContent  = btn.dataset.qty + ' unidades';
     document.getElementById('modalPrice').textContent     = btn.dataset.price;
-    document.getElementById('btnPay').dataset.sid         = btn.dataset.sid;
-    document.getElementById('linkInput').value            = '';
+    document.getElementById('btnPay').dataset.sid          = btn.dataset.sid;
+    document.getElementById('btnPay').dataset.drip_runs    = btn.dataset.drip_runs    || '0';
+    document.getElementById('btnPay').dataset.drip_interval= btn.dataset.drip_interval|| '0';
+    document.getElementById('linkInput').value             = '';
     showStep(1);
     document.getElementById('modalBackdrop').classList.add('open');
     setTimeout(function(){ document.getElementById('linkInput').focus(); }, 250);
@@ -1081,6 +1168,9 @@ document.getElementById('btnPay').addEventListener('click', async function(){
   try {
     var orderBody = { serviceId: sid, link: link, paymentMethod: pm.value };
     if (pm.value === 'pix') orderBody.taxNumber = taxNumber.replace(/\D/g,'');
+    var dripR = parseInt(btn.dataset.drip_runs    || '0');
+    var dripI = parseInt(btn.dataset.drip_interval|| '0');
+    if(dripR > 1){ orderBody.drip_runs = dripR; orderBody.drip_interval = dripI; }
     var resp = await fetch(WORKER_URL + '/api/order', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},

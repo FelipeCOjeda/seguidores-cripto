@@ -375,7 +375,7 @@ async function handleCreateOrder(request, env) {
   const body = await request.json().catch(() => null);
   if (!body) return json({ error: 'Invalid JSON' }, 400);
 
-  const { serviceId, link, paymentMethod, taxNumber } = body;
+  const { serviceId, link, paymentMethod, taxNumber, drip_runs, drip_interval } = body;
 
   if (!serviceId || !link || !paymentMethod)
     return json({ error: 'Missing: serviceId, link, paymentMethod' }, 400);
@@ -421,6 +421,8 @@ async function handleCreateOrder(request, env) {
     qrBase64: null,
     paymentUrl: null,
     retryCount: 0,
+    dripRuns:     (Number(drip_runs)     > 1) ? Number(drip_runs)     : 0,
+    dripInterval: (Number(drip_interval) > 0) ? Number(drip_interval) : 0,
     createdAt: now,
     updatedAt: now,
   };
@@ -614,13 +616,23 @@ async function dispatchSmmOrder(order, env) {
   let lastError = null;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
+      // Drip-feed: divide a quantidade pelos runs; cada run entrega qty/runs
+      const dripRuns     = order.dripRuns     || 0;
+      const dripInterval = order.dripInterval || 0;
+      const useDrip = dripRuns > 1 && dripInterval > 0;
+      const qtyPerRun = useDrip ? Math.max(1, Math.floor(qty / dripRuns)) : qty;
+
       const form = new URLSearchParams({
         key:      env.SMM_API_KEY,
         action:   'add',
         service:  smmId,
         link:     link,
-        quantity: String(qty),
+        quantity: String(qtyPerRun),
       });
+      if (useDrip) {
+        form.set('runs',     String(dripRuns));
+        form.set('interval', String(dripInterval));
+      }
       const resp = await fetch(env.SMM_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
