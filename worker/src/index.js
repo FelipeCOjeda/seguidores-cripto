@@ -299,6 +299,11 @@ export default {
         return addCors(await handleGetStatus(id, env));
       }
 
+      if (path.startsWith('/api/ln-status/') && request.method === 'GET') {
+        const hash = path.split('/').pop();
+        return addCors(await handleCheckLnStatus(hash, env));
+      }
+
       if (path === '/api/ticket' && request.method === 'POST')
         return addCors(await handleCreateTicket(request, env));
 
@@ -433,10 +438,15 @@ async function handleCreateOrder(request, env) {
       order.invoiceId   = chk.id;
       order.qrCode      = chk.qrCode     || null;
       order.paymentUrl  = chk.qrCodeUrl  || null;
+    } else if (paymentMethod === 'lightning') {
+      const inv = await createLNbitsInvoice(service.priceBRL, orderId, service.name, env);
+      order.invoiceId   = inv.payment_hash;
+      order.qrCode      = inv.payment_request;
+      order.payCurrency = 'sats';
+      order.payAmount   = String(inv.sats);
     } else {
-      const payCurrency = paymentMethod === 'btc'       ? 'btc'
-                        : paymentMethod === 'lightning'  ? 'btcln'
-                        : paymentMethod === 'usdt'       ? 'usdttrc20'
+      const payCurrency = paymentMethod === 'btc'  ? 'btc'
+                        : paymentMethod === 'usdt'  ? 'usdttrc20'
                         : 'eth';
       const inv = await createNowPaymentsInvoice(service.priceBRL, payCurrency, orderId, service.name, env);
       order.invoiceId   = String(inv.payment_id);
@@ -466,6 +476,8 @@ async function handleCreateOrder(request, env) {
     qrCode:        order.qrCode,
     qrBase64:      order.qrBase64,
     paymentUrl:    order.paymentUrl || null,
+    lnInvoice:     order.paymentMethod === 'lightning' ? order.qrCode    : null,
+    paymentHash:   order.paymentMethod === 'lightning' ? order.invoiceId : null,
     status:        order.paymentStatus,
     statusUrl:     `${env.WORKER_BASE_URL || ''}/api/status/${orderId}`,
   }, 201);
@@ -674,6 +686,86 @@ async function createNowPaymentsInvoice(amountBRL, payCurrency, orderId, descrip
   });
   if (!resp.ok) throw new Error(`NOWPayments ${resp.status}: ${await resp.text()}`);
   return resp.json();
+}
+
+// ─── LNbits: criar invoice Lightning ─────────────────────────────────
+// Docs: https://lnbits.lnvoltz.com/docs
+// POST /api/v1/payments  →  { payment_hash, payment_request, ... }
+async function createLNbitsInvoice(amountBRL, orderId, description, env) {
+  const LN_URL = 'https://lnbits.lnvoltz.com';
+  const LN_KEY = env.LN_INVOICE_KEY || '26c37e966d024fd6aee21d5067183430';
+
+  // Cotação BTC/BRL em tempo real (CoinGecko, cache 60s no CF)
+  const priceResp = await fetch(
+    'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl',
+    { headers: { 'Accept': 'application/json' }, cf: { cacheTtl: 60 } }
+  );
+  if (!priceResp.ok) throw new Error('Falha ao obter cotação BTC/BRL');
+  const priceData = await priceResp.json();
+  const btcBRL = priceData?.bitcoin?.brl;
+  if (!btcBRL) throw new Error('Cotação BTC/BRL inválida');
+
+  // BRL → sats com buffer de 2% contra volatilidade de preço
+  const sats = Math.ceil((amountBRL / btcBRL) * 100_000_000 * 1.02);
+
+  const resp = await fetch(`${LN_URL}/api/v1/payments`, {
+    method: 'POST',
+    headers: { 'X-Api-Key': LN_KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ out: false, amount: sats, memo: `${description} — ${orderId}` }),
+  });
+  if (!resp.ok) throw new Error(`LNbits ${resp.status}: ${await resp.text()}`);
+  const data = await resp.json();
+  return { ...data, sats };
+}
+
+// ─── Lightning: verificar pagamento via LNbits ────────────────────────
+async function handleCheckLnStatus(paymentHash, env) {
+  if (!paymentHash || paymentHash.length < 10)
+    return json({ error: 'Invalid paymentHash' }, 400);
+
+  const LN_URL = 'https://lnbits.lnvoltz.com';
+  const LN_KEY = env.LN_INVOICE_KEY || '26c37e966d024fd6aee21d5067183430';
+
+  try {
+    const resp = await fetch(`${LN_URL}/api/v1/payments/${paymentHash}`, {
+      headers: { 'X-Api-Key': LN_KEY },
+    });
+    if (!resp.ok) return json({ paid: false });
+    const lnData = await resp.json();
+    const paid = lnData.paid === true;
+
+    if (paid) {
+      // Localiza pedido pelo invoice_id no D1 e despacha SMM se ainda pendente
+      const row = env.DB
+        ? await env.DB.prepare('SELECT id FROM orders WHERE invoice_id=?')
+            .bind(paymentHash).first().catch(() => null)
+        : null;
+      if (row?.id) {
+        let order = await getOrderD1(row.id, env);
+        if (!order) {
+          const raw = await env.ORDERS.get(row.id);
+          if (raw) order = JSON.parse(raw);
+        }
+        if (order && (order.payment_status || order.paymentStatus) !== 'confirmed') {
+          const now = new Date().toISOString();
+          order.payment_status = 'confirmed'; order.paymentStatus = 'confirmed';
+          order.updated_at = now;             order.updatedAt     = now;
+          await dispatchSmmOrder(order, env);
+          await updateOrderD1(order, env);
+          await env.ORDERS.put(
+            row.id,
+            JSON.stringify(toKvOrder(order)),
+            { expirationTtl: 604800 }
+          );
+        }
+      }
+    }
+
+    return json({ paid, paymentHash });
+  } catch (e) {
+    console.error('handleCheckLnStatus:', e.message);
+    return json({ paid: false, error: e.message });
+  }
 }
 
 // ─── Eulen (DePix): criar depósito PIX ───────────────────────────────

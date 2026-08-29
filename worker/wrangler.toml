@@ -32,4 +32,5 @@ SMM_API_URL     = "https://smmhub.com.br/api/v2"
 # wrangler secret put NOWPAYMENTS_IPN_SECRET ← assinatura webhook NOWPayments
 # wrangler secret put SMM_API_KEY            ← painel SMM (ex: SMMHub)
 # wrangler secret put ADMIN_TOKEN            ← token secreto para /admin
+# wrangler secret put LN_INVOICE_KEY        ← LNbits invoice/read key (lnbits.lnvoltz.com)
 
