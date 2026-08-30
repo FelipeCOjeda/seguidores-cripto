@@ -695,15 +695,15 @@ async function createLNbitsInvoice(amountBRL, orderId, description, env) {
   const LN_URL = 'https://lnbits.lnvoltz.com';
   const LN_KEY = env.LN_INVOICE_KEY || '26c37e966d024fd6aee21d5067183430';
 
-  // Cotação BTC/BRL em tempo real (CoinGecko, cache 60s no CF)
+  // Cotação BTC/BRL em tempo real (Mercado Bitcoin, cache 60s no CF)
   const priceResp = await fetch(
-    'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl',
+    'https://www.mercadobitcoin.net/api/BTC/ticker/',
     { headers: { 'Accept': 'application/json' }, cf: { cacheTtl: 60 } }
   );
   if (!priceResp.ok) throw new Error('Falha ao obter cotação BTC/BRL');
   const priceData = await priceResp.json();
-  const btcBRL = priceData?.bitcoin?.brl;
-  if (!btcBRL) throw new Error('Cotação BTC/BRL inválida');
+  const btcBRL = parseFloat(priceData?.ticker?.last);
+  if (!btcBRL || isNaN(btcBRL)) throw new Error('Cotação BTC/BRL inválida');
 
   // BRL → sats com buffer de 2% contra volatilidade de preço
   const sats = Math.ceil((amountBRL / btcBRL) * 100_000_000 * 1.02);
